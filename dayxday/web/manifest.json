@@ -1,0 +1,28 @@
+{
+    "name": "DayxDay",
+    "short_name": "DayxDay",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#6667AB",
+    "theme_color": "#6667AB",
+    "description": "Simple To-do-App",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
