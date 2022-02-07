@@ -196,7 +196,7 @@ class Home extends StatelessWidget {
                                                     prefix:
                                                         Icons.calendar_today),
                                                 SizedBox(
-                                                  height: 80,
+                                                  height: 250,
                                                 ),
                                               ],
                                             ),

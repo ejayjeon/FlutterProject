@@ -64,7 +64,7 @@ class TaskItem extends StatelessWidget {
                 ? IconSlideAction(
                     closeOnTap: true,
                     caption: 'Back',
-                    color: veryPeri,
+                    color: Colors.grey,
                     icon: Icons.arrow_back_ios_new,
                     onTap: () {
                       AppCubit.get(context).updateDatabase('New', tasks!['id']);

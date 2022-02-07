@@ -30,9 +30,7 @@ class AppCubit extends Cubit<AppStates> {
     doneTasks = [];
     archivedTasks = [];
     database!.rawQuery('SELECT * FROM tasks').then((value) {
-      //print(value);
       value.forEach((element) {
-        print(element['id']);
         if (element['status'] == 'New') {
           newTasks.add(element);
         } else if (element['status'] == 'done') {
@@ -67,11 +65,6 @@ class AppCubit extends Cubit<AppStates> {
       onCreate: (database, version) {
         database
             .execute(
-                //id integer
-                //title string
-                //data string
-                //time string
-                //status string
                 'CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, date TEXT, time TEXT, status TEXT)')
             .then((value) => print('Table Created'))
             .catchError((error) {
