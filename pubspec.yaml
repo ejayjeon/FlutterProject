@@ -37,6 +37,8 @@ dev_dependencies:
   json_serializable: ^6.1.4
   freezed: ^1.1.1
   build_runner: ^2.1.7
+  sqflite_common_ffi: ^2.1.0+2
+  mockito: ^5.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

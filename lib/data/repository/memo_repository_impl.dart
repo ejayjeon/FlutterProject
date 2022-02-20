@@ -1,38 +1,33 @@
-import 'package:jemmemo/data/data_resource/memo_db.dart';
+import 'package:jemmemo/data/data_source/memo_db_helper.dart';
 import 'package:jemmemo/domain/model/memo.dart';
 import 'package:jemmemo/domain/repository/memo_repository.dart';
 
 class MemoRepositoryImpl implements MemoRepository {
-  final MemoDb db;
+  final MemoDbHelper db;
   MemoRepositoryImpl(this.db); // db의 기능을 하겠다는 것을 알려줌
 
   @override
-  Future<void> deleteMemo(Memo memo) {
-    // TODO: implement deleteMemo
-    throw UnimplementedError();
+  Future<void> deleteMemo(Memo memo) async {
+    await db.deleteMemo(memo);
   }
 
   @override
-  Future<Memo> getMemoById(int id) {
-    // TODO: implement getMemoById
-    throw UnimplementedError();
+  Future<Memo?> getMemoById(int id) async {
+    return await db.getMemoById(id);
   }
 
   @override
-  Future<List<Memo>> getMemos() {
-    // TODO: implement getMemos
-    throw UnimplementedError();
+  Future<List<Memo>> getMemos() async {
+    return await db.getNotes();
   }
 
   @override
-  Future<void> insertMemo(Memo memo) {
-    // TODO: implement insertMemo
-    throw UnimplementedError();
+  Future<void> insertMemo(Memo memo) async {
+    await db.insertMemo(memo);
   }
 
   @override
-  Future<void> updateMemo(Memo memo) {
-    // TODO: implement updateMemo
-    throw UnimplementedError();
+  Future<void> updateMemo(Memo memo) async {
+    await db.updateMemo(memo);
   }
 }

@@ -5,7 +5,7 @@ abstract class MemoRepository {
 
   Future<List<Memo>> getMemos(); // DB에서 해당 메모들을 가져온다
 
-  Future<Memo> getMemoById(int id); // id를 제공하면 해당 메모를 가져오는 메소드
+  Future<Memo?> getMemoById(int id); // id를 제공하면 해당 메모를 가져오는 메소드
 
   Future<void> insertMemo(Memo memo); // 메모 추가
   Future<void> updateMemo(Memo memo); // 메모 업데이트
