@@ -14,10 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.db import router
+from django.urls import path, include
 from gongmore.views import index
+from rest_framework import routers
+import gongmore.views
+
+router = routers.DefaultRouter()
+router.register('gongmores', gongmore.views.GongmoreViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index)
+    path('', index),
+    path('api/', include(router.urls))
 ]
