@@ -48,11 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // 한계 날짜를 정해줌
               mode: CupertinoDatePickerMode.date,
               initialDateTime: selectedDate,
-              maximumDate: DateTime(
-                now.year,
-                now.month,
-                now.day,
-              ),
+              maximumDate: DateTime.now(),
               onDateTimeChanged: (DateTime date) {
                 setState(() {
                   // 받아오는 date와, 선언한 selectedDate
