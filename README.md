@@ -41,6 +41,7 @@
 ## 5) 동영상 플레이어
 
 - AspectRatio 위젯 사용하기 : 동영상이나 사진을 삽입했을 때, 원래의 비율대로 조정하기 위함
+
 ```dart
 AspectRatio(
  aspectRatio: videoController!.value.aspectRatio,
@@ -49,6 +50,7 @@ AspectRatio(
 ```
 
 - Stack 위젯 사용하기
+
 ```dart
   Stack(
     children: [
@@ -77,6 +79,7 @@ AspectRatio(
 ```
 
 - Image Picker 라이브러리 사용하기
+
 ```dart
 void onNewVideoPressed() async {
   final video = await ImagePicker().pickVideo(
@@ -84,20 +87,24 @@ void onNewVideoPressed() async {
   );
 }
 ```
+
 - Video Player 라이브러리 사용하기
+
 ```dart
  CustomVideoPlayer(
     video: video!,
     onNewVideoPressed: onNewVideoPressed,
   )
 ```
+
 - 재생, 정지, 3초 앞으로 돌리기, 3초 뒤로 돌리기, 동영상 컨드롤러 제작하기
+
 ```dart
 void onReversePressed() {
   // 현재 영상이 어느 부분을 상영하고 있는지 알고 있어야 한다
   final currentPosition = videoController!.value.position;
   Duration position = Duration();
-  
+
   // 현재 포지션이 3초가 안된 경우? 기존 포지션 0초
   if (currentPosition.inSeconds > 3) {
     position = currentPosition - Duration(seconds: 3);
@@ -135,14 +142,61 @@ void onForwardPressed() {
 ## 6) 위치 기반 출근 앱
 
 - 구글 지도 API 세팅하기
+
+  - google_maps_flutter 2.1.3
+  - geolocator 8.2.0
+
+  ```dart
+
+  ```
+
 - 위치 서비스를 이용하여 내 위치 지도에 표시하기
+
+```dart
+
+```
+
 - 특정 위치간 거리 구하기
+
+```dart
+
+```
+
 - 지도에 마커 표시하기
+
+```dart
+
+```
+
 - 지도에 원 표시하기
+
+```dart
+
+```
+
 - 특정 위치로 카메라 이동시키기
+
+```dart
+
+```
+
 - 현재 위치 표시하고 위도와 경도 구하기
+
+```dart
+
+```
+
 - 위도와 경도간 거리 구하기
+
+```dart
+
+```
+
 - Material Dialog 활용하기
+
+```dart
+
+```
 
 <br/>
 
