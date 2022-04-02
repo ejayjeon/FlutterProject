@@ -146,14 +146,57 @@ void onForwardPressed() {
   - google_maps_flutter 2.1.3
   - geolocator 8.2.0
 
-  ```dart
-
-  ```
-
 - 위치 서비스를 이용하여 내 위치 지도에 표시하기
 
 ```dart
+// latitude(위도) - longitude(경도)를 나타내기 위한 GoogleMaps 라이브러리 기능 이용하기
+// 화면에서 보이는 가운데, 위도와 경도 지점
+final LatLng deksuLatLng = LatLng(37.566254, 126.975775);
 
+// Zoom Level ( 1 ~ 20 )
+final CameraPosition initialPosition = CameraPosition(
+  target: companyLatLng,
+  zoom: 15,
+);
+
+// GoogleMap 위젯을 사용해서 화면에 위젯 띄우기
+Scaffold(
+  body: GoogleMap(
+    // 처음 구글 지도 시작했을 때 위치
+    initialCameraPosition: initialPosition,
+    // 지도 타입 : hybrid, normal, satellite, terrain
+    mapType: MapType.normal,
+  ),
+);
+```
+
+- 위치 서비스 이용에 대한 권한 요청하기 (geolocator)
+
+```dart
+Future<String> checkPermission() async {
+  final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+
+  if (!isLocationEnabled) {
+    return '위치 서비스를 활성화 해주세요';
+  }
+
+// 현재 앱이 가지고 있는 위치 서비스 : denied, deniedForever, whileInUse, always
+  LocationPermission checkedPermission = await Geolocator.checkPermission();
+
+  if (checkedPermission == LocationPermission.denied) {
+    checkedPermission = await Geolocator.requestPermission();
+// 그럼에도 불구하고 위치 권한 서비스가 denied 상태라면
+    if (checkedPermission == LocationPermission.denied) {
+      return '위치 권한을 허가해 주세요';
+    }
+  }
+
+  if (checkedPermission == LocationPermission.deniedForever) {
+    return '앱의 위치 권한을 설정창에서 허가해주세요';
+  }
+
+  return '위치 권한이 허가되었습니다';
+}
 ```
 
 - 특정 위치간 거리 구하기
