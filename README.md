@@ -40,10 +40,95 @@
 
 ## 5) 동영상 플레이어
 
+- AspectRatio 위젯 사용하기 : 동영상이나 사진을 삽입했을 때, 원래의 비율대로 조정하기 위함
+```dart
+AspectRatio(
+ aspectRatio: videoController!.value.aspectRatio,
+ ...
+)
+```
+
 - Stack 위젯 사용하기
+```dart
+  Stack(
+    children: [
+      VideoPlayer(
+        videoController!,
+      ),
+      if (showController)
+        _controllers(
+          onReversePressed: onReversePressed,
+          onPlayPressed: onPlayPressed,
+          onForwardPressed: onForwardPressed,
+          isPlaying: videoController!.value.isPlaying,
+        ),
+      if (showController)
+        _newVideo(
+          onPressed: widget.onNewVideoPressed,
+        ),
+      _slideBottom(
+        currentPosition: currentPosition,
+        videoController: videoController,
+        maxPosition: videoController!.value.duration,
+        onChanged: onSlideChanged,
+      ),
+    ],
+  ),
+```
+
 - Image Picker 라이브러리 사용하기
+```dart
+void onNewVideoPressed() async {
+  final video = await ImagePicker().pickVideo(
+    source: ImageSource.gallery,
+  );
+}
+```
 - Video Player 라이브러리 사용하기
+```dart
+ CustomVideoPlayer(
+    video: video!,
+    onNewVideoPressed: onNewVideoPressed,
+  )
+```
 - 재생, 정지, 3초 앞으로 돌리기, 3초 뒤로 돌리기, 동영상 컨드롤러 제작하기
+```dart
+void onReversePressed() {
+  // 현재 영상이 어느 부분을 상영하고 있는지 알고 있어야 한다
+  final currentPosition = videoController!.value.position;
+  Duration position = Duration();
+  
+  // 현재 포지션이 3초가 안된 경우? 기존 포지션 0초
+  if (currentPosition.inSeconds > 3) {
+    position = currentPosition - Duration(seconds: 3);
+  }
+  videoController!.seekTo(position);
+}
+
+void onPlayPressed() {
+  // 영상 재생
+  // 이미 실행중이면 중지 : 실행중이 아니면 재생
+  setState(() {
+    if (videoController!.value.isPlaying) {
+      videoController!.pause();
+    } else {
+      videoController!.play();
+    }
+  });
+}
+
+void onForwardPressed() {
+  final maxPosition = videoController!.value.duration;
+  final currentPosition = videoController!.value.position;
+  Duration position = maxPosition;
+  // 전체길이에서 3초를 뺀 부분을 초로 가져온 부분이 현재 길이보다 길 경우, 현재 포지션에서 3초를 더해도 길어지지 않는다.
+  if ((maxPosition - Duration(seconds: 3)).inSeconds >
+      currentPosition.inSeconds) {
+    position = currentPosition + Duration(seconds: 3);
+  }
+  videoController!.seekTo(position);
+}
+```
 
 <br/>
 
