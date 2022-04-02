@@ -1,5 +1,7 @@
 # Miscellaneous
 *.class
+*.swift
+*.xml
 *.log
 *.pyc
 *.swp
