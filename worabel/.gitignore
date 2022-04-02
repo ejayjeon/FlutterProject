@@ -27,6 +27,8 @@
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
+.metadata
+.packages
 .pub-cache/
 .pub/
 /build/
@@ -44,3 +46,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/src/main/AndroidManifest.xml
+/ios/Runner/AppDelegate.swift
