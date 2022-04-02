@@ -5,36 +5,320 @@
 ## 1) Web View
 
 - `pub.dev` 패키지 이용하기
-- 플랫폼 별 Native 세팅 변경하기
-- WebView 위젯 이용하기
+
+  - webview_flutter: ^3.0.1
+
+- WebView 컨트롤러 & 위젯 이용하기
+
+```dart
+// 웹뷰 컨트롤러 사용 -> WebView 위젯 내에서 선언한 onWebViewCreated controller 대체
+WebViewController? controller;
+final url = 'https://github.com/jemmajeon';
+...
+body: WebView(
+  // 처음 시작할 때 WebViewController를 불러옴
+  // on : 어떤 행동을 시작했을 때
+    onWebViewCreated: (WebViewController controller) {
+      // 상단에 선언한 context의 controller가 곧 이 controller
+      this.controller = controller;
+    },
+    initialUrl: url,
+),
+```
+
+<br/>
+
 - WebView 상 JavaScript 권한 열기
+
+```dart
+  // default 값에서 자바스크립트 사용 중지를 풀어줌
+javascriptMode: JavascriptMode.unrestricted,
+```
+
+<br/>
+
 - HTTP 프로토콜 열어주기
+
+```dart
+// ios : ios > Runner > info.plist
+// 가장 하단에 작성
+...
+// <-- 여기부터
+    <key>NSAppTransportSecurity</key>
+    <dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+    <key>NSAllowsArbitrayLoadInWebContent</key>
+    <true/>
+    </dict>
+//  여기까지 -->
+</dict>
+</plist>
+
+```
+
+<br/><br/>
+
+---
 
 <br/>
 
 ## 2) 전자 액자
 
 - PageView 위젯 사용하기
+
+```dart
+PageController controller = PageController(initialPage: 0,);
+...
+body: PageView(
+  controller: controller,
+  children: [1, 2, 3, 4, 5]
+  .map(
+    (e) => Image.asset('assets/image_$e.jpeg', fit: BoxFit.cover),
+  ).toList(),
+),
+
+```
+
+<br/>
+
 - Timer 클래스 주기적으로 실행하기
+
+```dart
+timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  // 사이에 내용 추가
+  }
+```
+
+<br/>
+
 - Stateful & 라이프사이클 실전 이용하기
+
+```dart
+// Timer는 앱이 최초에 실행될 때, initState 단계에서 실행
+@override
+void initState() {
+  super.initState();
+  timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    int currentPage = controller.page!.toInt();
+    int nextPage = currentPage + 1;
+
+    // 마지막 페이지에 달하면 페이지 다시 0페이지로
+    if (nextPage > maxPage) {
+      nextPage = 0;
+    }
+    controller.animateToPage(nextPage,
+        duration: Duration(milliseconds: 1000), curve: Curves.linear);
+  });
+}
+
+// Timer 와 Controller는 dispose에서 꼭 해제해 준다
+ @override
+  void dispose() {
+    controller.dispose();
+    if (timer != null) timer!.cancel();
+    super.dispose();
+  }
+
+
+```
+
+<br/><br/>
+
+---
 
 <br/>
 
 ## 3) 우리 처음 만난 날
 
 - Image / Font / Theme 적용하기
+
+```dart
+// pubspect.yaml
+// image
+ assets:
+    - asset/images/
+
+// font
+fonts:
+    - family: GowunDodum
+      fonts:
+        - asset: asset/fonts/GowunDodum-Regular.ttf
+
+```
+
+<br/>
+
 - Date Picker 사용하기
+
+```dart
+DateTime selectedDate = DateTime.now();
+...
+
+child: CupertinoDatePicker(
+  // 한계 날짜를 정해줌
+  mode: CupertinoDatePickerMode.date,
+  initialDateTime: selectedDate,
+  maximumDate: DateTime.now(),
+  onDateTimeChanged: (DateTime date) {
+    setState(() {
+      // 받아오는 date와, 선언한 selectedDate
+      selectedDate = date;
+    });
+  },
+),
+
+```
+
+<br/>
+
 - Date Time 클래스 실전에 사용하기
+
+```dart
+// 현재날짜와 디데이를 카운트할 선택한 날짜와의 차이 구하기
+final now = DateTime.now();
+...
+'D+${DateTime(now.year, now.month, now.day).difference(selectedDate).inDays + 1}
+
+```
+
+<br/>
+
 - Cupertino Dialog 활용하기
+
+```dart
+showCupertinoDialog(
+  context: context,
+  // 다른 부분 클릭 여부 컨트롤
+  barrierDismissible: true,
+  builder: (BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        color: Colors.white.withOpacity(0.5),
+        height: 300.0,
+        child: CupertinoDatePicker(
+          // 한계 날짜를 정해줌
+          mode: CupertinoDatePickerMode.date,
+          initialDateTime: selectedDate,
+          maximumDate: DateTime.now(),
+          onDateTimeChanged: (DateTime date) {
+            setState(
+              () {
+                selectedDate = date;
+              },
+            );
+          },
+        ),
+      ),
+    );
+  },
+);
+
+```
+
+<br/>
+
+---
 
 <br/>
 
 ## 4) 랜덤 숫자 생성기
 
 - 난수 생성하기
+
+```dart
+import 'dart:math';
+...
+final rand = Random();
+// 랜덤 숫자 중 중복숫자를 방지하기 위해 List / Map / Set 중 Set 이용
+final Set<int> newNumbers = {};
+  while (newNumbers.length != 6) {
+    final number = rand.nextInt(maxNumber);
+    newNumbers.add(number);
+  }
+
+```
+
+<br/>
+
 - 간단한 Navigation 및 데이터 송수신
+
+```dart
+// push : list의 Add와 같은 기능. 페이지 이동
+ Navigator.of(context).push<int>(
+  MaterialPageRoute(
+    builder: (BuildContext context) {
+      return SettingsScreen(
+        maxNumber: maxNumber,
+      );
+    },
+  ),
+
+// 뒤로가기
+Navigator.of(context).pop(maxNumber.toInt());
+
+```
+
+<br/>
+
 - Slider 위젯 사용하기
-- Functional 프로그래밍을 활용한 위젯 렌더링 및 코드정리
+
+```dart
+ void initState() {
+  super.initState();
+  maxNumber = widget.maxNumber.toDouble();
+ }
+...
+Slider(
+  value: maxNumber,
+  min: 0,
+  max: 100,
+  onChanged: (double val) {
+    setState(() {
+      maxNumber = val;
+      print(maxNumber);
+    });
+  },
+),
+
+```
+
+<br/>
+
+- Functional 프로그래밍 / asMap()
+
+```dart
+Column(
+  children: randomNumbers
+      .asMap()
+      .entries
+      .map(
+        (e) => Padding(
+          // 열의 마지막 숫자면 패딩을 넣지 않는다? asMap().entries를 한 순간 key를 가지고 올 수 있다
+          // 인덱스의 마지막 번째 !== ? :
+          padding: EdgeInsets.only(bottom: e.key == 5 ? 0 : 16.0),
+          child: Row(
+            children: e.value
+                .toString()
+                .split('')
+                .map((y) => Image.asset(
+                      'assets/images/$y.png',
+                      height: 70.0,
+                      width: 50.0,
+                    ))
+                .toList(),
+          ),
+        ),
+      )
+      .toList(),
+),
+
+```
+
+<br/><br/>
+
+---
 
 <br/>
 
@@ -48,6 +332,8 @@ AspectRatio(
  ...
 )
 ```
+
+<br/>
 
 - Stack 위젯 사용하기
 
@@ -78,6 +364,8 @@ AspectRatio(
   ),
 ```
 
+<br/>
+
 - Image Picker 라이브러리 사용하기
 
 ```dart
@@ -88,6 +376,8 @@ void onNewVideoPressed() async {
 }
 ```
 
+<br/>
+
 - Video Player 라이브러리 사용하기
 
 ```dart
@@ -96,6 +386,8 @@ void onNewVideoPressed() async {
     onNewVideoPressed: onNewVideoPressed,
   )
 ```
+
+<br/>
 
 - 재생, 정지, 3초 앞으로 돌리기, 3초 뒤로 돌리기, 동영상 컨드롤러 제작하기
 
@@ -137,6 +429,10 @@ void onForwardPressed() {
 }
 ```
 
+<br/><br/>
+
+---
+
 <br/>
 
 ## 6) 위치 기반 출근 앱
@@ -145,6 +441,8 @@ void onForwardPressed() {
 
   - google_maps_flutter 2.1.3
   - geolocator 8.2.0
+
+<br/>
 
 - 위치 서비스를 이용하여 내 위치 지도에 표시하기
 
@@ -169,6 +467,8 @@ Scaffold(
   ),
 );
 ```
+
+<br/>
 
 - 위치 서비스 이용에 대한 권한 요청하기 (geolocator)
 
@@ -199,11 +499,15 @@ Future<String> checkPermission() async {
 }
 ```
 
+<br/>
+
 - 특정 위치간 거리 구하기
 
 ```dart
 
 ```
+
+<br/>
 
 - 지도에 마커 표시하기
 
@@ -211,11 +515,15 @@ Future<String> checkPermission() async {
 
 ```
 
+<br/>
+
 - 지도에 원 표시하기
 
 ```dart
 
 ```
+
+<br/>
 
 - 특정 위치로 카메라 이동시키기
 
@@ -223,11 +531,15 @@ Future<String> checkPermission() async {
 
 ```
 
+<br/>
+
 - 현재 위치 표시하고 위도와 경도 구하기
 
 ```dart
 
 ```
+
+<br/>
 
 - 위도와 경도간 거리 구하기
 
@@ -235,7 +547,23 @@ Future<String> checkPermission() async {
 
 ```
 
+<br/>
+
 - Material Dialog 활용하기
+
+```dart
+
+```
+
+<br/><br/>
+
+---
+
+<br/>
+
+## 7) LIVE 영상 통화
+
+- Agora API를 활용한 영상통화 앱 제작
 
 ```dart
 
@@ -243,25 +571,90 @@ Future<String> checkPermission() async {
 
 <br/>
 
-## 7) LIVE 영상 통화
-
-- Agora API를 활용한 영상통화 앱 제작
 - Box Shadow 사용하기
-  <br/>
+
+```dart
+
+```
+
+<br/><br/>
+
+---
+
+<br/>
 
 ## 8) 캘린더 스케줄러
 
 - Drift 패키지를 활용한 SQ Lite 사용하기
+
+```dart
+
+```
+
+<br/>
+
 - Bottom Sheet 활용하기
+
+```dart
+
+```
+
+<br/>
+
 - Wrap 위젯 사용하기
+
+```dart
+
+```
+
+<br/>
+
 - Table Calendar 패키지 활용하기
+
+```dart
+
+```
+
+<br/>
+
 - Dismissible 위젯으로 삭제 애니메이션 구현하기
+
+```dart
+
+```
+
+<br/>
+
 - Stream을 통해 데이터의 변화 자동으로 감지하기
+
+```dart
+
+```
+
+<br/>
+
+<br/>
+
+---
 
 <br/>
 
 ## 9) 미세먼지 측정 앱
 
 - HTTP 요청 연동하기
+
+```dart
+
+```
+
+<br/>
+
 - Hive 데이터베이스를 이용한 캐싱 및 오 프라인 지원
-  <br/>
+
+```dart
+
+```
+
+<br/>
+
+<br/>
