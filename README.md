@@ -501,9 +501,41 @@ Future<String> checkPermission() async {
 
 <br/>
 
-- 특정 위치간 거리 구하기
+- FutureBuilder / StreamBuilder 이용하기
 
 ```dart
+// 1. FutureBuilder : Future 형태를 받아서 값을 리턴해줄 수 있는 위젯
+Future<String> checkPermission() async {
+  final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+
+  if (!isLocationEnabled) {
+    return '위치 서비스를 활성화 해주세요';
+  }
+}
+
+// Future 값을 snapshot으로 반환받을 수 있게 된다
+body: FutureBuilder<String>(
+  future: checkPermission(), // 무조건 Future를 리턴해주는 함수 실행
+  builder: (BuildContext context, AsyncSnapshot snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: primaryColor,
+        ),
+      );
+    }
+  }
+}
+
+
+// 2. StreamBuilder : yield를 통해 받아오는 값의 변화가 있을 때마다 계속해서 값을 리턴함
+// 새로운 위치가 yield 되면 snapshot.data가 바뀌기 때문에 builder가 다시 실행되고, streambuilder는 변경된 상태를 계속해서 리스닝하기 때문에 값을 받아올 수 있게 된다
+StreamBuilder<Position>(
+  stream: Geolocator.getPositionStream(),
+  builder: (context, snapshot) {
+ ...
+  }
+)
 
 ```
 
@@ -512,14 +544,41 @@ Future<String> checkPermission() async {
 - 지도에 마커 표시하기
 
 ```dart
+// Marker 인스턴스 생성
+ final Marker marker = Marker(
+  markerId: MarkerId('marker'),
+  position: companyLatLng,
+);
+
+// GoogleMaps 위젯 안에서 사용. marker는 Set 형태로 저장
+child: GoogleMap(
+ ...
+  markers: Set.from([marker]),
+);
 
 ```
 
 <br/>
 
 - 지도에 원 표시하기
+  ![이미지](./worabel/assets/2.png)
 
 ```dart
+// Circle 인스턴스 생성
+final Circle withinDistanceCircle = Circle(
+  circleId: CircleId('withinDistanceCircle'),
+  center: companyLatLng,
+  fillColor: primaryColor.withOpacity(0.5),
+  radius: distance,
+  strokeColor: primaryColor,
+  strokeWidth: 1,
+);
+
+// GoogleMaps 위젯 안에서 사용. circle은 Set 형태로 저장
+child: GoogleMap(
+  ...
+  circles: Set.from([circle]),
+),
 
 ```
 
@@ -528,6 +587,17 @@ Future<String> checkPermission() async {
 - 특정 위치로 카메라 이동시키기
 
 ```dart
+// 구글맵 컨트롤러 생성
+GoogleMapController? mapController;
+
+// 컨트롤러가 null이 아닐 경우를 가정하여, animateCamera를 이용, Geolocator가 제공하는 Position 메소드를 이용한다. -> getCurrentPosition()을 이용해도 된다
+final location = await Geolocator.getLastKnownPosition();
+  mapController!.animateCamera(
+    CameraUpdate.newLatLng(
+      LatLng(location!.latitude, location.longitude),
+    ),
+  );
+
 
 ```
 
@@ -537,13 +607,24 @@ Future<String> checkPermission() async {
 
 ```dart
 
-```
+// 내가 원 안에 위치해 있으면 true, 그렇지 않으면 false
+bool isWithinRange = false;
+  if (snapshot.hasData) {
+    final start = snapshot.data!;
+    final end = companyLatLng;
 
-<br/>
-
-- 위도와 경도간 거리 구하기
-
-```dart
+// Geolocator 내 거리를 구하는 메소드 이용
+    final distance = Geolocator.distanceBetween(
+      start.latitude,
+      start.longitude,
+      end.latitude,
+      end.longitude,
+    );
+    // circle이 표시되는, 즉 회사 주변 100m 이내라는 이야기
+    if (distance < circleDistance) {
+      isWithinRange = true;
+    }
+  }
 
 ```
 
@@ -551,7 +632,19 @@ Future<String> checkPermission() async {
 
 - Material Dialog 활용하기
 
+![이미지](./worabel/assets/1.png)
+
 ```dart
+showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return AlertDialog(
+      title: const Text('출근하기'),
+      content: const Text('출근을 하시겠습니까'),
+    )
+  }
+  actions: []
+);
 
 ```
 
