@@ -101,7 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
           // Future 값을 snapshot으로 반환받을 수 있게 된다
           //print(snapshot.connectionState);
           //print(snapshot.data);
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (!snapshot.hasData) {
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            // 처음 재시작했을 때만 data가 없음. setState를 한다고 하더라도, FutureBuilder의 캐싱 기능을 통해 기존의 데이터가 유지됨
             return const Center(
               child: CircularProgressIndicator(
                 color: primaryColor,
