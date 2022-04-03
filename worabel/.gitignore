@@ -50,3 +50,5 @@ app.*.map.json
 /android/app/release
 /android/app/src/main/AndroidManifest.xml
 /ios/Runner/AppDelegate.swift
+/ios/Runner/
+/android/app/src/main/
