@@ -664,7 +664,15 @@ showDialog(
 
 <br/>
 
-- Box Shadow 사용하기
+- RTC(Real Time Communication) : 실시간 커뮤니케이션
+
+```dart
+
+```
+
+<br/>
+
+- Stack : 현재 영상 위로 쌓이는 레이어 위젯
 
 ```dart
 
