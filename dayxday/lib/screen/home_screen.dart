@@ -46,7 +46,7 @@ BoxDecoration getGradient() {
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [azure, mint, appleGreen],
+      colors: [azure, blueViolet, lilac],
     ),
   );
 }
