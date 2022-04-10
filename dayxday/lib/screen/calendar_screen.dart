@@ -8,6 +8,7 @@ import 'package:dayxday/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CalendarScreen extends StatefulWidget {
   // final int itemCount;
@@ -15,6 +16,7 @@ class CalendarScreen extends StatefulWidget {
   // final int endTime;
   // final String content;
   // final Color color;
+  // final SlidableController slidableController;
   const CalendarScreen(
       {
       //   required this.itemCount,
@@ -22,6 +24,7 @@ class CalendarScreen extends StatefulWidget {
       // required this.endTime,
       // required this.content,
       // required this.color,
+      // required this.slidableController,
       Key? key})
       : super(key: key);
 
@@ -128,97 +131,100 @@ class _ScheduledList extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: StreamBuilder<List<ScheduleWithCate>>(
-            stream: GetIt.I<LocalDb>().watchSchedules(selectedDate),
-            builder: (context, snapshot) {
-              // 쿼리 자체에서 where 필터를 진행했기 때문에 더 이상 할 필요가 없다
-              // List<Schedule> schedules = [];
-              // if (snapshot.hasData) {
-              //   schedules = snapshot.data!
-              //       .where((e) => e.date.toUtc() == selectedDate)
-              //       .toList();
-              //   print(schedules);
-              // }
-              if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+          stream: GetIt.I<LocalDb>().watchSchedules(selectedDate),
+          builder: (context, snapshot) {
+            // 쿼리 자체에서 where 필터를 진행했기 때문에 더 이상 할 필요가 없다
+            // List<Schedule> schedules = [];
+            // if (snapshot.hasData) {
+            //   schedules = snapshot.data!
+            //       .where((e) => e.date.toUtc() == selectedDate)
+            //       .toList();
+            //   print(schedules);
+            // }
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-              if (snapshot.hasData && snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text(
-                    '스케줄이 없습니다',
-                    style: TextStyle(
-                      color: veryperi,
+            if (snapshot.hasData && snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text(
+                  '스케줄이 없습니다',
+                  style: TextStyle(
+                    color: veryperi,
+                  ),
+                ),
+              );
+            }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 8.0);
+              },
+              itemBuilder: (context, index) {
+                final scheduleWithCate = snapshot.data![index];
+                return GestureDetector(
+                  onTap: () {
+                    // Update : 카드를 눌러서 bottomSheet 보여줌
+                    // 어떤 id를 가진 bottomSheet 인지 알 필요가 있음
+                    showModalBottomSheet(
+                      context: context,
+                      // 화면 전체를 차지하게
+                      isScrollControlled: true,
+                      builder: (_) {
+                        return ScheduleBottomSheet(
+                          selectedDate: selectedDate,
+                          sheduleId: scheduleWithCate.schedule.id,
+                        );
+                      },
+                    );
+                  },
+                  child: Dismissible(
+                    // 스와이프 액션
+                    key: ObjectKey(scheduleWithCate.schedule.id),
+                    confirmDismiss: (DismissDirection direction) async {
+                      switch (direction) {
+                        case DismissDirection.endToStart:
+                          return await _showConfirmationDialog(
+                                  context, 'Archive', selectedDate) ==
+                              true;
+                        case DismissDirection.startToEnd:
+                          return await _showConfirmationDialog(
+                                  context, 'Delete', selectedDate) ==
+                              true;
+                        case DismissDirection.horizontal:
+                        case DismissDirection.vertical:
+                        case DismissDirection.up:
+                        case DismissDirection.down:
+                          assert(false);
+                      }
+                      return false;
+                    },
+                    onDismissed: (DismissDirection direction) {
+                      GetIt.I<LocalDb>()
+                          .removeSchedule(scheduleWithCate.schedule.id);
+                    },
+                    direction: DismissDirection.endToStart,
+                    child: ScheduleBox(
+                      startTime: scheduleWithCate.schedule.startTime,
+                      endTime: scheduleWithCate.schedule.endTime,
+                      content: scheduleWithCate.schedule.content,
+                      color: color,
+                      category:
+                          scheduleWithCate.categoryName.category.toString(),
                     ),
                   ),
                 );
-              }
-              return ListView.separated(
-                itemCount: snapshot.data!.length,
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 8.0);
-                },
-                itemBuilder: (context, index) {
-                  final scheduleWithCate = snapshot.data![index];
-                  return GestureDetector(
-                    onTap: () {
-                      // Update : 카드를 눌러서 bottomSheet 보여줌
-                      // 어떤 id를 가진 bottomSheet 인지 알 필요가 있음
-                      showModalBottomSheet(
-                        context: context,
-                        // 화면 전체를 차지하게
-                        isScrollControlled: true,
-                        builder: (_) {
-                          return ScheduleBottomSheet(
-                            selectedDate: selectedDate,
-                            sheduleId: scheduleWithCate.schedule.id,
-                          );
-                        },
-                      );
-                    },
-                    child: Dismissible(
-                      // 스와이프 액션
-                      key: ObjectKey(scheduleWithCate.schedule.id),
-                      confirmDismiss: (DismissDirection direction) async {
-                        switch (direction) {
-                          case DismissDirection.endToStart:
-                            return await _showConfirmationDialog(
-                                    context, 'Archive', selectedDate) ==
-                                true;
-                          case DismissDirection.startToEnd:
-                            return await _showConfirmationDialog(
-                                    context, 'Delete', selectedDate) ==
-                                true;
-                          case DismissDirection.horizontal:
-                          case DismissDirection.vertical:
-                          case DismissDirection.up:
-                          case DismissDirection.down:
-                            assert(false);
-                        }
-                        return false;
-                      },
-                      onDismissed: (DismissDirection direction) {
-                        GetIt.I<LocalDb>()
-                            .removeSchedule(scheduleWithCate.schedule.id);
-                      },
-                      direction: DismissDirection.endToStart,
-                      child: ScheduleBox(
-                        startTime: scheduleWithCate.schedule.startTime,
-                        endTime: scheduleWithCate.schedule.endTime,
-                        content: scheduleWithCate.schedule.content,
-                        color: color,
-                        category:
-                            scheduleWithCate.categoryName.category.toString(),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }),
+              },
+            );
+          },
+        ),
       ),
     );
   }
+
+  void onPressed() {}
 
   Future<bool?> _showConfirmationDialog(
       BuildContext context, String action, DateTime selectedDate) {

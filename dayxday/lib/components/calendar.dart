@@ -23,6 +23,14 @@ class Calendar extends StatelessWidget {
         focusedDay: focusedDay,
         lastDay: DateTime(2030),
         headerStyle: const HeaderStyle(
+          leftChevronIcon: Icon(
+            Icons.chevron_left,
+            color: veryperi,
+          ),
+          rightChevronIcon: Icon(
+            Icons.chevron_right,
+            color: veryperi,
+          ),
           formatButtonVisible: false,
           titleCentered: true,
           titleTextStyle: TextStyle(fontSize: 16.0),
@@ -33,13 +41,13 @@ class Calendar extends StatelessWidget {
               Colors.transparent), // 설정해주지 않으면 원형이 기본인 이전 달로 이동할 경우 에러 발생
           defaultDecoration: defaultBoxDeco(paleGrey),
           weekendDecoration: defaultBoxDeco(paleGrey),
-          selectedDecoration: defaultBoxDeco(lilac).copyWith(
+          selectedDecoration: defaultBoxDeco(veryperi).copyWith(
             borderRadius: BorderRadius.circular(6.0),
             border: Border.all(color: veryperi, width: 2.0),
           ),
           weekendTextStyle: defaultTextDeco(veryperi),
           selectedTextStyle:
-              defaultTextDeco(veryperi).copyWith(fontWeight: FontWeight.bold),
+              defaultTextDeco(fontColor).copyWith(fontWeight: FontWeight.bold),
         ),
         onDaySelected: onDaySelected,
         selectedDayPredicate: (DateTime date) {

@@ -10,9 +10,10 @@ import 'package:dayxday/database/drift_db.dart';
 
 const DEFAULT_CATE = [
   'book',
-  'box',
+  'pencil',
   'call',
   'cinema',
+  'paint',
   'coding',
   'coffee',
   'eat',
@@ -21,12 +22,9 @@ const DEFAULT_CATE = [
   'gold',
   'hand',
   'heart',
-  'home',
-  'meeting',
   'money',
-  'paint',
-  'pencil',
   'stock',
+  'meeting',
   'travel',
   'work'
 ];
@@ -58,8 +56,6 @@ void main() async {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'modu',
-        primaryColor: pinkPerfume,
-        backgroundColor: appleGreen,
       ),
       initialRoute: '/',
       routes: {
