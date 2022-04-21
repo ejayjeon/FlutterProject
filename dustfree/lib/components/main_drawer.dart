@@ -1,26 +1,15 @@
 import 'package:dustfree/const/colors.dart';
+import 'package:dustfree/const/regions.dart';
 import 'package:flutter/material.dart';
 
-const regions = [
-  '서울',
-  '경기',
-  '대구',
-  '충남',
-  '인천',
-  '대전',
-  '경북',
-  '세종',
-  '광주',
-  '전북',
-  '강원',
-  '울산',
-  '전남',
-  '부산',
-  '제주',
-];
+typedef OnRegionTap = void Function(String region);
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key? key}) : super(key: key);
+  final OnRegionTap onRegionTap;
+  final String selectedRegion;
+  const MainDrawer(
+      {required this.onRegionTap, required this.selectedRegion, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +36,11 @@ class MainDrawer extends StatelessWidget {
                   tileColor: fontLight,
                   selectedTileColor: defaultBgLight,
                   selectedColor: fontDark,
-                  selected: e == '경기',
-                  onTap: () {},
+                  selected: e == selectedRegion,
+                  onTap: () {
+                    onRegionTap(e);
+                    // 여기서 Navigator.of(context).pop() 해줘도 되지만, 상위에서 state 관리를 해주기 위해서
+                  },
                   title: Text(e),
                 ),
               )

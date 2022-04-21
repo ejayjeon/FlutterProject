@@ -1,7 +1,6 @@
 import 'package:dustfree/components/card_title.dart';
 import 'package:dustfree/components/main_card.dart';
 import 'package:dustfree/components/stat_box.dart';
-import 'package:dustfree/const/colors.dart';
 import 'package:flutter/material.dart';
 
 class MainStatBox extends StatelessWidget {
