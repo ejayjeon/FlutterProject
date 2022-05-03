@@ -1,11 +1,12 @@
 import 'package:dustfree/components/main_appbar.dart';
 import 'package:dustfree/components/main_drawer.dart';
-import 'package:dustfree/components/main_dust_box.dart';
-import 'package:dustfree/components/main_stat_box.dart';
+import 'package:dustfree/components/hourly_card.dart';
+import 'package:dustfree/components/category_card.dart';
 import 'package:dustfree/const/colors.dart';
 import 'package:dustfree/const/regions.dart';
 import 'package:dustfree/const/status_level.dart';
 import 'package:dustfree/model/stat_model.dart';
+import 'package:dustfree/model/statandstatus_model.dart';
 import 'package:dustfree/repository/stat_repository.dart';
 import 'package:dustfree/utils/data_utils.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   String region = regions[0];
+  // 지역값에 해당하는 값을 가고 와야 함
   @override
   void initState() {
     super.initState();
@@ -66,7 +68,8 @@ class _MainScreenState extends State<MainScreen> {
     const ts = TextStyle(
         color: fontLight, fontSize: 20.0, fontWeight: FontWeight.bold);
     return Scaffold(
-      backgroundColor: defaultBg,
+      // backgroundColor: defaultBg,
+      // status의 값을 상위에서 불러올 수 없으니까, scaffold에서 배경을 지정하는 대신 아래에서 배경값을 지정한다
       drawer: MainDrawer(
         selectedRegion: region,
         onRegionTap: (String region) {
@@ -96,31 +99,69 @@ class _MainScreenState extends State<MainScreen> {
           Map<ItemCode, List<StatModel>> stats = snapshot.data!;
           // 키 값으로 ItemCode, 그에 해당되는 값들을 Value에 넣음 그 아이템들 중에서 PM10이라는 값을 가진 데이터 중에서 0번을 가져오면 가장 최근의 값을 가져오게 됨
           StatModel pm10RecentStat = stats[ItemCode.PM10]![0];
+          stats[ItemCode.PM10];
 
 // statusLevel을 찾는데, 이 데이터들 중 미세먼지 지수가 < 가지고온 최근 데이터 중 seoul 보다 작은지 비교한 다음에, 걸러진 기준들 중에서 가장 마지막(last) 번째를 불러온다.
+
+// 최근 미세먼지 데이터
           final status = DataUtils.getStatusFromItemCodeFromValue(
               value: pm10RecentStat.seoul,
               itemCode: ItemCode.PM10); // 미세먼지를 기준으로만 가져옴
 
-          return CustomScrollView(
-            slivers: [
-              MainAppbar(
-                stat: pm10RecentStat,
-                status: status,
-                region: region,
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    MainStatBox(),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
-                    MainDustBox(),
-                  ],
+          final ssModel = stats.keys.map((key) {
+            final value = stats[key]!;
+            final stat = value[0]; // 첫번째
+            return StatandStatusModel(
+              itemCode: key, // map에서 ItemCode
+              stat: stat,
+              status: DataUtils.getStatusFromItemCodeFromValue(
+                  value: stat.getLevelFromRegion(region),
+                  // 지역별 수치
+                  itemCode: key),
+            );
+          }).toList();
+
+          return Container(
+            color: status.primaryColor,
+            child: CustomScrollView(
+              slivers: [
+                MainAppbar(
+                  stat: pm10RecentStat,
+                  status: status,
+                  region: region,
                 ),
-              ),
-            ],
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      // 종류별
+                      CategoryCard(
+                        darkColor: status.darkColor,
+                        lightColor: status.lightColor,
+                        models: ssModel,
+                        region: region,
+                      ),
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      // 시간별
+                      ...stats.keys.map((e) {
+                        final stat = stats[e]!;
+                        return HourlyCard(
+                          category: DataUtils.itemCodeKrString(itemCode: e),
+                          region: region,
+                          statModel: stat,
+                          darkColor: status.darkColor,
+                          lightColor: status.lightColor,
+                        );
+                      }).toList(),
+                      const SizedBox(
+                        height: 32.0,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

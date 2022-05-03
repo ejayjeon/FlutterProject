@@ -2,8 +2,10 @@ import 'package:dustfree/const/colors.dart';
 import 'package:flutter/material.dart';
 
 class MainCard extends StatelessWidget {
-  const MainCard({required this.child, Key? key}) : super(key: key);
+  const MainCard({required this.child, required this.bgColor, Key? key})
+      : super(key: key);
   final Widget child;
+  final Color bgColor;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -15,7 +17,7 @@ class MainCard extends StatelessWidget {
           ),
         ),
       ),
-      color: defaultBgLight,
+      color: bgColor,
       elevation: 0,
       child: child,
     );
