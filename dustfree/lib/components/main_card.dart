@@ -9,8 +9,8 @@ class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
-      shape: RoundedRectangleBorder(
+      margin: const EdgeInsets.all(8.0),
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(
             8.0,

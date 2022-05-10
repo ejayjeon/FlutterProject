@@ -8,10 +8,14 @@ class MainAppbar extends StatelessWidget {
   final StatusModel status;
   final StatModel stat;
   final String region;
+  final DateTime dateTime;
+  final bool isExpanded;
   const MainAppbar(
       {required this.status,
       required this.stat,
       required this.region,
+      required this.dateTime,
+      required this.isExpanded,
       Key? key})
       : super(key: key);
 
@@ -26,6 +30,13 @@ class MainAppbar extends StatelessWidget {
     );
     return SliverAppBar(
       backgroundColor: status.primaryColor,
+      pinned: true,
+      // 스크롤을 다  올렸을 때에만 날짜 보게
+      title: isExpanded
+          ? null
+          : Text(
+              '$region ${DataUtils.getTimeFromDateTime(dateTime: dateTime)}'),
+      centerTitle: true,
       // 앱바가 늘어날 수 있는 공간
       expandedHeight: 500,
       // 앱을 스크롤하면 사라질 수 있는 공간 : flexible-space

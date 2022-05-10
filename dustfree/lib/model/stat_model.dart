@@ -2,36 +2,90 @@
 import 'dart:convert';
 
 import 'package:dustfree/utils/data_utils.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'stat_model.g.dart';
+
+@HiveType(typeId: 2)
 enum ItemCode {
+  @HiveField(0)
   PM10, // 미세먼지
+  @HiveField(1)
   PM25, // 초미세먼지
+  @HiveField(2)
   NO2, // 이산화질소
+  @HiveField(3)
   O3, // 오존
+  @HiveField(4)
   CO, // 일산화탄소
+  @HiveField(5)
   SO2, // 아황산가스
 }
 
+// 타입id는 절대로 중복되면 안된다
+@HiveType(typeId: 1)
 class StatModel {
+  @HiveField(0) // 타입 안에서는 절대적인 인덱스
   final double daegu;
+  @HiveField(1)
   final double chungnam;
+  @HiveField(2)
   final double incheon;
+  @HiveField(3)
   final double daejeon;
+  @HiveField(4)
   final double gyeongbuk;
+  @HiveField(5)
   final double gangwon;
+  @HiveField(6)
   final double sejong;
+  @HiveField(7)
   final double gwangju;
+  @HiveField(8)
   final double jeonbuk;
+  @HiveField(9)
   final double ulsan;
+  @HiveField(10)
   final double jeonnam;
+  @HiveField(11)
   final double seoul;
+  @HiveField(12)
   final double busan;
+  @HiveField(13)
   final double jeju;
+  @HiveField(14)
   final double chungbuk;
+  @HiveField(15)
   final double gyeongnam;
+  @HiveField(16)
   final double gyeonggi;
+  @HiveField(17)
   final DateTime dateTime;
+  @HiveField(18)
   final ItemCode itemCode; // enum
+
+// Hive Generation이 있어야하기 위해서는 기본 Constructor가 있어야함
+  StatModel({
+    required this.daegu,
+    required this.chungnam,
+    required this.incheon,
+    required this.daejeon,
+    required this.gyeongbuk,
+    required this.gangwon,
+    required this.sejong,
+    required this.gwangju,
+    required this.jeonbuk,
+    required this.ulsan,
+    required this.jeonnam,
+    required this.seoul,
+    required this.busan,
+    required this.jeju,
+    required this.chungbuk,
+    required this.gyeongnam,
+    required this.gyeonggi,
+    required this.dateTime,
+    required this.itemCode,
+  });
 
 // 컨스트럭트가 아니라 Json 형태에서부터 데이터를 받아오기 위해 작성 = 일종의 컨벤션
   StatModel.fromJson({required Map<String, dynamic> json})

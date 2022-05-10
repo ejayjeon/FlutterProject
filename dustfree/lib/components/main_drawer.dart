@@ -7,14 +7,20 @@ typedef OnRegionTap = void Function(String region);
 class MainDrawer extends StatelessWidget {
   final OnRegionTap onRegionTap;
   final String selectedRegion;
+  final Color darkColor;
+  final Color lightColor;
   const MainDrawer(
-      {required this.onRegionTap, required this.selectedRegion, Key? key})
+      {required this.onRegionTap,
+      required this.selectedRegion,
+      required this.darkColor,
+      required this.lightColor,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: defaultBgLight,
+      backgroundColor: darkColor,
       child: ListView(
         children: [
           DrawerHeader(
@@ -34,7 +40,7 @@ class MainDrawer extends StatelessWidget {
               .map(
                 (e) => ListTile(
                   tileColor: fontLight,
-                  selectedTileColor: defaultBgLight,
+                  selectedTileColor: lightColor,
                   selectedColor: fontDark,
                   selected: e == selectedRegion,
                   onTap: () {

@@ -4,7 +4,6 @@ import 'package:dustfree/components/hourly_card.dart';
 import 'package:dustfree/components/category_card.dart';
 import 'package:dustfree/const/colors.dart';
 import 'package:dustfree/const/regions.dart';
-import 'package:dustfree/const/status_level.dart';
 import 'package:dustfree/model/stat_model.dart';
 import 'package:dustfree/model/statandstatus_model.dart';
 import 'package:dustfree/repository/stat_repository.dart';
@@ -21,10 +20,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   String region = regions[0];
+  bool isExpanded = true;
+  ScrollController scrollController = ScrollController();
   // 지역값에 해당하는 값을 가고 와야 함
   @override
   void initState() {
     super.initState();
+    scrollController.addListener(scrollListener);
     fetchData();
   }
 
@@ -63,34 +65,43 @@ class _MainScreenState extends State<MainScreen> {
     return stats;
   }
 
+  // 스크롤을 했을 때 expanded인 것을 확인하기 위해
+  scrollListener() {
+    bool isExpanded = scrollController.offset < 500 - kToolbarHeight;
+    if (isExpanded != this.isExpanded) {
+      setState(() {
+        this.isExpanded = isExpanded;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(scrollListener);
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     const ts = TextStyle(
         color: fontLight, fontSize: 20.0, fontWeight: FontWeight.bold);
-    return Scaffold(
-      // backgroundColor: defaultBg,
-      // status의 값을 상위에서 불러올 수 없으니까, scaffold에서 배경을 지정하는 대신 아래에서 배경값을 지정한다
-      drawer: MainDrawer(
-        selectedRegion: region,
-        onRegionTap: (String region) {
-          setState(() {
-            this.region = region;
-          });
-          Navigator.of(context).pop();
-        },
-      ),
-      body: FutureBuilder<Map<ItemCode, List<StatModel>>>(
+    return FutureBuilder<Map<ItemCode, List<StatModel>>>(
         future: fetchData(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('에러가 있습니다'),
+            return Scaffold(
+              body: Center(
+                child: Text('에러가 있습니다'),
+              ),
             );
           }
           if (!snapshot.hasData) {
-            return const Center(
-              // 로딩상태
-              child: CircularProgressIndicator(),
+            return Scaffold(
+              body: Center(
+                // 로딩상태
+                child: CircularProgressIndicator(),
+              ),
             );
           }
 
@@ -121,50 +132,68 @@ class _MainScreenState extends State<MainScreen> {
             );
           }).toList();
 
-          return Container(
-            color: status.primaryColor,
-            child: CustomScrollView(
-              slivers: [
-                MainAppbar(
-                  stat: pm10RecentStat,
-                  status: status,
-                  region: region,
-                ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      // 종류별
-                      CategoryCard(
-                        darkColor: status.darkColor,
-                        lightColor: status.lightColor,
-                        models: ssModel,
-                        region: region,
-                      ),
-                      const SizedBox(
-                        height: 8.0,
-                      ),
-                      // 시간별
-                      ...stats.keys.map((e) {
-                        final stat = stats[e]!;
-                        return HourlyCard(
-                          category: DataUtils.itemCodeKrString(itemCode: e),
-                          region: region,
-                          statModel: stat,
+          return Scaffold(
+            // backgroundColor: defaultBg,
+            // status의 값을 상위에서 불러올 수 없으니까, scaffold에서 배경을 지정하는 대신 아래에서 배경값을 지정한다
+            drawer: MainDrawer(
+              darkColor: status.darkColor,
+              lightColor: status.lightColor,
+              selectedRegion: region,
+              onRegionTap: (String region) {
+                setState(() {
+                  this.region = region;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            body: Container(
+              color: status.primaryColor,
+              child: CustomScrollView(
+                controller: scrollController,
+                slivers: [
+                  MainAppbar(
+                    isExpanded: isExpanded,
+                    stat: pm10RecentStat,
+                    status: status,
+                    region: region,
+                    dateTime: pm10RecentStat.dateTime,
+                  ),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        // 종류별
+                        CategoryCard(
                           darkColor: status.darkColor,
                           lightColor: status.lightColor,
-                        );
-                      }).toList(),
-                      const SizedBox(
-                        height: 32.0,
-                      ),
-                    ],
+                          models: ssModel,
+                          region: region,
+                        ),
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+                        // 시간별
+                        ...stats.keys.map(
+                          (e) {
+                            final stat = stats[e]!;
+                            return HourlyCard(
+                              category: DataUtils.itemCodeKrString(itemCode: e),
+                              region: region,
+                              statModel: stat,
+                              darkColor: status.darkColor,
+                              lightColor: status.lightColor,
+                            );
+                          },
+                        ).toList(),
+                        const SizedBox(
+                          height: 32.0,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
-        },
-      ),
-    );
+        });
   }
 }
