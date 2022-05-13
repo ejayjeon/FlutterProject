@@ -16,7 +16,7 @@ void main() async {
   await Hive.openBox(id); // 앱의 dustFree 라는 로컬 데이터베이스가 생성되어서 언제든지 데이터를 넣고 뺄 수 있다
 
   for (ItemCode itemCode in ItemCode.values) {
-    await Hive.openBox(itemCode.name);
+    await Hive.openBox<StatModel>(itemCode.name); // 제네릭 사용
   }
 
   runApp(

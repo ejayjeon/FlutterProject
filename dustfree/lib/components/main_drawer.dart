@@ -23,12 +23,12 @@ class MainDrawer extends StatelessWidget {
       backgroundColor: darkColor,
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             curve: Curves.easeInCubic,
             child: Text(
               '지역 선택',
               style: TextStyle(
-                color: fontLight,
+                color: fontDark,
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold,
                 // fontFamily: 'SurroundAir',

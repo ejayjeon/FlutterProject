@@ -8,21 +8,21 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(
-              '미세먼지 측정 앱 ',
-              style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pushNamed('/main');
               },
               child: Image.asset(
-                'assets/img/illu14.png',
+                'assets/img/illu30.png',
+              ),
+            ),
+            const Text(
+              '오늘의 미세먼지',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],

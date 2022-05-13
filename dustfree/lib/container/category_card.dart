@@ -1,19 +1,18 @@
 import 'package:dustfree/components/card_title.dart';
 import 'package:dustfree/components/main_card.dart';
 import 'package:dustfree/components/stat_box.dart';
-import 'package:dustfree/model/statandstatus_model.dart';
+import 'package:dustfree/model/stat_model.dart';
 import 'package:dustfree/utils/data_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class CategoryCard extends StatelessWidget {
-  final List<StatandStatusModel> models;
   final String region;
   final Color darkColor;
   final Color lightColor;
   const CategoryCard(
       {required this.darkColor,
       required this.lightColor,
-      required this.models,
       required this.region,
       Key? key})
       : super(key: key);
@@ -40,18 +39,29 @@ class CategoryCard extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     // 페이지가 넘어가듯이 : 자동 페이지가 넘어가듯이 physics
                     physics: const PageScrollPhysics(),
-                    children: models
+                    children: ItemCode.values
                         .map(
-                          (model) => StatBox(
-                            width: constraint.maxWidth / 3,
-                            category: DataUtils.itemCodeKrString(
-                              itemCode: model.itemCode,
-                            ),
-                            imgPath: model.status.imgPath,
-                            level: model.status.label,
-                            stat: '${model.stat.getLevelFromRegion(
-                              region,
-                            )}${DataUtils.getUnitFromItemCode(itemcode: model.itemCode)}',
+                          (ItemCode itemCode) => ValueListenableBuilder<Box>(
+                            valueListenable:
+                                Hive.box<StatModel>(itemCode.name).listenable(),
+                            builder: (context, Box box, widget) {
+                              final stat = (box.values.last as StatModel);
+                              final status =
+                                  DataUtils.getStatusFromItemCodeFromValue(
+                                      value: stat.getLevelFromRegion(region),
+                                      itemCode: itemCode);
+                              return StatBox(
+                                width: constraint.maxWidth / 3,
+                                category: DataUtils.itemCodeKrString(
+                                  itemCode: itemCode,
+                                ),
+                                imgPath: status.imgPath,
+                                level: status.label,
+                                stat: '${stat.getLevelFromRegion(
+                                  region,
+                                )}${DataUtils.getUnitFromItemCode(itemcode: itemCode)}',
+                              );
+                            },
                           ),
                         )
                         .toList(),

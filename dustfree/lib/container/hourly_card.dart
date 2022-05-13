@@ -3,19 +3,18 @@ import 'package:dustfree/components/main_card.dart';
 import 'package:dustfree/model/stat_model.dart';
 import 'package:dustfree/utils/data_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HourlyCard extends StatelessWidget {
   final Color darkColor;
   final Color lightColor;
-  final String category;
   final String region;
-  final List<StatModel> statModel;
+  final ItemCode itemCode;
   const HourlyCard(
-      {required this.category,
-      required this.region,
-      required this.statModel,
+      {required this.region,
       required this.darkColor,
       required this.lightColor,
+      required this.itemCode,
       Key? key})
       : super(key: key);
 
@@ -28,15 +27,18 @@ class HourlyCard extends StatelessWidget {
         children: [
           CardTitle(
             bgColor: darkColor,
-            title: '시간별 ${this.category}',
+            title: '시간별 ${DataUtils.itemCodeKrString(itemCode: itemCode)}',
           ),
-          Column(
-            children: statModel
-                .map(
-                  (e) => renderRow(statModel: e),
-                )
-                .toList(),
-          ),
+          ValueListenableBuilder<Box>(
+            valueListenable: Hive.box<StatModel>(itemCode.name).listenable(),
+            builder: (context, box, widget) => Column(
+              children: box.values
+                  .toList()
+                  .reversed
+                  .map((e) => renderRow(statModel: e))
+                  .toList(),
+            ),
+          )
         ],
       ),
     );
@@ -48,7 +50,7 @@ class HourlyCard extends StatelessWidget {
       itemCode: statModel.itemCode,
     );
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
       child: Row(
         children: [
           // mainAxixAlignment 대신 각자 위젯을 Expanded로 감싸준 이유는 글자수에 따라 아이콘의 정렬이 비뚤비뚤하기 때문

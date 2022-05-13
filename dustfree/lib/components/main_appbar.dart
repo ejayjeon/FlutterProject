@@ -21,8 +21,8 @@ class MainAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ts = TextStyle(
-        fontSize: 30.0, fontWeight: FontWeight.w700, color: fontLight);
+    const ts =
+        TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700, color: fontDark);
     // final now = DateTime.utc(
     //     DateTime.now().year, DateTime.now().month, DateTime.now().day);
     const boxPadding = SizedBox(
@@ -44,7 +44,7 @@ class MainAppbar extends StatelessWidget {
         background: SafeArea(
           child: Container(
             //The height of the toolbar component of the [AppBar]
-            margin: EdgeInsets.only(top: kToolbarHeight),
+            margin: const EdgeInsets.only(top: kToolbarHeight),
             child: Column(
               children: [
                 Text(

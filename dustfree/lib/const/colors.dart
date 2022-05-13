@@ -6,17 +6,17 @@ const Color bestBgLight = Color(0xFFA6E3FF);
 const Color bestBg = Color(0xFF64E0FF);
 const Color bestBgDark = Color(0xFF4FA7CA);
 
-const Color niceBgLight = Color(0xFFB0FF8E);
-const Color niceBg = Color(0xFF9DFF64);
-const Color niceBgDark = Color(0xFF80C14B);
+const Color niceBgLight = Color(0xFF7CFF98);
+const Color niceBg = Color(0xFF44E16B);
+const Color niceBgDark = Color(0xFF48C269);
 
-const Color goodBgLight = Color(0xFFD1FF8B);
-const Color goodBg = Color(0xFFE7FF5E);
-const Color goodBgDark = Color(0xFFB7CC51);
+const Color goodBgLight = Color(0xFFCFFE89);
+const Color goodBg = Color(0xFFAFFF4E);
+const Color goodBgDark = Color.fromARGB(255, 123, 187, 6);
 
-const Color defaultBgLight = Color(0xFFFDFF9A);
-const Color defaultBg = Color(0xFFFCFE80);
-const Color defaultBgDark = Color(0xFFCAC653);
+const Color defaultBgLight = Color(0xFFFDFF90);
+const Color defaultBg = Color(0xFFFCFF42);
+const Color defaultBgDark = Color(0xFFCAC520);
 
 // not good
 const Color notGoodBgLight = Color(0xFFFFE695);

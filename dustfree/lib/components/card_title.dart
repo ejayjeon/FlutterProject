@@ -9,13 +9,13 @@ class CardTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const ts = TextStyle(
-        color: fontLight, fontSize: 20.0, fontWeight: FontWeight.bold);
+    const ts =
+        TextStyle(color: fontDark, fontSize: 20.0, fontWeight: FontWeight.bold);
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8.0),
             topRight: Radius.circular(8.0),
           )),
