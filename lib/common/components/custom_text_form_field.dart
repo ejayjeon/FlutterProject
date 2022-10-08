@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscure = false,
     this.autoFocus = false,
     required this.onChanged,
+    this.prefixIcon,
   });
 
   final String? hintText;
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscure;
   final bool autoFocus;
   final ValueChanged<String>? onChanged;
+  final IconData? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
       autofocus: autoFocus,
       onChanged: onChanged,
       decoration: lightInputThemeData.copyWith(
+        icon: Icon(prefixIcon),
         hintText: hintText,
         errorText: errorText,
         filled: true,

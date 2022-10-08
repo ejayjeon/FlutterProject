@@ -3,6 +3,8 @@ import 'package:nosh/common/const/color_schemes.g.dart';
 
 const DARK_BG = Color(0xFF36374d);
 const LIGHT_BG = Color(0xFFfaf7fa);
+const LIGHT_PRIMARY = Color(0xFF005AC4);
+const DARK_PRIMARY = Color(0xFFAEC6FF);
 
 var lightThemeData = ThemeData(
   useMaterial3: true,
@@ -14,6 +16,7 @@ var lightThemeData = ThemeData(
   textTheme: lightTextThemeData,
   indicatorColor: lightColorScheme.secondaryContainer,
   backgroundColor: const Color(0xFFFBFBFB),
+  // scaffoldBackgroundColor: const Color(0xFFFBFBFB),
   // inputDecorationTheme: lightInputThemeData,
 );
 
@@ -27,6 +30,7 @@ var darkThemeData = ThemeData(
   textTheme: darkTextThemeData,
   indicatorColor: darkColorScheme.secondaryContainer,
   backgroundColor: const Color(0xFF0C0D13),
+  // scaffoldBackgroundColor: const Color(0xFF0C0D13),
   // inputDecorationTheme: darkInputThemeData,
 );
 
@@ -63,32 +67,32 @@ var darkScrollbarThemeData = ScrollbarThemeData(
 // elevated button 테마
 var lightElevatedBtnThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll<Color?>(
-      Colors.transparent,
+    backgroundColor: MaterialStatePropertyAll<Color?>(
+      lightColorScheme.primaryContainer,
     ),
-    overlayColor: MaterialStatePropertyAll<Color?>(
-      lightColorScheme.onPrimary,
-    ),
+    // overlayColor: MaterialStatePropertyAll<Color?>(
+    //   lightColorScheme.onPrimary,
+    // ),
     elevation: const MaterialStatePropertyAll<double?>(0.0),
-    textStyle: MaterialStatePropertyAll<TextStyle>(
+    textStyle: const MaterialStatePropertyAll<TextStyle>(
       TextStyle(
-        color: lightColorScheme.onSurface,
+        color: LIGHT_PRIMARY,
       ),
     ),
   ),
 );
 var darkElevatedBtnThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll<Color?>(
-      Colors.transparent,
+    backgroundColor: MaterialStatePropertyAll<Color?>(
+      darkColorScheme.primaryContainer,
     ),
-    overlayColor: MaterialStatePropertyAll<Color?>(
-      darkColorScheme.onPrimary,
-    ),
+    // overlayColor: MaterialStatePropertyAll<Color?>(
+    //   darkColorScheme.onPrimary,
+    // ),
     elevation: const MaterialStatePropertyAll<double?>(0.0),
-    textStyle: MaterialStatePropertyAll<TextStyle>(
+    textStyle: const MaterialStatePropertyAll<TextStyle>(
       TextStyle(
-        color: darkColorScheme.onSurface,
+        color: DARK_PRIMARY,
       ),
     ),
   ),
@@ -241,6 +245,12 @@ var lightInputThemeData = InputDecoration(
       width: 1.0,
     ),
   ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: lightColorScheme.primaryContainer,
+      width: 1.0,
+    ),
+  ),
 );
 
 var darkInputThemeData = InputDecoration(
@@ -273,6 +283,12 @@ var darkInputThemeData = InputDecoration(
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(
       color: darkColorScheme.primary,
+      width: 1.0,
+    ),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: darkColorScheme.primaryContainer,
       width: 1.0,
     ),
   ),

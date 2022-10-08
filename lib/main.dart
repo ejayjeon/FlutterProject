@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nosh/common/components/custom_text_form_field.dart';
 import 'package:nosh/common/const/custom_theme.dart';
+import 'package:nosh/common/view/splash_screen.dart';
+import 'package:nosh/user/view/login_screen.dart';
 
 void main() {
   runApp(
@@ -19,25 +21,8 @@ class _App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightThemeData,
       darkTheme: darkThemeData,
-      home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomTextFormField(
-              hintText: 'Email',
-              obscure: false,
-              autoFocus: true,
-              onChanged: (String value) {},
-            ),
-            CustomTextFormField(
-              hintText: 'Password',
-              obscure: true,
-              autoFocus: true,
-              onChanged: (String value) {},
-            ),
-          ],
-        ),
-      ),
+      themeMode: ThemeMode.system,
+      home: const SplachScreen(),
     );
   }
 }
