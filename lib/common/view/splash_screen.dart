@@ -1,6 +1,5 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:nosh/common/const/color_schemes.g.dart';
 import 'package:nosh/common/const/data.dart';
 import 'package:nosh/common/layout/main_layout.dart';
@@ -28,19 +27,34 @@ class _SplachScreenState extends State<SplachScreen> {
   void checkToken() async {
     final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
     final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
+    final dio = Dio();
 
-    if (refreshToken == null || accessToken == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+    try {
+      final resp = await dio.post(
+        'http://$ip/auth/token',
+        options: Options(
+          headers: {
+            'authorization': 'Bearer $refreshToken',
+          },
         ),
-        (route) => false,
       );
-    } else {
-      // 만약에 토큰이 하나라도 있다면 -> 원래는 인증로직 거쳐야함
+      // 발급받은 AccessToken Storage에 저장
+      await storage.write(
+        key: ACCESS_TOKEN_KEY,
+        value: resp.data['accessToken'],
+      );
+      // 에러가 나지 않으면 토큰이 발급되면서, 다음 페이지로 넘어감
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (_) => const RootTab(),
+        ),
+        (route) => false,
+      );
+    } catch (e) {
+      // 만약에 상태코드가 200이 아니라면 에러
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (_) => const LoginScreen(),
         ),
         (route) => false,
       );
@@ -64,7 +78,7 @@ class _SplachScreenState extends State<SplachScreen> {
               'assets/images/misc/logo2.png',
               width: MediaQuery.of(context).size.width,
             ),
-            customSizedBox(),
+            CustomSizedBox(height: 8.0),
             CircularProgressIndicator(
               color: lightColorScheme.primary,
             ),

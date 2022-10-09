@@ -21,11 +21,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   // Dart 에서 Base64로 변환하는 방법
   final dio = Dio();
-  // 안드로이드 에뮬과 시뮬 path는 다르다 별도로 설정해 주어야 함
-  static const emulatorIp = '10.0.2.2:3000';
-  static const simulatorIp = '127.0.0.1:3000';
-  // IOS 와 Android 구분하는 방법
-  final ip = Platform.isIOS ? simulatorIp : emulatorIp;
 
   String email = '';
   String pwd = '';
@@ -51,18 +46,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   title: 'WELCOME TO NOSH',
                   theme: Theme.of(context).textTheme.headline2,
                 ),
-                customSizedBox(),
+                CustomSizedBox(height: 16.0),
                 _Title(
                   title:
                       'Please enter your E-mail address and password. \nWish you having wonderful day 😁',
                   theme: Theme.of(context).textTheme.bodyText1,
                 ),
-                customSizedBox(),
+                CustomSizedBox(height: 16.0),
                 Image.asset(
                   'assets/images/misc/logo2.png',
                   width: MediaQuery.of(context).size.width / 3 * 2,
                 ),
-                customSizedBox(),
+                CustomSizedBox(height: 16.0),
                 CustomTextFormField(
                   hintText: 'Email',
                   obscure: false,
@@ -72,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     email = value;
                   },
                 ),
-                customSizedBox(),
+                CustomSizedBox(height: 16.0),
                 CustomTextFormField(
                   hintText: 'Password',
                   obscure: true,
@@ -82,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     pwd = value;
                   },
                 ),
-                customSizedBox(),
+                CustomSizedBox(height: 16.0),
                 CustomElevatedBtn(
                   onPressed: () async {
                     final rawString = '$email:$pwd';
@@ -112,18 +107,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: const Text('SIGN IN'),
                 ),
-                customSizedBox(),
+                CustomSizedBox(height: 16.0),
                 CustomElevatedBtn(
-                  onPressed: () async {
-                    final resp = await dio.post(
-                      'http://$ip/auth/token',
-                      options: Options(
-                        headers: {
-                          'authorization': 'Bearer $tokenData.refreshtoken'
-                        },
-                      ),
-                    );
-                  },
+                  onPressed: () async {},
                   backgroundColor: Colors.transparent,
                   child: const Text('SIGN UP'),
                 ),

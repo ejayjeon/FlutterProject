@@ -20,6 +20,7 @@ var lightThemeData = ThemeData(
   backgroundColor: LIGHT_BG,
   appBarTheme: lightAppbarThemeData,
   bottomNavigationBarTheme: lightBottomNavThemeData,
+  cardTheme: lightCardThemeData,
   // scaffoldBackgroundColor: const Color(0xFFFBFBFB),
   // inputDecorationTheme: lightInputThemeData,
 );
@@ -36,6 +37,7 @@ var darkThemeData = ThemeData(
   backgroundColor: DARK_BG,
   appBarTheme: darkAppbarThemeData,
   bottomNavigationBarTheme: darkBottomNavThemeData,
+  cardTheme: darkCardThemeData,
   // scaffoldBackgroundColor: const Color(0xFF0C0D13),
   // inputDecorationTheme: darkInputThemeData,
 );
@@ -48,23 +50,6 @@ var lightAppbarThemeData = const AppBarTheme(
   titleTextStyle:
       TextStyle(color: DARK_MAIN, fontSize: 16.0, fontWeight: FontWeight.w600),
 );
-
-/**
- * Color? backgroundColor,
-  double? elevation,
-  IconThemeData? selectedIconTheme,
-  IconThemeData? unselectedIconTheme,
-  Color? selectedItemColor,
-  Color? unselectedItemColor,
-  TextStyle? selectedLabelStyle,
-  TextStyle? unselectedLabelStyle,
-  bool? showSelectedLabels,
-  bool? showUnselectedLabels,
-  BottomNavigationBarType? type,
-  bool? enableFeedback,
-  BottomNavigationBarLandscapeLayout? landscapeLayout,
-  MaterialStateProperty<MouseCursor?>? mouseCursor,
- */
 
 var darkAppbarThemeData = const AppBarTheme(
   backgroundColor: DARK_BG,
@@ -95,6 +80,27 @@ var darkBottomNavThemeData = lightBottomNavThemeData.copyWith(
   selectedItemColor: darkColorScheme.primary,
   unselectedItemColor: darkColorScheme.secondary,
 );
+
+/**
+ * Clip? clipBehavior,
+  Color? color,
+  Color? shadowColor,
+  Color? surfaceTintColor,
+  double? elevation,
+  EdgeInsetsGeometry? margin,
+  ShapeBorder? shape,
+ */
+// 카드 테마
+var lightCardThemeData = CardTheme(
+  color: LIGHT_BG,
+  shadowColor: Colors.transparent,
+  elevation: 0,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(8.0),
+  ),
+);
+
+var darkCardThemeData = lightCardThemeData.copyWith(color: DARK_BG);
 
 // 스위치 테마
 var lightSwitchThemeData = SwitchThemeData(
