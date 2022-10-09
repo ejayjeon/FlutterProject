@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nosh/common/const/color_schemes.g.dart';
 
-const DARK_BG = Color(0xFF36374d);
-const LIGHT_BG = Color(0xFFfaf7fa);
+const DARK_MAIN = Color(0xFF36374d);
+const LIGHT_MAIN = Color(0xFFfaf7fa);
+const DARK_BG = Color(0xFF0C0D13);
+const LIGHT_BG = Color(0xFFFBFBFB);
 const LIGHT_PRIMARY = Color(0xFF005AC4);
 const DARK_PRIMARY = Color(0xFFAEC6FF);
 
@@ -15,7 +17,9 @@ var lightThemeData = ThemeData(
   fontFamily: 'Pretendard',
   textTheme: lightTextThemeData,
   indicatorColor: lightColorScheme.secondaryContainer,
-  backgroundColor: const Color(0xFFFBFBFB),
+  backgroundColor: LIGHT_BG,
+  appBarTheme: lightAppbarThemeData,
+  bottomNavigationBarTheme: lightBottomNavThemeData,
   // scaffoldBackgroundColor: const Color(0xFFFBFBFB),
   // inputDecorationTheme: lightInputThemeData,
 );
@@ -29,9 +33,67 @@ var darkThemeData = ThemeData(
   fontFamily: 'Pretendard',
   textTheme: darkTextThemeData,
   indicatorColor: darkColorScheme.secondaryContainer,
-  backgroundColor: const Color(0xFF0C0D13),
+  backgroundColor: DARK_BG,
+  appBarTheme: darkAppbarThemeData,
+  bottomNavigationBarTheme: darkBottomNavThemeData,
   // scaffoldBackgroundColor: const Color(0xFF0C0D13),
   // inputDecorationTheme: darkInputThemeData,
+);
+
+// 앱바
+var lightAppbarThemeData = const AppBarTheme(
+  backgroundColor: LIGHT_BG,
+  foregroundColor: DARK_MAIN,
+  elevation: 0,
+  titleTextStyle:
+      TextStyle(color: DARK_MAIN, fontSize: 16.0, fontWeight: FontWeight.w600),
+);
+
+/**
+ * Color? backgroundColor,
+  double? elevation,
+  IconThemeData? selectedIconTheme,
+  IconThemeData? unselectedIconTheme,
+  Color? selectedItemColor,
+  Color? unselectedItemColor,
+  TextStyle? selectedLabelStyle,
+  TextStyle? unselectedLabelStyle,
+  bool? showSelectedLabels,
+  bool? showUnselectedLabels,
+  BottomNavigationBarType? type,
+  bool? enableFeedback,
+  BottomNavigationBarLandscapeLayout? landscapeLayout,
+  MaterialStateProperty<MouseCursor?>? mouseCursor,
+ */
+
+var darkAppbarThemeData = const AppBarTheme(
+  backgroundColor: DARK_BG,
+  foregroundColor: LIGHT_MAIN,
+  elevation: 0,
+  titleTextStyle:
+      TextStyle(color: LIGHT_MAIN, fontSize: 16.0, fontWeight: FontWeight.w600),
+);
+
+// 바텀바
+var lightBottomNavThemeData = BottomNavigationBarThemeData(
+  backgroundColor: LIGHT_BG,
+  elevation: 0,
+  selectedItemColor: lightColorScheme.primary,
+  unselectedItemColor: lightColorScheme.secondary,
+  selectedLabelStyle: const TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w600,
+  ),
+  unselectedLabelStyle: const TextStyle(
+    fontSize: 10,
+  ),
+  type: BottomNavigationBarType.fixed,
+);
+
+var darkBottomNavThemeData = lightBottomNavThemeData.copyWith(
+  backgroundColor: DARK_BG,
+  selectedItemColor: darkColorScheme.primary,
+  unselectedItemColor: darkColorScheme.secondary,
 );
 
 // 스위치 테마
@@ -102,17 +164,17 @@ var darkElevatedBtnThemeData = ElevatedButtonThemeData(
 var lightTextThemeData = const TextTheme(
   headline1: TextStyle(
     fontSize: 30.0,
-    color: DARK_BG,
+    color: DARK_MAIN,
     fontWeight: FontWeight.w800,
   ),
   headline2: TextStyle(
     fontSize: 25.0,
-    color: DARK_BG,
+    color: DARK_MAIN,
     fontWeight: FontWeight.w700,
   ),
   headline3: TextStyle(
     fontSize: 20.0,
-    color: DARK_BG,
+    color: DARK_MAIN,
     fontWeight: FontWeight.w600,
   ),
   subtitle1: TextStyle(
@@ -127,32 +189,32 @@ var lightTextThemeData = const TextTheme(
   ),
   bodyText1: TextStyle(
     fontSize: 14.0,
-    color: DARK_BG,
+    color: DARK_MAIN,
   ),
   bodyText2: TextStyle(
     fontSize: 10.0,
-    color: DARK_BG,
+    color: DARK_MAIN,
   ),
   caption: TextStyle(
       fontSize: 13.0,
-      color: DARK_BG,
+      color: DARK_MAIN,
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.w700),
 );
 var darkTextThemeData = const TextTheme(
   headline1: TextStyle(
     fontSize: 30.0,
-    color: LIGHT_BG,
+    color: LIGHT_MAIN,
     fontWeight: FontWeight.w800,
   ),
   headline2: TextStyle(
     fontSize: 25.0,
-    color: LIGHT_BG,
+    color: LIGHT_MAIN,
     fontWeight: FontWeight.w700,
   ),
   headline3: TextStyle(
     fontSize: 25.0,
-    color: LIGHT_BG,
+    color: LIGHT_MAIN,
     fontWeight: FontWeight.w600,
   ),
   subtitle1: TextStyle(
@@ -167,15 +229,15 @@ var darkTextThemeData = const TextTheme(
   ),
   bodyText1: TextStyle(
     fontSize: 14.0,
-    color: LIGHT_BG,
+    color: LIGHT_MAIN,
   ),
   bodyText2: TextStyle(
     fontSize: 10.0,
-    color: LIGHT_BG,
+    color: LIGHT_MAIN,
   ),
   caption: TextStyle(
       fontSize: 13.0,
-      color: LIGHT_BG,
+      color: LIGHT_MAIN,
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.w700),
 );
@@ -183,9 +245,9 @@ var darkTextThemeData = const TextTheme(
 // Dialog 테마
 var lightDlgThemeData = const DialogTheme(
   backgroundColor: Color(0xFFFBFBFB),
-  iconColor: DARK_BG,
+  iconColor: DARK_MAIN,
   titleTextStyle: TextStyle(
-    color: DARK_BG,
+    color: DARK_MAIN,
     fontSize: 20.0,
     fontWeight: FontWeight.w700,
   ),
@@ -215,9 +277,9 @@ var darkDlgThemeData = const DialogTheme(
 var lightInputThemeData = InputDecoration(
   focusColor: lightColorScheme.primary,
   isCollapsed: true,
-  iconColor: DARK_BG,
-  prefixIconColor: DARK_BG,
-  suffixIconColor: DARK_BG,
+  iconColor: DARK_MAIN,
+  prefixIconColor: DARK_MAIN,
+  suffixIconColor: DARK_MAIN,
   contentPadding: const EdgeInsets.all(16.0),
   errorMaxLines: 1,
   hintStyle: TextStyle(
@@ -225,7 +287,7 @@ var lightInputThemeData = InputDecoration(
     fontSize: 14.0,
   ),
   helperStyle: const TextStyle(
-    color: DARK_BG,
+    color: DARK_MAIN,
     fontSize: 12.0,
   ),
   errorStyle: TextStyle(
@@ -256,9 +318,9 @@ var lightInputThemeData = InputDecoration(
 var darkInputThemeData = InputDecoration(
   focusColor: darkColorScheme.primary,
   isCollapsed: true,
-  iconColor: LIGHT_BG,
-  prefixIconColor: LIGHT_BG,
-  suffixIconColor: LIGHT_BG,
+  iconColor: LIGHT_MAIN,
+  prefixIconColor: LIGHT_MAIN,
+  suffixIconColor: LIGHT_MAIN,
   contentPadding: const EdgeInsets.all(16.0),
   errorMaxLines: 1,
   hintStyle: TextStyle(
@@ -266,7 +328,7 @@ var darkInputThemeData = InputDecoration(
     fontSize: 14.0,
   ),
   helperStyle: const TextStyle(
-    color: LIGHT_BG,
+    color: LIGHT_MAIN,
     fontSize: 12.0,
   ),
   errorStyle: TextStyle(
