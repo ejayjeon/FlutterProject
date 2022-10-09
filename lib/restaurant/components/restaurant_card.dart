@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/const/color_schemes.g.dart';
+import 'package:nosh/restaurant/model/restaurant_model.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({
@@ -21,6 +22,24 @@ class RestaurantCard extends StatelessWidget {
   final int ratingsCount; // 평점 갯수
   final int deliveryTime; // 배달 시간
   final int deliveryFee; // 배달 비용
+
+  factory RestaurantCard.fromModel({
+    required RestaurantModel model,
+  }) {
+    return RestaurantCard(
+      image: Image.network(
+        model.thumbUrl,
+        fit: BoxFit.cover,
+      ),
+      name: model.name,
+      // List<dynamic> type을 List<String> type으로 변경
+      tags: model.tags,
+      ratings: model.ratings,
+      ratingsCount: model.ratingsCount,
+      deliveryTime: model.deliveryTime,
+      deliveryFee: model.deliveryFee,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

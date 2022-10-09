@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/const/data.dart';
 import 'package:nosh/restaurant/components/restaurant_card.dart';
+import 'package:nosh/restaurant/model/restaurant_model.dart';
 
 class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({super.key});
@@ -38,21 +39,23 @@ class RestaurantScreen extends StatelessWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (_, index) {
                   final item = snapshot.data![index];
-                  return RestaurantCard(
-                    image: Image.network(
-                      'http://$ip${item['thumbUrl']}',
-                      fit: BoxFit.cover,
-                    ),
-                    name: item['name'],
-                    // List<dynamic> type을 List<String> type으로 변경
-                    tags: List<String>.from(
-                      item['tags'],
-                    ),
-                    ratings: item['ratings'],
-                    ratingsCount: item['ratingsCount'],
-                    deliveryTime: item['deliveryTime'],
-                    deliveryFee: item['deliveryFee'],
-                  );
+                  // Factory Contructor을 만들면 아래에서 해주었던 패턴을 할 필요가 없게 된다
+                  final pItem = RestaurantModel.fromJson(json: item);
+                  // final pItem = RestaurantModel(
+                  //   id: item['id'],
+                  //   name: item['name'],
+                  //   thumbUrl: 'http://${ip}${item['thumbUrl']}',
+                  //   tags: List<String>.from(item['tags']),
+                  //   priceRange: RestaurantPriceRange.values.firstWhere(
+                  //       (element) => element.name == item['priceRange']),
+                  //   ratings: item['ratings'],
+                  //   ratingsCount: item['ratingsCount'],
+                  //   deliveryTime: item['deliveryTime'],
+                  //   deliveryFee: item['deliveryFee'],
+                  // );
+
+                  // Factory Model
+                  return RestaurantCard.fromModel(model: pItem);
                 },
                 separatorBuilder: (_, index) {
                   return CustomSizedBox(height: 16.0);
