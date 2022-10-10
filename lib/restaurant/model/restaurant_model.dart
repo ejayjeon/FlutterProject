@@ -1,10 +1,18 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:nosh/common/const/data.dart';
+import 'package:nosh/common/utils/data_utils.dart';
+
+part 'restaurant_model.g.dart';
 
 enum RestaurantPriceRange { expensive, medium, cheap }
 
+@JsonSerializable()
 class RestaurantModel {
   final String id;
   final String name;
+  @JsonKey(
+    fromJson: DataUtils.pathToUrl,
+  )
   final String thumbUrl;
   final List<String> tags;
   final RestaurantPriceRange priceRange;
@@ -25,27 +33,35 @@ class RestaurantModel {
     required this.deliveryFee,
   });
 
-  // Json 값을 가져옴
-  factory RestaurantModel.fromJson({
-    required Map<String, dynamic> json,
-  }) {
-    return RestaurantModel(
-      id: json['id'],
-      name: json['name'],
-      thumbUrl: 'http://$ip${json['thumbUrl']}',
-      tags: List<String>.from(json['tags']),
-      priceRange: RestaurantPriceRange.values.firstWhere(
-        (element) => element.name == json['priceRange'],
-      ),
-      ratings: json['ratings'],
-      ratingsCount: json['ratingsCount'],
-      deliveryTime: json['deliveryTime'],
-      deliveryFee: json['deliveryFee'],
-    );
-  }
+// Json 에서 만들 Factory 파일을 불러오는 과정
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
+      _$RestaurantModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RestaurantModelToJson(this);
+
+// 무조건 static이어야 한다.
+// flutter pub run build_runnder build / watch
 }
 
-
+// Json 값을 가져옴
+//   factory RestaurantModel.fromJson({
+//     required Map<String, dynamic> json,
+//   }) {
+//     return RestaurantModel(
+//       id: json['id'],
+//       name: json['name'],
+//       thumbUrl: 'http://$ip${json['thumbUrl']}',
+//       tags: List<String>.from(json['tags']),
+//       priceRange: RestaurantPriceRange.values.firstWhere(
+//         (element) => element.name == json['priceRange'],
+//       ),
+//       ratings: json['ratings'],
+//       ratingsCount: json['ratingsCount'],
+//       deliveryTime: json['deliveryTime'],
+//       deliveryFee: json['deliveryFee'],
+//     );
+//   }
+// }
 
 /**  FACTORY CONTRRUCTOR를 만드는 이유
  * 외부에서 받아온 값들을 메소드로 받아서 FACTORY CONSTRUCTOR 내부에서 가공할 수 있음. 

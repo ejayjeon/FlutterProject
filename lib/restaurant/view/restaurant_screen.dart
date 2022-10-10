@@ -42,7 +42,7 @@ class RestaurantScreen extends StatelessWidget {
               itemBuilder: (_, index) {
                 final item = snapshot.data![index];
                 // Factory Contructor을 만들면 아래에서 해주었던 패턴을 할 필요가 없게 된다
-                final pItem = RestaurantModel.fromJson(json: item);
+                final pItem = RestaurantModel.fromJson(item);
                 // final pItem = RestaurantModel(
                 //   id: item['id'],
                 //   name: item['name'],
