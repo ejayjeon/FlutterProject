@@ -39,6 +39,8 @@ dependencies:
   dio: ^4.0.6
   flutter_secure_storage: ^6.0.0 # Redis 같은 스토리지
   json_annotation: ^4.7.0 # serializable 사용을 위해 추가
+  retrofit: ^3.3.1 # 상태관리
+  logger: any # for logging purpose
   
 
 dev_dependencies:
@@ -47,7 +49,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   json_serializable: ^6.5.0 # serializable 사용을 위해 추가
   build_runner: ^2.2.1 # serializable 사용을 위해 추가
-
+  retrofit_generator: '>=4.0.0 <5.0.0'
 #
 flutter:
 
