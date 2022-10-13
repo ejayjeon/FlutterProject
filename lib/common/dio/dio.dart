@@ -44,8 +44,9 @@ class CustomInterceptor extends Interceptor {
 // 2) 응답 받을 때
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // TODO: implement onResponse
-    super.onResponse(response, handler);
+    print(
+        '[RSP], [${response.requestOptions.method}] ${response.requestOptions.uri}');
+    return super.onResponse(response, handler);
   }
 
 // 3) 에러가 났을 때

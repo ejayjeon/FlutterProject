@@ -41,6 +41,7 @@ dependencies:
   json_annotation: ^4.7.0 # serializable 사용을 위해 추가
   retrofit: ^3.3.1 # 상태관리
   logger: any # for logging purpose
+  flutter_riverpod: ^2.0.2 # 상태관리
   
 
 dev_dependencies:

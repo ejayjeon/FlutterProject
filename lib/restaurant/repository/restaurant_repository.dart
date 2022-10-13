@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:nosh/common/model/cursor_pagination_model.dart';
 import 'package:nosh/restaurant/model/restaurant_detail_model.dart';
+import 'package:nosh/restaurant/model/restaurant_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'restaurant_repository.g.dart';
@@ -12,8 +14,9 @@ abstract class RestaurantRepository {
       _RestaurantRepository;
 
 // 페이지네이션 -> http://$ip/restaurant/
-  // @GET('/')
-  // Paginate();
+  @GET('/')
+  @Headers({'accessToken': 'true'})
+  Future<CursorPagination<RestaurantModel>> paginate();
 
   // 요청 : 변수 입력 시 {id} -> http://$ip/restaurant/{id}
   @GET('/{id}')

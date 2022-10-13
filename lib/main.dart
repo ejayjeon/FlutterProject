@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:nosh/common/components/custom_text_form_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/const/custom_theme.dart';
 import 'package:nosh/common/view/splash_screen.dart';
-import 'package:nosh/user/view/login_screen.dart';
 
 void main() {
   runApp(
-    const _App(),
+    const ProviderScope(
+      observers: [],
+      child: _App(),
+    ),
   );
 }
 
