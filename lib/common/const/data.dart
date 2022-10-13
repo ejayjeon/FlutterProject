@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-final storage = FlutterSecureStorage();
 // 안드로이드 에뮬과 시뮬 path는 다르다 별도로 설정해 주어야 함
 const emulatorIp = '10.0.2.2:3000';
 const simulatorIp = '127.0.0.1:3000';

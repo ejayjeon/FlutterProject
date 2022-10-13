@@ -3,24 +3,26 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/components/custom_elevated_btn.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/components/custom_text_form_field.dart';
 import 'package:nosh/common/const/data.dart';
 import 'package:nosh/common/layout/main_layout.dart';
 import 'package:nosh/common/const/custom_theme.dart';
+import 'package:nosh/common/provider/dio_provider.dart';
+import 'package:nosh/common/provider/secure_storage_provider.dart';
 import 'package:nosh/common/view/root_tab.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   // Dart 에서 Base64로 변환하는 방법
-  final dio = Dio();
 
   String email = '';
   String pwd = '';
@@ -82,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () async {
                     final rawString = '$email:$pwd';
                     String token = stringToBase64.encode(rawString);
-                    print('$rawString');
+                    final dio = ref.read(dioProvider);
                     final resp = await dio.post(
                       'http://$ip/auth/login',
                       options: Options(
@@ -92,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // 1. 발급받은 토큰 저장
                     final accessToken = resp.data['accessToken'];
                     final refreshToken = resp.data['refreshToken'];
-
+                    final storage = ref.read(secureStorageProvider);
                     await storage.write(
                         key: REFRESH_TOKEN_KEY, value: refreshToken);
                     await storage.write(

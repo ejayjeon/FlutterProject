@@ -1,38 +1,44 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/const/data.dart';
 import 'package:nosh/common/dio/dio.dart';
 import 'package:nosh/common/layout/main_layout.dart';
+import 'package:nosh/common/provider/dio_provider.dart';
 import 'package:nosh/product/components/product_card.dart';
 import 'package:nosh/restaurant/components/restaurant_card.dart';
 import 'package:nosh/restaurant/model/restaurant_detail_model.dart';
+import 'package:nosh/restaurant/provider/restaurant_repository_provider.dart';
 import 'package:nosh/restaurant/repository/restaurant_repository.dart';
 
-class RestaurantDetailScreen extends StatelessWidget {
+class RestaurantDetailScreen extends ConsumerWidget {
   const RestaurantDetailScreen({super.key, required this.id});
 
   final String id; // 누른 레스토랑의 아이디
 
-  Future<RestaurantDetailModel> getRestaurantDetail() async {
-    final dio = Dio();
+  // Future<RestaurantDetailModel> getRestaurantDetail(WidgetRef ref) async {
+  // final dio = ref.watch(dioProvider);
 
 // dio 생성, interceptors 추가
-    dio.interceptors.add(
-      CustomInterceptor(storage: storage),
-    );
+  // dio.interceptors.add(
+  //   CustomInterceptor(storage: storage),
+  // );
 
-    final repository =
-        RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
-    return repository.getRestaurantDetail(id: id);
-  }
+  // final repository =
+  //     RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
+  // return repository.getRestaurantDetail(id: id);
+
+  //   return
+  // }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MainLayout(
       title: '불타는 떢볶이',
       body: FutureBuilder<RestaurantDetailModel>(
-        future: getRestaurantDetail(),
+        future:
+            ref.watch(restaurantRepositoryProvider).getRestaurantDetail(id: id),
         builder: (_, AsyncSnapshot<RestaurantDetailModel> snapshot) {
           if (snapshot.hasError) {
             return Center(

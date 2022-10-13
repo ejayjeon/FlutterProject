@@ -1,21 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/const/color_schemes.g.dart';
 import 'package:nosh/common/const/data.dart';
 import 'package:nosh/common/layout/main_layout.dart';
+import 'package:nosh/common/provider/dio_provider.dart';
+import 'package:nosh/common/provider/secure_storage_provider.dart';
 import 'package:nosh/common/view/root_tab.dart';
 import 'package:nosh/user/view/login_screen.dart';
 
 import '../components/custom_sized_box.dart';
 
-class SplachScreen extends StatefulWidget {
+class SplachScreen extends ConsumerStatefulWidget {
   const SplachScreen({super.key});
 
   @override
-  State<SplachScreen> createState() => _SplachScreenState();
+  ConsumerState<SplachScreen> createState() => _SplachScreenState();
 }
 
-class _SplachScreenState extends State<SplachScreen> {
+class _SplachScreenState extends ConsumerState<SplachScreen> {
   @override
   void initState() {
     // 앱이 처음 시작했을 때 토큰의 유무 확인
@@ -25,10 +28,11 @@ class _SplachScreenState extends State<SplachScreen> {
   }
 
   void checkToken() async {
+    // ref.watch : then the rebuilt dependent widget will not reflect the changes in the inherited widget
+    final storage = ref.read(secureStorageProvider);
     final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
     final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
-    final dio = Dio();
-
+    final dio = ref.read(dioProvider);
     try {
       final resp = await dio.post(
         'http://$ip/auth/token',
@@ -62,6 +66,7 @@ class _SplachScreenState extends State<SplachScreen> {
   }
 
   void deleteToken() async {
+    final storage = ref.watch(secureStorageProvider);
     await storage.deleteAll();
   }
 

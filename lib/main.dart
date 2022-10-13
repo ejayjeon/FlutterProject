@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/const/custom_theme.dart';
+import 'package:nosh/common/const/logger.dart';
 import 'package:nosh/common/view/splash_screen.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      observers: [],
+    ProviderScope(
+      observers: [
+        Logger(),
+      ],
       child: _App(),
     ),
   );

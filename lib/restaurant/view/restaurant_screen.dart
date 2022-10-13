@@ -1,56 +1,52 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
-import 'package:nosh/common/const/data.dart';
-import 'package:nosh/common/dio/dio.dart';
+import 'package:nosh/common/model/cursor_pagination_model.dart';
 import 'package:nosh/restaurant/components/restaurant_card.dart';
 import 'package:nosh/restaurant/model/restaurant_model.dart';
-import 'package:nosh/restaurant/repository/restaurant_repository.dart';
+import 'package:nosh/restaurant/provider/restaurant_repository_provider.dart';
 import 'package:nosh/restaurant/view/restaurant_detail_screen.dart';
 
-class RestaurantScreen extends StatelessWidget {
+class RestaurantScreen extends ConsumerWidget {
   const RestaurantScreen({super.key});
 
-  Future<List<RestaurantModel>> pagenateRestaurant() async {
-    final dio = Dio();
+  // Future<List<RestaurantModel>> pagenateRestaurant(WidgetRef ref) async {
+  //   final dio = ref.watch(dioProvider);
 
-    dio.interceptors.add(
-      CustomInterceptor(storage: storage),
-    );
+  // final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
 
-    // final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
+  // final resp =
+  //     await RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant')
+  //         .paginate();
 
-    final resp =
-        await RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant')
-            .paginate();
-
-    // final resp = await dio.get(
-    //   'http://$ip/restaurant',
-    //   options: Options(
-    //     headers: {'authorization': 'Bearer $accessToken'},
-    //   ),
-    // );
-    // Future 값
-    return resp.data;
-  }
+  // final resp = await dio.get(
+  //   'http://$ip/restaurant',
+  //   options: Options(
+  //     headers: {'authorization': 'Bearer $accessToken'},
+  //   ),
+  // );
+  // Future 값
+  //   return resp.data;
+  // }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: FutureBuilder<List<RestaurantModel>>(
-          future: pagenateRestaurant(),
-          builder: (context, AsyncSnapshot<List<RestaurantModel>> snapshot) {
+        child: FutureBuilder<CursorPagination<RestaurantModel>>(
+          future: ref.watch(restaurantRepositoryProvider).paginate(),
+          builder: (context,
+              AsyncSnapshot<CursorPagination<RestaurantModel>> snapshot) {
             if (!snapshot.hasData) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return ListView.separated(
-              itemCount: snapshot.data!.length,
+              itemCount: snapshot.data!.data.length,
               itemBuilder: (_, index) {
-                final pItem = snapshot.data![index];
+                final pItem = snapshot.data!.data[index];
                 // Factory Contructor을 만들면 아래에서 해주었던 패턴을 할 필요가 없게 된다
                 // final pItem = RestaurantModel.fromJson(item);
                 // final pItem = RestaurantModel(
