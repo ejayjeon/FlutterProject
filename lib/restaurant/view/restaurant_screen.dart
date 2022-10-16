@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/model/cursor_pagination_model.dart';
 import 'package:nosh/restaurant/components/restaurant_card.dart';
-import 'package:nosh/restaurant/model/restaurant_model.dart';
-import 'package:nosh/restaurant/provider/restaurant_repository_provider.dart';
+import 'package:nosh/restaurant/provider/restaurant_provider.dart';
 import 'package:nosh/restaurant/view/restaurant_detail_screen.dart';
 
 class RestaurantScreen extends ConsumerWidget {
@@ -31,59 +30,58 @@ class RestaurantScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: FutureBuilder<CursorPagination<RestaurantModel>>(
-          future: ref.watch(restaurantRepositoryProvider).paginate(),
-          builder: (context,
-              AsyncSnapshot<CursorPagination<RestaurantModel>> snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return ListView.separated(
-              itemCount: snapshot.data!.data.length,
-              itemBuilder: (_, index) {
-                final pItem = snapshot.data!.data[index];
-                // Factory Contructor을 만들면 아래에서 해주었던 패턴을 할 필요가 없게 된다
-                // final pItem = RestaurantModel.fromJson(item);
-                // final pItem = RestaurantModel(
-                //   id: item['id'],
-                //   name: item['name'],
-                //   thumbUrl: 'http://${ip}${item['thumbUrl']}',
-                //   tags: List<String>.from(item['tags']),
-                //   priceRange: RestaurantPriceRange.values.firstWhere(
-                //       (element) => element.name == item['priceRange']),
-                //   ratings: item['ratings'],
-                //   ratingsCount: item['ratingsCount'],
-                //   deliveryTime: item['deliveryTime'],
-                //   deliveryFee: item['deliveryFee'],
-                // );
+    final data = ref.watch(restaurantProvider);
 
-                // Factory Model
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => RestaurantDetailScreen(
-                          id: pItem.id,
-                        ),
-                      ),
-                    );
-                  },
-                  child: RestaurantCard.fromModel(
-                    model: pItem,
+    // 잘못된 예외처리
+
+    if (data is CursorPaginationLoading) {
+      return const Center(
+        child: CircularProgressIndicator(), // 순수하게 처음 로딩을 할 때에만
+      );
+    }
+
+    final cp = data as CursorPagination;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ListView.separated(
+        // FutureBuild X
+        itemCount: cp.data.length,
+        itemBuilder: (_, index) {
+          final pItem = cp.data[index];
+          // Factory Contructor을 만들면 아래에서 해주었던 패턴을 할 필요가 없게 된다
+          // final pItem = RestaurantModel.fromJson(item);
+          // final pItem = RestaurantModel(
+          //   id: item['id'],
+          //   name: item['name'],
+          //   thumbUrl: 'http://${ip}${item['thumbUrl']}',
+          //   tags: List<String>.from(item['tags']),
+          //   priceRange: RestaurantPriceRange.values.firstWhere(
+          //       (element) => element.name == item['priceRange']),
+          //   ratings: item['ratings'],
+          //   ratingsCount: item['ratingsCount'],
+          //   deliveryTime: item['deliveryTime'],
+          //   deliveryFee: item['deliveryFee'],
+          // );
+
+          // Factory Model
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => RestaurantDetailScreen(
+                    id: pItem.id,
                   ),
-                );
-              },
-              separatorBuilder: (_, index) {
-                return CustomSizedBox(height: 16.0);
-              },
-            );
-          },
-        ),
+                ),
+              );
+            },
+            child: RestaurantCard.fromModel(
+              model: pItem,
+            ),
+          );
+        },
+        separatorBuilder: (_, index) {
+          return CustomSizedBox(height: 16.0);
+        },
       ),
     );
   }

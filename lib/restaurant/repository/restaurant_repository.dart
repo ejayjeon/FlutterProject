@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:nosh/common/model/cursor_pagination_model.dart';
+import 'package:nosh/common/model/pagination_params.dart';
 import 'package:nosh/restaurant/model/restaurant_detail_model.dart';
 import 'package:nosh/restaurant/model/restaurant_model.dart';
 import 'package:retrofit/retrofit.dart';
@@ -16,7 +17,10 @@ abstract class RestaurantRepository {
 // 페이지네이션 -> http://$ip/restaurant/
   @GET('/')
   @Headers({'accessToken': 'true'})
-  Future<CursorPagination<RestaurantModel>> paginate();
+  Future<CursorPagination<RestaurantModel>> paginate({
+    // 어떻게 Retrofit에서 파라미터를 받나? : Queries()
+    @Queries() PaginationParams? paginationParams = const PaginationParams(),
+  });
 
   // 요청 : 변수 입력 시 {id} -> http://$ip/restaurant/{id}
   @GET('/{id}')
