@@ -6,30 +6,35 @@ import 'package:nosh/restaurant/components/restaurant_card.dart';
 import 'package:nosh/restaurant/provider/restaurant_provider.dart';
 import 'package:nosh/restaurant/view/restaurant_detail_screen.dart';
 
-class RestaurantScreen extends ConsumerWidget {
+class RestaurantScreen extends ConsumerStatefulWidget {
   const RestaurantScreen({super.key});
 
-  // Future<List<RestaurantModel>> pagenateRestaurant(WidgetRef ref) async {
-  //   final dio = ref.watch(dioProvider);
+  @override
+  ConsumerState<RestaurantScreen> createState() => _RestaurantScreenState();
+}
 
-  // final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
-
-  // final resp =
-  //     await RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant')
-  //         .paginate();
-
-  // final resp = await dio.get(
-  //   'http://$ip/restaurant',
-  //   options: Options(
-  //     headers: {'authorization': 'Bearer $accessToken'},
-  //   ),
-  // );
-  // Future 값
-  //   return resp.data;
-  // }
+class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
+  // 어디까지 스크롤을 했는지 알기 위해
+  final ScrollController controller = ScrollController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    controller.addListener(scrollListener);
+  }
+
+  void scrollListener() {
+    // 현재 위치가 최대 길이보다 조금 덜 되는 위치까지 왔다면
+    if (controller.offset > controller.position.maxScrollExtent - 300) {
+      ref.read(restaurantProvider.notifier).paginate(
+            fetchMore: true,
+          );
+    }
+  }
+
+  // Future<List<RestaurantModel>> pagenateRestaurant(WidgetRef ref) async {
+  @override
+  Widget build(BuildContext context) {
     final data = ref.watch(restaurantProvider);
 
     // 잘못된 예외처리
@@ -40,13 +45,37 @@ class RestaurantScreen extends ConsumerWidget {
       );
     }
 
+    if (data is CursorPaginationError) {
+      return Center(
+        child: Text(data.message),
+      );
+    }
+
+    // 나머지는 CurssorPagination
+    // CursorPaginationFetchingMore
+    // CursorPaginationRefetching
+
     final cp = data as CursorPagination;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ListView.separated(
+        controller: controller,
         // FutureBuild X
-        itemCount: cp.data.length,
+        itemCount: cp.data.length + 1,
         itemBuilder: (_, index) {
+          if (index == cp.data.length) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
+              child: Center(
+                child: data is CursorPaginationFetchingMore
+                    ? CircularProgressIndicator()
+                    : Text('마지막 데이터입니다'),
+              ),
+            );
+          }
           final pItem = cp.data[index];
           // Factory Contructor을 만들면 아래에서 해주었던 패턴을 할 필요가 없게 된다
           // final pItem = RestaurantModel.fromJson(item);
