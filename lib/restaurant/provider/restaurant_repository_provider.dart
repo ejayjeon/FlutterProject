@@ -5,7 +5,6 @@ import 'package:nosh/restaurant/repository/restaurant_repository.dart';
 
 final restaurantRepositoryProvider = Provider<RestaurantRepository>(
   (ref) {
-    // 프로바이더 안에서는 변경이 있을 것을 대비해서 watch
     final dio = ref.watch(dioProvider);
     final repository =
         RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');

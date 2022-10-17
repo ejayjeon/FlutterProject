@@ -24,7 +24,10 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
   }
 
   void scrollListener() {
-    // 현재 위치가 최대 길이보다 조금 덜 되는 위치까지 왔다면
+    /** 
+     * 현재 스크롤의 위치 : controller.offset
+     * 스크롤이 가능한 마지막 위치 : controller.position.maxScrollExtent
+    */
     if (controller.offset > controller.position.maxScrollExtent - 300) {
       ref.read(restaurantProvider.notifier).paginate(
             fetchMore: true,
@@ -32,35 +35,31 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
     }
   }
 
-  // Future<List<RestaurantModel>> pagenateRestaurant(WidgetRef ref) async {
   @override
   Widget build(BuildContext context) {
     final data = ref.watch(restaurantProvider);
 
-    // 잘못된 예외처리
-
+    /** 프로바이더의 값이 Loading인 경우, 로딩바 */
     if (data is CursorPaginationLoading) {
       return const Center(
-        child: CircularProgressIndicator(), // 순수하게 처음 로딩을 할 때에만
+        child: CircularProgressIndicator(),
       );
     }
 
+    /** 프로바이더의 값이 Error인 경우, 에러 데이터 */
     if (data is CursorPaginationError) {
       return Center(
         child: Text(data.message),
       );
     }
 
-    // 나머지는 CurssorPagination
-    // CursorPaginationFetchingMore
-    // CursorPaginationRefetching
-
+    /** 로딩, 에러를 제외하고, CursorPaginationBase를 상속받은 경우  */
     final cp = data as CursorPagination;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: ListView.separated(
         controller: controller,
-        // FutureBuild X
+        // FutureBuild : 추가로 데이터를 요청하기 위해 사용, 프로바이더를 사용해서, async 로직을 완료한 경우 굳이 FutureBuilder를 쓸 필요가 없게됨
         itemCount: cp.data.length + 1,
         itemBuilder: (_, index) {
           if (index == cp.data.length) {

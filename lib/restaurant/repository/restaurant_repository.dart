@@ -31,9 +31,3 @@ abstract class RestaurantRepository {
     // @Path('id') required String sid, -> 다를 경우
   });
 }
-
-/**
- * The name 'Headers' is defined in the libraries 'package:dio/src/headers.dart (via package:dio/dio.dart)' and 'package:retrofit/http.dart (via package:retrofit/retrofit.dart)'.
-Try using 'as prefix' for one of the import directives, or hiding the name from all but one of the imports.
- * 
- */
