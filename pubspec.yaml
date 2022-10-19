@@ -42,6 +42,7 @@ dependencies:
   retrofit: ^3.3.1 # 상태관리
   logger: any # for logging purpose
   flutter_riverpod: ^2.0.2 # 상태관리
+  skeletons: ^0.0.3 # 스켈레톤
   
 
 dev_dependencies:

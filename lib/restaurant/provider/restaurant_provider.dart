@@ -39,7 +39,7 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
     paginate();
   }
 
-  void paginate({
+  Future<void> paginate({
     int fetchCount = 10,
     bool fetchMore = false, // 현재 데이터가 있는지?
     bool forceRefetch = false, // 강제 로딩 : CursorPaginationLoading()
@@ -125,4 +125,37 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
       state = CursorPaginationError(message: '데이터를 가져오지 못했습니다');
     }
   }
+
+  void getDetail({
+    required String id,
+  }) async {
+    // 1. 만약에 아직 데이터가 하나도 없는 상태라면(CursorPagination)
+    if (state is! CursorPagination) {
+      await paginate();
+    }
+
+    // 2. state가 CursorPagenation이 아니면 return
+
+    if (state is! CursorPagination) {
+      return;
+    }
+
+    // 3. 이제부터 들어오는 데이터는 무조건 CursorPagination
+    final pState = state as CursorPagination;
+    final resp = await repository.getRestaurantDetail(id: id); // restaurant
+
+    // 4. pState에서 id에 해당하는 값을 찾은 다음, 그 값을 새로 받은 resp로 대체해주면 됨
+    state = pState.copyWith(
+      data: pState.data
+          .map<RestaurantModel>(
+            (e) => e.id == id ? resp : e,
+          )
+          .toList(),
+    );
+  }
+
+  /* [re(1), re(2), re(3)] 인 데이터가 있을 때,
+    id : 2인 Detail Model을 가져와 !
+    -> getDetail(id: 2);
+  */
 }
