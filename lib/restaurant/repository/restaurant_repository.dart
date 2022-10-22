@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart' hide Headers;
 import 'package:nosh/common/model/cursor_pagination_model.dart';
 import 'package:nosh/common/model/pagination_params.dart';
+import 'package:nosh/common/repository/base_pagination_repository.dart';
 import 'package:nosh/restaurant/model/restaurant_detail_model.dart';
 import 'package:nosh/restaurant/model/restaurant_model.dart';
 import 'package:retrofit/retrofit.dart';
@@ -9,7 +10,8 @@ part 'restaurant_repository.g.dart';
 
 @RestApi()
 // 인스턴스를 방지하기 위해 abstract
-abstract class RestaurantRepository {
+abstract class RestaurantRepository
+    implements IBasePaginationRepository<RestaurantModel> {
   // http://$ip/restaurant/
   factory RestaurantRepository(Dio dio, {String baseUrl}) =
       _RestaurantRepository;
