@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nosh/common/const/data.dart';
+import 'package:nosh/common/model/model_with_id.dart';
 import 'package:nosh/common/utils/data_utils.dart';
 
 part 'restaurant_model.g.dart';
@@ -7,8 +8,9 @@ part 'restaurant_model.g.dart';
 enum RestaurantPriceRange { expensive, medium, cheap }
 
 @JsonSerializable()
-class RestaurantModel {
-  final String id;
+class RestaurantModel implements IModelWithId {
+  final String
+      id; // id를 정의했기 때문에 에러가 나지 않음. 만약 implement를 했음에도 id가 정의되지 않았으면 당연히 에러가 발생한다
   final String name;
   @JsonKey(
     fromJson: DataUtils.pathToUrl,

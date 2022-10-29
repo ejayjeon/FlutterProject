@@ -4,10 +4,10 @@ part 'cursor_pagination_model.g.dart';
 
 // 페이지네이션 데이터가 들어왔는지 여부를 확인하기 위해서, 상속을 이용한다.
 // CursorPatinationBase 타입이 나오는지 확인하기 위해서 OOP의 특성
-abstract class CursorPaginationBase {}
+abstract class CursorPaginationBase<T> {}
 
 // 에러가 났을 때
-class CursorPaginationError extends CursorPaginationBase {
+class CursorPaginationError<T> extends CursorPaginationBase {
   final String message;
 
   CursorPaginationError({
@@ -16,7 +16,7 @@ class CursorPaginationError extends CursorPaginationBase {
 }
 
 // 로딩 상태
-class CursorPaginationLoading extends CursorPaginationBase {}
+class CursorPaginationLoading<T> extends CursorPaginationBase {}
 
 // 데이터가 성공적으로 들어왔을 때
 @JsonSerializable(genericArgumentFactories: true)

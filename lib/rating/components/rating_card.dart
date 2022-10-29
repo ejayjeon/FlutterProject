@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/const/custom_theme.dart';
 import 'package:collection/collection.dart';
+import 'package:nosh/rating/model/rating_model.dart';
 
 class RatingCard extends StatelessWidget {
   final ImageProvider avatarImage;
@@ -19,6 +20,20 @@ class RatingCard extends StatelessWidget {
     required this.email,
     required this.content,
   });
+
+  factory RatingCard.fromModel({
+    required RatingModel model,
+  }) {
+    return RatingCard(
+      avatarImage: NetworkImage(
+        model.user.imageUrl,
+      ),
+      images: model.imgUrls.map((e) => Image.network(e)).toList(),
+      rating: model.rating,
+      email: model.id,
+      content: model.content,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

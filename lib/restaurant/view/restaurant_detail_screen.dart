@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/components/skeleton_theme.dart';
 import 'package:nosh/common/layout/main_layout.dart';
+import 'package:nosh/common/model/cursor_pagination_model.dart';
 import 'package:nosh/product/components/product_card.dart';
 import 'package:nosh/rating/components/rating_card.dart';
+import 'package:nosh/rating/model/rating_model.dart';
 import 'package:nosh/restaurant/components/restaurant_card.dart';
 import 'package:nosh/restaurant/model/restaurant_detail_model.dart';
 import 'package:nosh/restaurant/model/restaurant_model.dart';
 import 'package:nosh/restaurant/provider/restaurant_provider.dart';
+import 'package:nosh/restaurant/provider/restaurant_rating_provider.dart';
 // import 'package:skeletons/skeletons.dart';
 
 class RestaurantDetailScreen extends ConsumerStatefulWidget {
@@ -34,6 +37,7 @@ class _RestaurantDetailScreenState
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(restaurantDetailProvider(widget.id));
+    final ratingsState = ref.watch(restaurantRatingProvider(widget.id));
 
     if (state == null) {
       return MainLayout(
@@ -55,19 +59,8 @@ class _RestaurantDetailScreenState
             renderProducts(
               products: state.products,
             ),
-          const SliverPadding(
-            sliver: SliverToBoxAdapter(
-              child: RatingCard(
-                avatarImage:
-                    AssetImage('assets/images/logo/codefactory_logo.png'),
-                images: [],
-                rating: 4,
-                email: 'ejayjeon@gmail.com',
-                content: '서비스 감사합니다~ 완전 맛있어요! 사장님 맛집의 비결을 좀 알려주세요~~',
-              ),
-            ),
-            padding: EdgeInsets.all(16.0),
-          ),
+          if (ratingsState is CursorPagination<RatingModel>)
+            renderRatings(models: ratingsState.data)
         ],
       ),
     );
@@ -134,6 +127,25 @@ class _RestaurantDetailScreenState
             fontSize: 20.0,
             fontWeight: FontWeight.w700,
           ),
+        ),
+      ),
+    );
+  }
+
+  SliverPadding renderRatings({
+    required List<RatingModel> models,
+  }) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (_, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: RatingCard.fromModel(
+              model: models[index],
+            ),
+          ),
+          childCount: models.length,
         ),
       ),
     );

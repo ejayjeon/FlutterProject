@@ -6,6 +6,7 @@ import 'package:nosh/restaurant/model/restaurant_model.dart';
 part 'restaurant_detail_model.g.dart';
 
 @JsonSerializable()
+/** 디테일은 이미 IModelWithId 클래스를 implements 하고있는 레스토랑모델을 Extends 하고있기 때문에 별도로 해줄필요가 없다 */
 class RestaurantDetailModel extends RestaurantModel {
   final String detail;
   final List<RestaurantProductModel> products;

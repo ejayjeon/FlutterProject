@@ -5,7 +5,7 @@ class DataUtils {
     return 'http://$ip$value';
   }
 
-  static List<String> listPathsToUrls(List<String> value) {
+  static List<String> listPathsToUrls(List value) {
     return value.map((e) => pathToUrl(e)).toList();
   }
 }
