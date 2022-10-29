@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nosh/common/components/custom_sized_box.dart';
 import 'package:nosh/common/const/color_schemes.g.dart';
+import 'package:nosh/product/model/product_model.dart';
 import 'package:nosh/restaurant/model/restaurant_detail_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -17,7 +18,23 @@ class ProductCard extends StatelessWidget {
   final String detail;
   final int price;
 
-  factory ProductCard.fromModel({
+  factory ProductCard.fromProductModel({
+    required ProductModel model,
+  }) {
+    return ProductCard(
+      image: Image.network(
+        model.imgUrl,
+        fit: BoxFit.cover,
+        width: 110,
+        height: 110,
+      ),
+      name: model.name,
+      detail: model.detail,
+      price: model.price,
+    );
+  }
+
+  factory ProductCard.fromRestaurantProductModel({
     required RestaurantProductModel model,
   }) {
     return ProductCard(

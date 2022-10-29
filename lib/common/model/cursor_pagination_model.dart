@@ -7,7 +7,7 @@ part 'cursor_pagination_model.g.dart';
 abstract class CursorPaginationBase<T> {}
 
 // 에러가 났을 때
-class CursorPaginationError<T> extends CursorPaginationBase {
+class CursorPaginationError extends CursorPaginationBase {
   final String message;
 
   CursorPaginationError({
@@ -16,7 +16,7 @@ class CursorPaginationError<T> extends CursorPaginationBase {
 }
 
 // 로딩 상태
-class CursorPaginationLoading<T> extends CursorPaginationBase {}
+class CursorPaginationLoading extends CursorPaginationBase {}
 
 // 데이터가 성공적으로 들어왔을 때
 @JsonSerializable(genericArgumentFactories: true)
@@ -33,7 +33,7 @@ class CursorPagination<T> extends CursorPaginationBase {
     CursorPaginationMeta? meta,
     List<T>? data,
   }) {
-    return CursorPagination(
+    return CursorPagination<T>(
       meta: meta ?? this.meta,
       data: data ?? this.data,
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nosh/common/layout/main_layout.dart';
+import 'package:nosh/product/view/product_screen.dart';
 import 'package:nosh/restaurant/view/restaurant_screen.dart';
 
 class RootTab extends StatefulWidget {
@@ -44,9 +45,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         physics: NeverScrollableScrollPhysics(),
         children: [
           RestaurantScreen(),
-          Container(
-            child: Text('음식'),
-          ),
+          ProductScreen(),
           Container(
             child: Text('주문'),
           ),
