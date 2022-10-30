@@ -5,6 +5,7 @@ import 'package:nosh/common/provider/pagination_provider.dart';
 import 'package:nosh/restaurant/model/restaurant_model.dart';
 import 'package:nosh/restaurant/provider/restaurant_repository_provider.dart';
 import 'package:nosh/restaurant/repository/restaurant_repository.dart';
+import 'package:collection/collection.dart';
 
 final restaurantDetailProvider =
     Provider.family<RestaurantModel?, String>((ref, id) {
@@ -14,7 +15,8 @@ final restaurantDetailProvider =
     return null;
   }
 
-  return state.data.firstWhere((element) => element.id == id);
+// firstWhere -> 존재하지 않으면 에러 반환 -> Collection Package -> firstWhereOrNull
+  return state.data.firstWhereOrNull((element) => element.id == id);
 });
 
 final restaurantProvider =
@@ -154,14 +156,24 @@ class RestaurantStateNotifier
     final pState = state as CursorPagination;
     final resp = await repository.getRestaurantDetail(id: id); // restaurant
 
-    // 4. pState에서 id에 해당하는 값을 찾은 다음, 그 값을 새로 받은 resp로 대체해주면 됨
-    state = pState.copyWith(
-      data: pState.data
-          .map<RestaurantModel>(
-            (e) => e.id == id ? resp : e,
-          )
-          .toList(),
-    );
+    if (pState.data.where((e) => e.id == id).isEmpty) {
+      state = pState.copyWith(
+        data: <RestaurantModel>[
+          ...pState.data,
+          resp,
+        ],
+      );
+    } else {
+      // 4. pState에서 id에 해당하는 값을 찾은 다음, 그 값을 새로 받은 resp로 대체해주면 됨
+      state = pState.copyWith(
+        data: pState.data
+            .map<RestaurantModel>(
+              // 데이터가 없으면 ?? -> 존재하지 않는 데이터?? 그냥 캐시를 데이터의 끝에 추가
+              (e) => e.id == id ? resp : e,
+            )
+            .toList(),
+      );
+    }
   }
 
   /* [re(1), re(2), re(3)] 인 데이터가 있을 때,

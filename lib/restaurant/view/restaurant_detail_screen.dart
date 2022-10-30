@@ -49,6 +49,7 @@ class _RestaurantDetailScreenState
     final state = ref.watch(restaurantDetailProvider(widget.id));
     final ratingsState = ref.watch(restaurantRatingProvider(widget.id));
 
+// provider에서 값을 받지 못하면 ?? Null
     if (state == null) {
       return MainLayout(
         body: const Center(
