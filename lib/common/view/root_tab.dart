@@ -4,6 +4,7 @@ import 'package:nosh/product/view/product_screen.dart';
 import 'package:nosh/restaurant/view/restaurant_screen.dart';
 
 class RootTab extends StatefulWidget {
+  static String get routeName => 'rootTab';
   const RootTab({super.key});
 
   @override

@@ -12,6 +12,7 @@ import 'package:nosh/user/view/login_screen.dart';
 import '../components/custom_sized_box.dart';
 
 class SplachScreen extends ConsumerStatefulWidget {
+  static String get routeName => 'splash';
   const SplachScreen({super.key});
 
   @override

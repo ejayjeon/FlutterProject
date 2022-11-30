@@ -43,6 +43,7 @@ dependencies:
   logger: any # for logging purpose
   flutter_riverpod: ^2.0.2 # 상태관리
   skeletons: ^0.0.3 # 스켈레톤
+  go_router: ^5.2.0 # GoRouter
   
 
 dev_dependencies:

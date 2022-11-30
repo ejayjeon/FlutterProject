@@ -15,6 +15,7 @@ import 'package:nosh/common/provider/secure_storage_provider.dart';
 import 'package:nosh/common/view/root_tab.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
+  static String get routeName => 'login';
   const LoginScreen({super.key});
 
   @override
