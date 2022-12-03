@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:nosh/common/components/pagination_list_view.dart';
-import 'package:nosh/restaurant/components/restaurant_card.dart';
+import 'package:nosh/common/component/pagination_list_view.dart';
+import 'package:nosh/restaurant/component/restaurant_card.dart';
 import 'package:nosh/restaurant/provider/restaurant_provider.dart';
 import 'package:nosh/restaurant/view/restaurant_detail_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RestaurantScreen extends StatelessWidget {
-  const RestaurantScreen({super.key});
-
-  // 어디까지 스크롤을 했는지 알기 위해
-
   @override
   Widget build(BuildContext context) {
     return PaginationListView(
@@ -16,12 +13,11 @@ class RestaurantScreen extends StatelessWidget {
       itemBuilder: <RestaurantModel>(_, index, model) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => RestaurantDetailScreen(
-                  id: model.id,
-                ),
-              ),
+            context.goNamed(
+              RestaurantDetailScreen.routeName,
+              params: {
+                'rid': model.id,
+              },
             );
           },
           child: RestaurantCard.fromModel(

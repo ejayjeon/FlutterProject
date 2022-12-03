@@ -1,11 +1,9 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:nosh/common/utils/data_utils.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
 abstract class UserModelBase {}
-
-class UserModelLoading extends UserModelBase {}
 
 class UserModelError extends UserModelBase {
   final String message;
@@ -14,6 +12,8 @@ class UserModelError extends UserModelBase {
     required this.message,
   });
 }
+
+class UserModelLoading extends UserModelBase {}
 
 @JsonSerializable()
 class UserModel extends UserModelBase {

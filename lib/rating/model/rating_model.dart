@@ -1,11 +1,10 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:nosh/common/model/model_with_id.dart';
 import 'package:nosh/common/utils/data_utils.dart';
 import 'package:nosh/user/model/user_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'rating_model.g.dart';
 
-/** 특정 레스토랑 Pagination */
 @JsonSerializable()
 class RatingModel implements IModelWithId {
   final String id;

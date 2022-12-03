@@ -4,7 +4,7 @@ part 'pagination_params.g.dart';
 
 @JsonSerializable()
 class PaginationParams {
-  final String? after; // 마지막으로 불러온 id
+  final String? after;
   final int? count;
 
   const PaginationParams({

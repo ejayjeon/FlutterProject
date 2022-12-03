@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:nosh/common/provider/pagination_provider.dart';
+import 'package:flutter/material.dart';
 
 class PaginationUtils {
   static void paginate({
@@ -7,10 +7,6 @@ class PaginationUtils {
     required PaginationProvider provider,
   }) {
     if (controller.offset > controller.position.maxScrollExtent - 300) {
-      // 어떤 프로바이더든 Paginate 함수가 있음 -> OOP의 중요성
-      // ref.read(restaurantProvider.notifier).paginate(
-      //       fetchMore: true,
-      //     );
       provider.paginate(
         fetchMore: true,
       );

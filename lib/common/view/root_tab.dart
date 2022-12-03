@@ -1,26 +1,39 @@
-import 'package:flutter/material.dart';
-import 'package:nosh/common/layout/main_layout.dart';
+import 'package:nosh/common/const/colors.dart';
+import 'package:nosh/common/layout/default_layout.dart';
+import 'package:nosh/order/view/order_screen.dart';
 import 'package:nosh/product/view/product_screen.dart';
 import 'package:nosh/restaurant/view/restaurant_screen.dart';
+import 'package:nosh/user/view/profile_screen.dart';
+import 'package:flutter/material.dart';
 
 class RootTab extends StatefulWidget {
-  const RootTab({super.key});
+  static String get routeName => 'home';
+
+  const RootTab({Key? key}) : super(key: key);
 
   @override
   State<RootTab> createState() => _RootTabState();
 }
 
 class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
-  int index = 0;
-  // Tab View 컨트롤을 위한 컨트롤러 셋팅
   late TabController controller;
+
+  int index = 0;
 
   @override
   void initState() {
     super.initState();
+
     controller = TabController(length: 4, vsync: this);
-    // 특정 값이 변경될 때마다 (index) Listener를 실행해야함
+
     controller.addListener(tabListener);
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(tabListener);
+
+    super.dispose();
   }
 
   void tabListener() {
@@ -30,58 +43,44 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
   }
 
   @override
-  void dispose() {
-    controller.removeListener(tabListener);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      title: 'NOSH',
-      body: TabBarView(
-        controller: controller,
-        // 탭에서 스와이프 했을 때 탭이 움직이지 않게 하기 위함
+    return DefaultLayout(
+      title: '코팩 딜리버리',
+      child: TabBarView(
         physics: NeverScrollableScrollPhysics(),
+        controller: controller,
         children: [
           RestaurantScreen(),
           ProductScreen(),
-          Container(
-            child: Text('주문'),
-          ),
-          Container(
-            child: Text('프로필'),
-          ),
+          OrderScreen(),
+          ProfileScreen(),
         ],
       ),
-      bottomNav: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: PRIMARY_COLOR,
+        unselectedItemColor: BODY_TEXT_COLOR,
+        selectedFontSize: 10,
+        unselectedFontSize: 10,
+        type: BottomNavigationBarType.fixed,
         onTap: (int index) {
           controller.animateTo(index);
         },
         currentIndex: index,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-            ),
+            icon: Icon(Icons.home_outlined),
             label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.fastfood_outlined,
-            ),
+            icon: Icon(Icons.fastfood_outlined),
             label: '음식',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.receipt_long_outlined,
-            ),
+            icon: Icon(Icons.receipt_long_outlined),
             label: '주문',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline,
-            ),
+            icon: Icon(Icons.person_outlined),
             label: '프로필',
           ),
         ],
