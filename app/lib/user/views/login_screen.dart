@@ -1,4 +1,5 @@
 import 'package:app/common/layout/main_layout.dart';
+import 'package:app/user/providers/login_check_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +16,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   String userPwd = '';
   @override
   Widget build(BuildContext context) {
-    // final state = ref.watch()
+    final state = ref.watch(loginCheckProvider);
     return MainLayout(
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
