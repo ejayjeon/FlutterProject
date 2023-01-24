@@ -7,7 +7,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final provider = ref.read(authProvider);
   return GoRouter(
     routes: provider.routes,
-    initialLocation: '/splash',
+    initialLocation: '/',
     refreshListenable: provider,
     errorBuilder: (context, state) => const ErrorScreen(),
   );
