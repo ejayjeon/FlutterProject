@@ -1,6 +1,6 @@
-import 'package:app/common/models/i_pagination.dart';
-import 'package:app/common/models/pagination_model.dart';
-import 'package:app/common/models/pagination_params.dart';
+import 'package:app/pagination/models/i_pagination.dart';
+import 'package:app/pagination/models/pagination_model.dart';
+import 'package:app/pagination/models/pagination_params.dart';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +25,9 @@ class PaginationProvider<T extends ModelWithId, U extends IPagination<T>>
     checkEquality: false,
   );
 
-  PaginationProvider({required this.repository}) : super(PaginationLoading()) {
+  PaginationProvider({
+    required this.repository,
+  }) : super(PaginationLoading()) {
     paginate();
 
     paginationThrottle.values.listen(

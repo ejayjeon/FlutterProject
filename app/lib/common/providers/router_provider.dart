@@ -1,26 +1,14 @@
 import 'package:app/common/views/error_screen.dart';
-import 'package:app/common/views/home_screen.dart';
-import 'package:app/user/views/user_screen.dart';
+import 'package:app/user/providers/auth_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final routerProvider = Provider((ref) {
+final routerProvider = Provider<GoRouter>((ref) {
+  final provider = ref.read(authProvider);
   return GoRouter(
-    routes: <RouteBase>[
-      GoRoute(
-        name: 'home',
-        path: '/',
-        builder: (context, state) => const HomeScreen(),
-        // Child Router
-        routes: [
-          GoRoute(
-            name: 'user',
-            path: 'user/:id',
-            builder: (context, state) => const UserScreen(),
-          )
-        ],
-      ),
-    ],
+    routes: provider.routes,
+    initialLocation: '/splash',
+    refreshListenable: provider,
     errorBuilder: (context, state) => const ErrorScreen(),
   );
 });

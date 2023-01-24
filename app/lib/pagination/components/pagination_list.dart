@@ -1,6 +1,6 @@
-import 'package:app/common/models/pagination_model.dart';
-import 'package:app/common/providers/pagination_provider.dart';
-import 'package:app/common/utils/paginate.dart';
+import 'package:app/pagination/models/pagination_model.dart';
+import 'package:app/pagination/providers/pagination_provider.dart';
+import 'package:app/pagination/utils/paginate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

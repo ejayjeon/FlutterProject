@@ -1,4 +1,4 @@
-import 'package:app/common/providers/pagination_provider.dart';
+import 'package:app/pagination/providers/pagination_provider.dart';
 import 'package:flutter/material.dart';
 
 class Paginate {

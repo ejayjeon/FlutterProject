@@ -1,8 +1,8 @@
-// Inteface
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pagination_model.g.dart';
 
+// Inteface
 abstract class PaginationBase {}
 
 // 1. Error 상황
