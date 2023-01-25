@@ -32,14 +32,6 @@ class KakaoViewModel {
 
 class KakaoLogin implements ILoginPlatform {
   // 1. 애플리케이션 install 체크
-  void checkInstall() async {
-    bool inInstalled = await isKakaoTalkInstalled();
-
-    OAuthToken token = inInstalled
-        ? await UserApi.instance.loginWithKakaoTalk()
-        : await UserApi.instance.loginWithKakaoAccount();
-  }
-
   @override
   Future<bool> login() async {
     try {

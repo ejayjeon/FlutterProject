@@ -20,7 +20,7 @@ class _KakaoLoginState extends ConsumerState<KakaoLogin> {
           child: Column(
             children: [
               ElevatedButton(
-                child: Text('로그인'),
+                child: Text('카카오 로그인'),
                 onPressed: () async {
                   await state.login();
                   setState(() {});
@@ -31,7 +31,7 @@ class _KakaoLoginState extends ConsumerState<KakaoLogin> {
                 Image.network(
                     state.user?.kakaoAccount?.profile?.profileImageUrl ?? ''),
               ElevatedButton(
-                child: Text('로그아웃'),
+                child: Text('카카오 로그아웃'),
                 onPressed: () async {
                   await state.logout();
                   setState(() {});

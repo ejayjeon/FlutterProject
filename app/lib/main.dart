@@ -19,7 +19,6 @@ void main() async {
       fallback: 'sane-default',
     ),
   );
-
   runApp(
     const ProviderScope(
       child: _App(),
