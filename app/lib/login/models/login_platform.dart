@@ -1,3 +1,8 @@
+abstract class ILoginPlatform {
+  Future<bool> login();
+  Future<bool> logout();
+}
+
 // 로그인 플랫폼
 enum LoginPlatform {
   kakao,
