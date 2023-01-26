@@ -1,6 +1,7 @@
 import 'package:app/common/components/book_rack.dart';
 import 'package:app/common/layout/main_layout.dart';
 import 'package:app/login/kakao/components/kakao_login.dart';
+import 'package:app/login/naver/components/naver_login.dart';
 import 'package:app/post/components/post_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -46,11 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
           BookRack(),
           PostScreen(),
           KakaoLogin(),
-          Container(
-            child: Center(
-              child: Text('소식'),
-            ),
-          ),
+          NaverLogin(),
           Container(
             child: Center(
               child: Text('내정보'),
