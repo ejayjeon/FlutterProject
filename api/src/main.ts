@@ -21,7 +21,7 @@ async function bootstrap() {
   // [APP USE]
   app.useGlobalPipes(new ValidationPipe()); // class별 validation 작동
   app.use(
-    '/api-docs',
+    'api-docs',
     basicAuth({
       users: {
         [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
