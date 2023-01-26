@@ -1,5 +1,6 @@
+import 'package:app/api/providers/kakao_book_api_provider.dart';
+import 'package:app/api/providers/ko_gpt_api_provider.dart';
 import 'package:app/common/layout/main_layout.dart';
-import 'package:app/gpt/providers/ko_gpt_api_provider.dart';
 import 'package:app/login/kakao/providers/kakao_login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,7 @@ class _KakaoLoginState extends ConsumerState<KakaoLogin> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(kakaoLoginProvider);
-    final state2 = ref.watch(koGPTProvider);
+    final state2 = ref.watch(kakaoBookApiProvider);
     return MainLayout(
       body: Container(
         child: Center(
@@ -40,9 +41,10 @@ class _KakaoLoginState extends ConsumerState<KakaoLogin> {
                 },
               ),
               ElevatedButton(
-                child: Text('카카오 GPT'),
-                onPressed: () {
-                  ref.read(koGPTProvider.notifier).koGPTApi();
+                child: Text('카카오 Book'),
+                onPressed: () async {
+                  // ref.read(koGPTProvider.notifier).koGPTApi();
+                  await state2.getBookList('사피엔스');
                   // setState(() {});
                 },
               ),

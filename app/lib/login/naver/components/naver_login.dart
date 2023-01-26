@@ -1,5 +1,4 @@
 import 'package:app/common/layout/main_layout.dart';
-import 'package:app/gpt/providers/ko_gpt_api_provider.dart';
 import 'package:app/login/naver/providers/naver_login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +14,6 @@ class _NaverLoginState extends ConsumerState<NaverLogin> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(naverLoginProvider);
-    final state2 = ref.watch(koGPTProvider);
     return MainLayout(
       body: Container(
         child: Center(

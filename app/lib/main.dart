@@ -8,7 +8,7 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 void main() async {
   // runApp() 호출 전에 WidgetBinding
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: 'config/.env');
+  await dotenv.load(fileName: 'assets/config/.env');
   KakaoSdk.init(
     nativeAppKey: dotenv.get(
       'KAKAO_NATIVE_APP_KEY',
