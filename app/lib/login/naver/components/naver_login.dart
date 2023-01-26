@@ -1,8 +1,7 @@
 import 'package:app/common/layout/main_layout.dart';
+import 'package:app/gpt/providers/ko_gpt_api_provider.dart';
 import 'package:app/login/naver/providers/naver_login_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NaverLogin extends ConsumerStatefulWidget {
@@ -16,6 +15,7 @@ class _NaverLoginState extends ConsumerState<NaverLogin> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(naverLoginProvider);
+    final state2 = ref.watch(koGPTProvider);
     return MainLayout(
       body: Container(
         child: Center(
@@ -32,7 +32,6 @@ class _NaverLoginState extends ConsumerState<NaverLogin> {
               ElevatedButton(
                 child: Text('네이버 로그아웃'),
                 onPressed: () async {
-                  await state.logout();
                   setState(() {});
                 },
               ),
