@@ -1,0 +1,49 @@
+name: app
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.5 <3.0.0'
+
+# 패키지
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+# dev 모드 패키지
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+# Flutter tjfwjd
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-ExtraBold.otf
+          weight: 900
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 800
+        - asset: assets/fonts/Pretendard-Black.otf
+          weight: 700
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Light.otf
+          weight: 300
+        - asset: assets/fonts/Pretendard-Thin.otf
+          weight: 200
+        - asset: assets/fonts/Pretendard-ExtraLight.otf
+          weight: 100
