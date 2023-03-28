@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.3.2 # 상태관리
 
 # dev 모드 패키지
 dev_dependencies:
@@ -19,7 +20,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 
-# Flutter tjfwjd
+# Flutter
 flutter:
   uses-material-design: true
 

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class MainLayout extends StatelessWidget {
   final String? title;
@@ -25,6 +23,8 @@ class MainLayout extends StatelessWidget {
     return Scaffold(
       appBar: _appbar(),
       body: _body(),
+      bottomNavigationBar: bottomNav,
+      floatingActionButton: fab,
     );
   }
 
