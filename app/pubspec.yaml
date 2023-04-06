@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   flutter_riverpod: ^2.3.2 # 상태관리
+  dio: ^5.1.1 # http 요청 2023.04.06.
 
 # dev 모드 패키지
 dev_dependencies:

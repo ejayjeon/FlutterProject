@@ -1,4 +1,7 @@
+import 'package:app/common/common_screen.dart';
+import 'package:app/common/theme/custom_theme.dart';
 import 'package:app/home/views/home_screen.dart';
+import 'package:app/user/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,14 +27,13 @@ class _App extends ConsumerWidget {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currMode, __) {
+        mode(currMode);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          darkTheme: ThemeData.dark(),
+          darkTheme: darkThemeData,
           themeMode: currMode,
-          theme: ThemeData(
-            useMaterial3: true,
-          ),
-          home: HomeScreen(
+          theme: lightThemeData,
+          home: LoginScreen(
             themeNotifier: themeNotifier,
           ),
         );
