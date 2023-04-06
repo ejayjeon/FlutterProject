@@ -7,6 +7,7 @@ class MainLayout extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget? bottomNav;
   final Widget? fab;
+  final Color? backgroundColor;
 
   const MainLayout({
     super.key,
@@ -16,11 +17,13 @@ class MainLayout extends StatelessWidget {
     this.bottomNav,
     this.fab,
     required this.body,
+    this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: _appbar(),
       body: _body(),
       bottomNavigationBar: bottomNav,
@@ -46,7 +49,7 @@ class MainLayout extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
+          // color: Colors.black87,
         ),
       ),
     );

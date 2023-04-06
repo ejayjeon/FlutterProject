@@ -2,13 +2,11 @@ import 'package:app/common/common_screen.dart';
 import 'package:app/common/components/custom_button.dart';
 import 'package:app/common/components/custom_textform.dart';
 import 'package:app/common/const/encoding.dart';
+import 'package:app/common/const/storage.dart';
 import 'package:app/common/layout/main_layout.dart';
-import 'package:app/home/views/home_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:app/common/const/ip.dart' as ip;
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class LoginScreen extends StatefulWidget {
   static String get routeName => 'login';
@@ -25,10 +23,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email = '';
   String pwd = '';
+  String token = '';
   @override
   Widget build(BuildContext context) {
-    final dio = Dio();
-    String token = '';
     return MainLayout(
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -37,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const _Title(title: '로그인'),
                 _SubTitle(subTitle: '디바이스 로그인'),
@@ -77,6 +75,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     );
+                    // 1. 입력받은 토큰 변수에 담기
+                    final refreshToken = resp.data['refreshToken'];
+                    final accressToken = resp.data['accressToken'];
+                    // 2. 토큰을 secure_storage에 저장
+                    await storage.write(
+                      key: REFRESH_TOKEN_KEY,
+                      value: refreshToken,
+                    );
+                    await storage.write(
+                      key: ACCESS_TOKEN_KEY,
+                      value: accressToken,
+                    );
+                    // 3. 만약에 토큰이 있으면 바로 넘어가도록
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (_) => CommonScreen(
@@ -84,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     );
-                    print(resp.data);
                   },
                   buttonText: '로그인',
                   themeNotifier: widget.themeNotifier,
@@ -93,18 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 8,
                 ),
                 CustomButton(
-                  onPressed: () async {
-                    final resp = await dio.post(
-                      '${ip.path}/auth/token',
-                      options: Options(
-                        headers: {
-                          'content-type': 'application/json',
-                          'authorization': 'Bearer $token',
-                        },
-                      ),
-                    );
-                    print('token:' + token);
-                  },
+                  onPressed: () async {},
                   buttonText: '취소',
                   subStyle: true,
                   themeNotifier: widget.themeNotifier,

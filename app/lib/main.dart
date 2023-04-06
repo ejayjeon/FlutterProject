@@ -2,6 +2,7 @@ import 'package:app/common/common_screen.dart';
 import 'package:app/common/theme/custom_theme.dart';
 import 'package:app/home/views/home_screen.dart';
 import 'package:app/user/views/login_screen.dart';
+import 'package:app/user/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,7 +34,7 @@ class _App extends ConsumerWidget {
           darkTheme: darkThemeData,
           themeMode: currMode,
           theme: lightThemeData,
-          home: LoginScreen(
+          home: SplashScreen(
             themeNotifier: themeNotifier,
           ),
         );

@@ -1,4 +1,5 @@
 import 'package:app/common/layout/main_layout.dart';
+import 'package:app/common/theme/color_schemes.g.dart';
 import 'package:app/home/views/home_screen.dart';
 import 'package:app/user/views/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -62,16 +63,6 @@ class _CommonScreenState extends State<CommonScreen>
       body: TabBarView(
         controller: controller,
         physics: const NeverScrollableScrollPhysics(),
-        // children: List.generate(
-        //   tabName.length,
-        //   (index) => Container(
-        //     child: Center(
-        //       child: Text(
-        //         tabName[index].toString(),
-        //       ),
-        //     ),
-        //   ),
-        // ),
         children: [
           HomeScreen(themeNotifier: widget.themeNotifier),
           HomeScreen(themeNotifier: widget.themeNotifier),
@@ -81,6 +72,9 @@ class _CommonScreenState extends State<CommonScreen>
       ),
       bottomNav: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        selectedItemColor: widget.themeNotifier.value == ThemeMode.light
+            ? lightColorScheme.primary
+            : darkColorScheme.primary,
         onTap: (int index) {
           controller.animateTo(index);
         },
