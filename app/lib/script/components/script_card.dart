@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class HomeCard extends StatelessWidget {
+class ScriptCard extends StatelessWidget {
   final Widget image;
   final String title;
   final List<String> tags;
   final bool isShared;
   final Color iconColor;
   final int? sharerCount; // 공유자 수 : 기본 1
-  const HomeCard({
+  const ScriptCard({
     super.key,
     required this.image,
     required this.title,

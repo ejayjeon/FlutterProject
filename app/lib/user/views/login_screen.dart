@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const _Title(title: '로그인'),
-                _SubTitle(subTitle: '디바이스 로그인'),
+                const _SubTitle(subTitle: '디바이스 로그인'),
                 Image.asset(
                   'assets/images/illu16.png',
                   width: MediaQuery.of(context).size.width / 3,
