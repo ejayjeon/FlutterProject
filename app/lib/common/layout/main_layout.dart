@@ -1,23 +1,30 @@
+import 'package:app/common/theme/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 
 class MainLayout extends StatelessWidget {
   final String? title;
-  final IconData? icon;
+  final IconData? actionIcon;
+  final IconData? fabIcon;
   final Widget body;
-  final VoidCallback? onPressed;
+  final bool needFab;
+  final VoidCallback? actionPressed;
+  final VoidCallback? fabPressed;
   final Widget? bottomNav;
-  final Widget? fab;
   final Color? backgroundColor;
+  final ValueNotifier? themeNotifier;
 
   const MainLayout({
     super.key,
     this.title,
-    this.icon,
-    this.onPressed,
+    this.actionIcon,
+    this.actionPressed,
+    this.fabPressed,
+    this.fabIcon,
     this.bottomNav,
-    this.fab,
+    this.needFab = false,
     required this.body,
     this.backgroundColor,
+    this.themeNotifier,
   });
 
   @override
@@ -27,7 +34,7 @@ class MainLayout extends StatelessWidget {
       appBar: _appbar(),
       body: _body(),
       bottomNavigationBar: bottomNav,
-      floatingActionButton: fab,
+      floatingActionButton: _fab(),
     );
   }
 
@@ -39,8 +46,8 @@ class MainLayout extends StatelessWidget {
       backgroundColor: Colors.transparent,
       actions: [
         IconButton(
-          onPressed: onPressed,
-          icon: Icon(icon),
+          onPressed: actionPressed,
+          icon: Icon(actionIcon),
         ),
       ],
       elevation: 0,
@@ -59,6 +66,19 @@ class MainLayout extends StatelessWidget {
   Widget _body() {
     return SafeArea(
       child: body,
+    );
+  }
+
+// FAB 버튼
+  FloatingActionButton? _fab() {
+    if (needFab == false) return null;
+    return FloatingActionButton(
+      elevation: 0,
+      backgroundColor: themeNotifier?.value == ThemeMode.light
+          ? lightColorScheme.primary
+          : darkColorScheme.primary,
+      child: Icon(fabIcon),
+      onPressed: fabPressed,
     );
   }
 }

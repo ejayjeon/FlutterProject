@@ -1,7 +1,10 @@
 import 'package:app/common/layout/main_layout.dart';
 import 'package:app/common/theme/color_schemes.g.dart';
 import 'package:app/home/views/home_screen.dart';
+import 'package:app/private/views/private_screen.dart';
+import 'package:app/user/views/user_screen.dart';
 import 'package:app/user/views/login_screen.dart';
+import 'package:app/whoever/views/whoever_screen.dart';
 import 'package:flutter/material.dart';
 
 class CommonScreen extends StatefulWidget {
@@ -50,14 +53,14 @@ class _CommonScreenState extends State<CommonScreen>
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: 'HOME',
-      onPressed: () {
+      title: tabName[index],
+      actionPressed: () {
         widget.themeNotifier.value =
             widget.themeNotifier.value == ThemeMode.light
                 ? ThemeMode.dark
                 : ThemeMode.light;
       },
-      icon: widget.themeNotifier.value == ThemeMode.light
+      actionIcon: widget.themeNotifier.value == ThemeMode.light
           ? Icons.nightlight_round_rounded
           : Icons.sunny,
       body: TabBarView(
@@ -65,9 +68,9 @@ class _CommonScreenState extends State<CommonScreen>
         physics: const NeverScrollableScrollPhysics(),
         children: [
           HomeScreen(themeNotifier: widget.themeNotifier),
-          HomeScreen(themeNotifier: widget.themeNotifier),
-          HomeScreen(themeNotifier: widget.themeNotifier),
-          HomeScreen(themeNotifier: widget.themeNotifier),
+          WhoeverScreen(themeNotifier: widget.themeNotifier),
+          PrivateScree(themeNotifier: widget.themeNotifier),
+          UserScreen(themeNotifier: widget.themeNotifier),
         ],
       ),
       bottomNav: BottomNavigationBar(

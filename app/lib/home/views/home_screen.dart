@@ -18,16 +18,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      fab: FloatingActionButton(
-        elevation: 0,
-        backgroundColor: themeNotifier.value == ThemeMode.light
-            ? lightColorScheme.primary
-            : darkColorScheme.primary,
-        child: const Icon(
-          Icons.add,
-        ),
-        onPressed: () {},
-      ),
+      needFab: true,
+      fabIcon: Icons.add,
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 8.0,
