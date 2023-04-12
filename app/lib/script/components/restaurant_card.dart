@@ -1,3 +1,5 @@
+import 'package:app/common/const/ip.dart';
+import 'package:app/script/model/restaurant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -23,11 +25,27 @@ class RestaurantCard extends StatelessWidget {
     required this.deliveryFee,
   });
 
+  factory RestaurantCard.fromModel({
+    required RestaurantModel model,
+  }) {
+    return RestaurantCard(
+      image: Image.network(model.thumbUrl),
+      name: model.name,
+      tags: model.tags,
+      priceRange: model.priceRange.toString(),
+      ratings: model.ratings,
+      ratingsCount: model.ratingsCount,
+      deliveryTime: model.deliveryTime,
+      deliveryFee: model.deliveryFee,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // 테두리 원으로 정리
         ClipRRect(
           borderRadius: BorderRadius.circular(
             8.0,
@@ -35,11 +53,24 @@ class RestaurantCard extends StatelessWidget {
           child: image,
         ),
         const SizedBox(
-          height: 16.0,
+          height: 8.0,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(name),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+            Text(
+              tags.join(' · '),
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12.0,
+              ),
+            ),
             renderDot(),
           ],
         ),
@@ -50,13 +81,22 @@ class RestaurantCard extends StatelessWidget {
           children: [
             _IconData(
               icon: Icons.star,
-              label: '별점',
+              label: ratings.toString(),
             ),
             renderDot(),
             _IconData(
-              icon: Icons.favorite,
-              label: '좋아요',
+              icon: Icons.people,
+              label: ratingsCount.toString(),
             ),
+            renderDot(),
+            _IconData(
+              icon: Icons.timelapse_outlined,
+              label: '$deliveryTime 분',
+            ),
+            renderDot(),
+            _IconData(
+                icon: Icons.monetization_on,
+                label: deliveryFee == 0 ? '무료' : '$deliveryFee 원'),
           ],
         ),
       ],
@@ -95,6 +135,7 @@ class _IconData extends StatelessWidget {
         Icon(
           icon,
           size: 14.0,
+          color: Theme.of(context).primaryColor,
         ),
         const SizedBox(
           width: 4.0,

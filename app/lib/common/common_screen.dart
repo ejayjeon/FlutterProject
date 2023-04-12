@@ -23,7 +23,7 @@ class _CommonScreenState extends State<CommonScreen>
     with SingleTickerProviderStateMixin {
   late TabController controller;
   int index = 0;
-  final List tabName = ['HOME', 'WHOEVER', 'OWN', 'USER'];
+  final List tabName = ['HOME', 'WHOEVER', 'PRIVATE', 'USER'];
   final List tabIcon = [
     Icons.home,
     Icons.people,

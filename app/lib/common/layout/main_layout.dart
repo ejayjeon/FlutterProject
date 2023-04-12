@@ -34,7 +34,7 @@ class MainLayout extends StatelessWidget {
       appBar: _appbar(),
       body: _body(),
       bottomNavigationBar: bottomNav,
-      floatingActionButton: _fab(),
+      floatingActionButton: _fab(context),
     );
   }
 
@@ -70,14 +70,15 @@ class MainLayout extends StatelessWidget {
   }
 
 // FAB 버튼
-  FloatingActionButton? _fab() {
+  FloatingActionButton? _fab(context) {
     if (needFab == false) return null;
     return FloatingActionButton(
       elevation: 0,
-      backgroundColor: themeNotifier?.value == ThemeMode.light
-          ? lightColorScheme.primary
-          : darkColorScheme.primary,
-      child: Icon(fabIcon),
+      backgroundColor: Theme.of(context).primaryColor,
+      child: Icon(
+        fabIcon,
+        color: Theme.of(context).hoverColor,
+      ),
       onPressed: fabPressed,
     );
   }

@@ -1,11 +1,10 @@
-import 'package:app/common/components/custom_textform.dart';
+import 'package:app/common/const/ip.dart';
+import 'package:app/common/const/storage.dart';
 import 'package:app/common/layout/main_layout.dart';
-import 'package:app/common/theme/color_schemes.g.dart';
-import 'package:app/common/theme/custom_theme.dart';
-import 'package:app/script/components/script_card.dart';
+import 'package:app/script/components/restaurant_card.dart';
+import 'package:app/script/model/restaurant_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class HomeScreen extends StatelessWidget {
   static String get routeName => 'home';
@@ -14,6 +13,20 @@ class HomeScreen extends StatelessWidget {
     super.key,
     required this.themeNotifier,
   });
+
+  Future<List> paginateScript() async {
+    final dio = Dio();
+    final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
+    final resp = await dio.get(
+      'http://$ip/restaurant',
+      options: Options(
+        headers: {
+          'authorization': 'Bearer $accessToken',
+        },
+      ),
+    );
+    return resp.data['data'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +37,21 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: 8.0,
         ),
-        child: ScriptCard(
-          iconColor: themeNotifier.value == ThemeMode.light
-              ? lightColorScheme.primary
-              : darkColorScheme.primary,
-          image: Image.asset(
-            'assets/images/dream.jpeg',
-            fit: BoxFit.cover,
-            // width: MediaQuery.of(context).size.width / 4,
-            // height: 150,
-          ),
-          title: '책이름',
-          tags: ['책', '북'],
+        child: FutureBuilder<List>(
+          future: paginateScript(),
+          builder: (context, AsyncSnapshot<List> snapshot) {
+            if (!snapshot.hasData) return Container();
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (_, index) {
+                final item = snapshot.data![index];
+                final pItem = RestaurantModel.fromJson(
+                  json: item,
+                );
+                return RestaurantCard.fromModel(model: pItem);
+              },
+            );
+          },
         ),
       ),
     );

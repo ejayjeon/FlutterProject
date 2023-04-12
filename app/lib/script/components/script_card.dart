@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
+/** 
+ * 메인에 보이는 Book 형태의 Script Card 수
+*/
 class ScriptCard extends StatelessWidget {
-  final Widget image;
-  final String title;
-  final List<String> tags;
-  final bool isShared;
-  final Color iconColor;
-  final int? sharerCount; // 공유자 수 : 기본 1
+  final Widget image; // 이미지
+  final String title; // 제목
+  final String description; // 소개
+  final List<String> tags; // 관련 태그들
+  final bool isShared; // false: Private, true: public
+  final int sharerCount; // 공유자 수 : 기본 1
+  final int favCount; // 좋아요 수
   const ScriptCard({
     super.key,
     required this.image,
     required this.title,
+    required this.description,
     required this.tags,
     this.isShared = false,
     this.sharerCount = 1,
-    required this.iconColor,
+    this.favCount = 0,
   });
 
   @override
@@ -35,13 +38,13 @@ class ScriptCard extends StatelessWidget {
             ),
             Icon(
               Icons.person,
-              color: iconColor,
+              color: Theme.of(context).primaryColor,
             ),
             Text(
               sharerCount.toString(),
               style: TextStyle(
                 fontSize: 14.0,
-                color: iconColor,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ],
@@ -50,8 +53,21 @@ class ScriptCard extends StatelessWidget {
           height: 16.0,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(title),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+            Text(
+              description,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 13.0,
+              ),
+            ),
             renderDot(),
           ],
         ),
@@ -62,12 +78,10 @@ class ScriptCard extends StatelessWidget {
           children: [
             _IconData(
               icon: Icons.star,
-              iconColor: iconColor,
-              label: '별점',
+              label: sharerCount.toString(),
             ),
             renderDot(),
             _IconData(
-              iconColor: iconColor,
               icon: Icons.favorite,
               label: '좋아요',
             ),
@@ -96,12 +110,10 @@ class ScriptCard extends StatelessWidget {
 class _IconData extends StatelessWidget {
   final IconData icon;
   final String label;
-  final Color iconColor;
   const _IconData({
     super.key,
     required this.icon,
     required this.label,
-    required this.iconColor,
   });
 
   @override
@@ -110,7 +122,7 @@ class _IconData extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: iconColor,
+          color: Theme.of(context).primaryColor,
           size: 14.0,
         ),
         const SizedBox(

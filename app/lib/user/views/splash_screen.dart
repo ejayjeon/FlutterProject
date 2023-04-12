@@ -1,5 +1,5 @@
 import 'package:app/common/common_screen.dart';
-import 'package:app/common/const/ip.dart' as ip;
+import 'package:app/common/const/ip.dart';
 import 'package:app/common/const/storage.dart';
 import 'package:app/common/layout/main_layout.dart';
 import 'package:app/common/theme/color_schemes.g.dart';
@@ -35,18 +35,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
 // initState는 await을 할 수 없어서 일반 함수 생성
   void checkToken() async {
+    final dio = Dio();
     final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
     final accessToken = await storage.read(key: ACCESS_TOKEN_KEY);
 // Dio로 토큰 가져와서 확인하기
     try {
       final resp = await dio.post(
-        '${ip.path}/auth/token',
+        'http://$ip/auth/token',
         options: Options(
           headers: {
             'content-type': 'application/json',
-            'authorization': 'Bearer $refreshToken',
+            'authorization': 'Bearer $accessToken',
           },
         ),
+      );
+      await storage.write(
+        key: ACCESS_TOKEN_KEY,
+        value: resp.data['accessToken'],
+      );
+      await storage.write(
+        key: REFRESH_TOKEN_KEY,
+        value: resp.data['refreshToken'],
       );
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
@@ -91,9 +100,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 16.0,
             ),
             CircularProgressIndicator(
-              color: widget.themeNotifier.value == ThemeMode.light
-                  ? lightColorScheme.primary
-                  : darkColorScheme.primary,
+              color: Theme.of(context).primaryColor,
             ),
           ],
         ),

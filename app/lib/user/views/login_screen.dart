@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String token = '';
   @override
   Widget build(BuildContext context) {
+    final dio = Dio();
     return MainLayout(
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

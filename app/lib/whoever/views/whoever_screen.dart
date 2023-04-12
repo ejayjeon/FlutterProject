@@ -18,7 +18,7 @@ class WhoeverScreen extends StatelessWidget {
       fabIcon: Icons.add,
       body: Center(
         child: Text(
-          'PRIVATE',
+          'WHOEVER',
         ),
       ),
     );
