@@ -14,6 +14,7 @@ dependencies:
   flutter_riverpod: ^2.3.2 # 상태관리
   dio: ^5.1.1 # http 요청 2023.04.06.
   flutter_secure_storage: ^8.0.0 # 민감한 정보 저장 2023.04.06.
+  flutter_quill: ^7.1.4 # 2023.04.13. 에디터
 
 # dev 모드 패키지
 dev_dependencies:

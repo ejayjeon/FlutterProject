@@ -77,14 +77,24 @@ class ScriptScreen extends StatelessWidget {
   }
 
   SliverList _sliverList() {
-    final rainbowColors = [
-      0xff0000,
-      0xff9900,
-      0xfbff00,
-      0x88ff00,
-      0x00c3ff,
-      0x0008ff,
-      0xa200ff,
+    // final rainbowColors = [
+    //   0xff0000,
+    //   0xff9900,
+    //   0xfbff00,
+    //   0x88ff00,
+    //   0x00c3ff,
+    //   0x0008ff,
+    //   0xa200ff,
+    // ];
+    const rainbowColors = [
+      Colors.red,
+      Colors.orange,
+      Colors.yellow,
+      Colors.green,
+      Colors.blue,
+      Colors.indigo,
+      Colors.pink,
+      Colors.purple
     ];
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -100,14 +110,24 @@ class ScriptScreen extends StatelessWidget {
   }
 
   SliverGrid _sliverGrid() {
-    final rainbowColors = [
-      0xff0000,
-      0xff9900,
-      0xfbff00,
-      0x88ff00,
-      0x00c3ff,
-      0x0008ff,
-      0xa200ff,
+    // final rainbowColors = [
+    //   0xff0000,
+    //   0xff9900,
+    //   0xfbff00,
+    //   0x88ff00,
+    //   0x00c3ff,
+    //   0x0008ff,
+    //   0xa200ff,
+    // ];
+    const rainbowColors = [
+      Colors.red,
+      Colors.orange,
+      Colors.yellow,
+      Colors.green,
+      Colors.blue,
+      Colors.indigo,
+      Colors.pink,
+      Colors.purple
     ];
     final numbers = List.generate(
       100,
@@ -130,12 +150,12 @@ class ScriptScreen extends StatelessWidget {
   }
 
   Widget renderContainer({
-    required int color,
+    required Color color,
     required int index,
   }) {
     return Container(
       height: 100,
-      color: Color(color),
+      color: color,
       child: Center(
         child: Text(index.toString()),
       ),

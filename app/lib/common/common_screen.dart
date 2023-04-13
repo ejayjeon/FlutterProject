@@ -1,7 +1,7 @@
 import 'package:app/common/layout/main_layout.dart';
 import 'package:app/common/theme/color_schemes.g.dart';
+import 'package:app/editor/views/custor_editor_screen.dart';
 import 'package:app/home/views/home_screen.dart';
-import 'package:app/private/views/private_screen.dart';
 import 'package:app/script/views/script_screen.dart';
 import 'package:app/user/views/user_screen.dart';
 import 'package:app/user/views/login_screen.dart';
@@ -68,9 +68,9 @@ class _CommonScreenState extends State<CommonScreen>
         controller: controller,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomeScreen(themeNotifier: widget.themeNotifier),
+          CustomEditorScreen(),
+          // HomeScreen(themeNotifier: widget.themeNotifier),
           WhoeverScreen(themeNotifier: widget.themeNotifier),
-          // PrivateScree(themeNotifier: widget.themeNotifie),
           ScriptScreen(),
           UserScreen(themeNotifier: widget.themeNotifier),
         ],
