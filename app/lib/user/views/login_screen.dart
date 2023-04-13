@@ -5,7 +5,7 @@ import 'package:app/common/const/encoding.dart';
 import 'package:app/common/const/storage.dart';
 import 'package:app/common/layout/main_layout.dart';
 import 'package:dio/dio.dart';
-import 'package:app/common/const/ip.dart' as ip;
+import 'package:app/common/const/ip.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     final rawString = '$email:$pwd';
                     token = stringToBase64.encode(rawString);
                     final resp = await dio.post(
-                      '${ip.path}/auth/login',
+                      'http://$ip/auth/login',
                       options: Options(
                         headers: {
                           'authorization': 'Basic $token',

@@ -2,6 +2,7 @@ import 'package:app/common/layout/main_layout.dart';
 import 'package:app/common/theme/color_schemes.g.dart';
 import 'package:app/home/views/home_screen.dart';
 import 'package:app/private/views/private_screen.dart';
+import 'package:app/script/views/script_screen.dart';
 import 'package:app/user/views/user_screen.dart';
 import 'package:app/user/views/login_screen.dart';
 import 'package:app/whoever/views/whoever_screen.dart';
@@ -69,7 +70,8 @@ class _CommonScreenState extends State<CommonScreen>
         children: [
           HomeScreen(themeNotifier: widget.themeNotifier),
           WhoeverScreen(themeNotifier: widget.themeNotifier),
-          PrivateScree(themeNotifier: widget.themeNotifier),
+          // PrivateScree(themeNotifier: widget.themeNotifie),
+          ScriptScreen(),
           UserScreen(themeNotifier: widget.themeNotifier),
         ],
       ),
