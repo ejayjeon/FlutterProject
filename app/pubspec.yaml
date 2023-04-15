@@ -15,6 +15,7 @@ dependencies:
   dio: ^5.1.1 # http 요청 2023.04.06.
   flutter_secure_storage: ^8.0.0 # 민감한 정보 저장 2023.04.06.
   flutter_quill: ^7.1.4 # 2023.04.13. 에디터
+  settings_ui: ^2.0.2 # 2023.04.15. 세팅 유아이
 
 # dev 모드 패키지
 dev_dependencies:

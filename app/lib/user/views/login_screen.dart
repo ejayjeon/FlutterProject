@@ -1,4 +1,4 @@
-import 'package:app/common/common_screen.dart';
+import 'package:app/common/views/common_screen.dart';
 import 'package:app/common/components/custom_button.dart';
 import 'package:app/common/components/custom_textform.dart';
 import 'package:app/common/const/encoding.dart';

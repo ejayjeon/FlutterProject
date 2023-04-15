@@ -15,17 +15,19 @@ var lightThemeData = ThemeData(
   colorScheme: lightColorScheme,
   primaryColor: lightColorScheme.primary,
   hoverColor: darkColorScheme.primary,
+  hintColor: lightColorScheme.outlineVariant,
   // inputDecorationTheme: lightInputTheme,
 );
 
 var darkThemeData = ThemeData(
-    useMaterial3: true,
-    fontFamily: 'Pretendard',
-    colorScheme: darkColorScheme,
-    primaryColor: darkColorScheme.primary,
-    hoverColor: lightColorScheme.primary
-    // inputDecorationTheme: darkInputTheme,
-    );
+  useMaterial3: true,
+  fontFamily: 'Pretendard',
+  colorScheme: darkColorScheme,
+  primaryColor: darkColorScheme.primary,
+  hoverColor: lightColorScheme.primary,
+  hintColor: darkColorScheme.outlineVariant,
+  // inputDecorationTheme: darkInputTheme,
+);
 
 // 개별 Input ThemeData
 var darkInputTheme = InputDecoration(
