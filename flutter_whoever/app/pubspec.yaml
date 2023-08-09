@@ -1,0 +1,54 @@
+name: app
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.5 <3.0.0'
+
+# 패키지
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.3.2 # 상태관리
+  dio: ^5.1.1 # http 요청 2023.04.06.
+  flutter_secure_storage: ^8.0.0 # 민감한 정보 저장 2023.04.06.
+  flutter_quill: ^7.1.4 # 2023.04.13. 에디터
+  settings_ui: ^2.0.2 # 2023.04.15. 세팅 유아이
+
+# dev 모드 패키지
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+# Flutter
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-ExtraBold.otf
+          weight: 900
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 800
+        - asset: assets/fonts/Pretendard-Black.otf
+          weight: 700
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Light.otf
+          weight: 300
+        - asset: assets/fonts/Pretendard-Thin.otf
+          weight: 200
+        - asset: assets/fonts/Pretendard-ExtraLight.otf
+          weight: 100
