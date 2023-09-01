@@ -21,6 +21,14 @@ class _MainNoteScreenState extends State<MainNoteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('App'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.more_horiz_rounded,
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
