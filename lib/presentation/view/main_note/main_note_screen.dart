@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_note/core/util/note_order.dart';
+import 'package:flutter_note/core/util/order_type.dart';
 import 'package:flutter_note/presentation/view/add_edit_note/add_edit_note_screen.dart';
 import 'package:flutter_note/presentation/view/main_note/components/note_item.dart';
+import 'package:flutter_note/presentation/view/main_note/components/order_section.dart';
 import 'package:flutter_note/presentation/view/main_note/components/snackbar.dart';
 import 'package:flutter_note/presentation/view_model/main_note/main_notes_view_model.dart';
 import 'package:flutter_note/presentation/view_model/main_note/notes_event.dart';
@@ -23,8 +26,11 @@ class _MainNoteScreenState extends State<MainNoteScreen> {
         title: const Text('App'),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(
+            onPressed: () {
+              // state.showOrderSection != state.showOrderSection;
+              viewModel.onEvent(const NotesEvent.toggleOrderSection());
+            },
+            icon: const Icon(
               Icons.more_horiz_rounded,
             ),
           )
@@ -47,36 +53,50 @@ class _MainNoteScreenState extends State<MainNoteScreen> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
-          children: state.notes
-              .map(
-                (note) => GestureDetector(
-                  onTap: () async {
-                    print(note);
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => AddEditNoteScreen(
-                          note: note,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(
+                milliseconds: 300,
+              ),
+              child: state.showOrderSection
+                  ? OrderSection(
+                      onOrderChanged: (noteOrder) {
+                        viewModel.onEvent(NotesEvent.changeOrder(noteOrder));
+                      },
+                      noteOder: state.noteOrder,
+                    )
+                  : null,
+            ),
+            ...state.notes
+                .map(
+                  (note) => GestureDetector(
+                    onTap: () async {
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => AddEditNoteScreen(
+                            note: note,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: NoteItem(
-                    note: note,
-                    onDeletePressed: (context) {
-                      viewModel.onEvent(NotesEvent.deleteNote(note));
-                      showSnackbar(
-                        title: '노트가 삭제되었습니다',
-                        context: context,
-                        needRestore: true,
-                        onRestorePressed: () {
-                          viewModel.onEvent(const NotesEvent.restoreNote());
-                        },
                       );
                     },
+                    child: NoteItem(
+                      note: note,
+                      onDeletePressed: (context) {
+                        viewModel.onEvent(NotesEvent.deleteNote(note));
+                        showSnackbar(
+                          title: '노트가 삭제되었습니다',
+                          context: context,
+                          needRestore: true,
+                          onRestorePressed: () {
+                            viewModel.onEvent(const NotesEvent.restoreNote());
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ],
         ),
       ),
     );

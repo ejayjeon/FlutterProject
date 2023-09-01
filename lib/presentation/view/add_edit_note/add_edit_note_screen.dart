@@ -146,8 +146,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                     : currentColor != viewModel.pickerColor
                         ? viewModel.pickerColor
                         : Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            child: ListView(
               children: [
                 GestureDetector(
                   onTap: () {
