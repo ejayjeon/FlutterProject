@@ -1,0 +1,76 @@
+name: whoever
+description: Whoever.
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.3.10
+  riverpod_annotation: ^2.1.4
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+  shared_preferences: ^2.2.1
+  firebase_core: ^2.15.1
+  change_app_package_name: ^1.1.0
+  firebase_messaging: ^14.6.7
+  dio: ^5.3.2
+  flutter_dotenv: ^5.1.0
+  flutter_secure_storage: ^9.0.0
+
+  # Retrofit
+  retrofit: '>=4.0.0 <5.0.0'
+  logger: any
+
+  # router
+  go_router: ^10.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  freezed: ^2.4.1
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
+  riverpod_generator: ^2.3.1
+  retrofit_generator: '>=5.0.0 <6.0.0'
+
+
+flutter:
+
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/config/
+    - .env
+
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: assets/fonts/Ubuntu-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/Ubuntu-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/Ubuntu-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Ubuntu-Light.ttf
+          weight: 200
+    - family: GmarketSans
+      fonts:
+        - asset: assets/fonts/GmarketSansBold.otf
+          weight: 700
+        - asset: assets/fonts/GmarketSansMedium.otf
+          weight: 500
+        - asset: assets/fonts/GmarketSansLight.otf
+          weight: 300
+

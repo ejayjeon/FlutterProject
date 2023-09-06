@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "561714743958",
+    "project_id": "whoever-app",
+    "storage_bucket": "whoever-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561714743958:android:8bb5e9787568ea910290b7",
+        "android_client_info": {
+          "package_name": "app.winter.whoever"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561714743958-u9r4rvtcfu9fio52pq419cq7s10a8jvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf1acK9RK8MXrPaunK9aexu1H9HBKX27I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561714743958-u9r4rvtcfu9fio52pq419cq7s10a8jvl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "561714743958-0ish9lknta5hie0b5p56a4ke64bjdh0d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.whoever"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
