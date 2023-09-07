@@ -13,7 +13,7 @@ class AppRouter {
   static final pages = <GetPage>[
     GetPage(
       name: Routes.APP,
-      page: () => const App(),
+      page: () => App(),
     ),
     GetPage(
       name: Routes.HOME,
