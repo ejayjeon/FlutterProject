@@ -7,6 +7,10 @@ class App extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(Get.currentRoute.toString()),
+      ),
       body: TabBarView(
         physics: const AlwaysScrollableScrollPhysics(),
         controller: controller.tabController,

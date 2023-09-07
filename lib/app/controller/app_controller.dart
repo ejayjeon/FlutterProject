@@ -24,7 +24,7 @@ class AppController extends GetxController
     super.onClose();
   }
 
-  // App Tab
+  // 1. App Tab UI
   final List<Widget> tabViews = <Widget>[
     const SplashView(),
     const HomeView(),
@@ -38,4 +38,8 @@ class AppController extends GetxController
       color: Colors.yellow,
     ),
   ];
+
+  // 2. App Device Token
+
+  // 3. App Access / Refresh Token
 }
