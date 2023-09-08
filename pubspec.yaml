@@ -20,6 +20,8 @@ dependencies:
   get: ^4.6.5
   intl: ^0.18.1
   shared_preferences: any
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

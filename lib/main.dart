@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:whoever/app/common/util/i18n.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/common/util/util.dart';
-import 'package:whoever/app/controller/app_binding.dart';
-import 'package:whoever/app/controller/app_controller.dart';
+import 'package:whoever/app/common/controller/app_binding.dart';
+import 'package:whoever/app/common/controller/app_controller.dart';
 import 'package:whoever/app/common/routes/app_router.dart';
-import 'package:whoever/app/view/home/home_view.dart';
+import 'package:whoever/app/home/home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +23,21 @@ class _App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      onInit: () {},
+      onInit: () {
+        Log(context.isTablet);
+      },
       locale: Get.deviceLocale,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       translations: I18N(),
       fallbackLocale: const Locale('ko', 'KR'),
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+        Locale('en', 'US'),
+      ],
       theme: lightTheme,
       darkTheme: darkTheme,
       // themeMode: ThemeMode.system,
