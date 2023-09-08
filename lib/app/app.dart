@@ -6,8 +6,6 @@ import 'package:whoever/app/common/controller/app_controller.dart';
 
 class App extends GetView<AppController> {
   App({super.key}) {
-    Log('App init...');
-
     controller.getThemeStatus();
   }
   @override

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:whoever/app/common/service/preference_service.dart';
 import 'package:whoever/app/common/util/i18n.dart';
 import 'package:whoever/app/common/util/theme.dart';
-import 'package:whoever/app/common/util/util.dart';
 import 'package:whoever/app/common/controller/app_binding.dart';
-import 'package:whoever/app/common/controller/app_controller.dart';
 import 'package:whoever/app/common/routes/app_router.dart';
-import 'package:whoever/app/home/home_view.dart';
+import 'package:whoever/app/common/util/util.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +22,7 @@ class _App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      onInit: () {
-        Log(context.isTablet);
-      },
+      onInit: () {},
       locale: Get.deviceLocale,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
