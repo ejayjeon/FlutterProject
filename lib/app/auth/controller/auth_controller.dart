@@ -56,7 +56,6 @@ class AuthController extends GetxController {
 
     if (isValid) {
       pref.setBool('loginValid', isValid);
-      // Log(pref.getBool('loginValid'));
       formKey.currentState!.save();
       AuthService.to.login();
 
