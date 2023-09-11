@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/common/util/util.dart';
-import 'package:whoever/app/home/home_view.dart';
-import 'package:whoever/app/splash/splash_view.dart';
+import 'package:whoever/app/view/home/home_view.dart';
+import 'package:whoever/app/view/splash/splash_view.dart';
 
 class AppController extends GetxController
     with GetSingleTickerProviderStateMixin {

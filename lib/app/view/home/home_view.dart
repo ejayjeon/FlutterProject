@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/home/controller/home_controller.dart';
+import 'package:whoever/app/view_model/home/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});

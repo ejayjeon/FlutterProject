@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:whoever/app/common/util/util.dart';
-import 'package:whoever/app/home/home_view.dart';
+import 'package:whoever/app/view/home/home_view.dart';
 
 class HomeController extends GetxController with StateMixin<HomeView> {
   @override
