@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:whoever/app/common/service/preference_service.dart';
 import 'package:whoever/app/common/util/i18n.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/common/controller/app_binding.dart';

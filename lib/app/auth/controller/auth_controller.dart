@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/auth/service/auth_service.dart';
 import 'package:whoever/app/common/routes/app_router.dart';
-import 'package:whoever/app/common/service/preference_service.dart';
+import 'package:whoever/app/common/service/storage_manager.dart';
 import 'package:whoever/app/common/util/util.dart';
 
 /**
@@ -10,7 +10,7 @@ import 'package:whoever/app/common/util/util.dart';
  */
 class AuthController extends GetxController {
   // ------------ Field ---------------------------
-  final pref = PrefererenceService().to.pref;
+  // final prefService = Get.find<PrefererenceService>();
 
   // TextFrom Validation을 위한 키
   final formKey = GlobalKey<FormState>();
@@ -53,9 +53,11 @@ class AuthController extends GetxController {
   void formSubmit() {
     final isValid = formKey.currentState!.validate();
     Get.focusScope!.unfocus();
+    // final pref = prefService.pref;
 
     if (isValid) {
-      pref.setBool('loginValid', isValid);
+      // pref.setBool('loginValid', isValid);
+      StorageManager.setData('loginValid', isValid);
       formKey.currentState!.save();
       AuthService.to.login();
 

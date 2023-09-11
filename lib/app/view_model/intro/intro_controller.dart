@@ -5,6 +5,6 @@ class IntroController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Log('intro Controller init...');
+    // Log('intro Controller init...');
   }
 }

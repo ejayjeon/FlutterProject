@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:whoever/app/common/service/storage_manager.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/common/util/util.dart';
 import 'package:whoever/app/view/home/home_view.dart';
@@ -15,7 +16,6 @@ class AppController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-    Log('[AppController] init...');
     tabController = TabController(
       length: tabViews.length,
       vsync: this,
@@ -48,6 +48,7 @@ class AppController extends GetxController
   setThemeStatus() async {
     SharedPreferences pref = await _prefs;
     pref.setBool('theme', isLight.value);
+    // StorageManager.setData('theme', isLight.value);
   }
 
   getThemeStatus() async {
