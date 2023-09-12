@@ -20,12 +20,6 @@ class FirebaseService extends GetxService {
 
     // 3. Background Message Stream
     onDataMessageListen();
-    // RemoteMessage? initMessage =
-    //     await FirebaseMessaging.instance.getInitialMessage();
-    // Log(initMessage);
-    // if (initMessage != null) {
-    //   _handleMessage(initMessage);
-    // }
     return this;
   }
 
@@ -54,10 +48,6 @@ class FirebaseService extends GetxService {
         title.value = message.notification!.title!;
         body.value = message.notification!.body!;
       }
-
-      if (message.data.isNotEmpty) {
-        Log(message.data["body"]);
-      }
     });
   }
 
@@ -74,6 +64,7 @@ class FirebaseService extends GetxService {
     }
   */
   void onDataMessageListen() {
+    // final Map<String, dynamic> data;
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (message.data.isNotEmpty) {
         Log(message.data["body"]);
