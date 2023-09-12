@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/common/util/util.dart';
-import 'package:whoever/app/common/controller/app_controller.dart';
+import 'package:whoever/app/controller/app_controller.dart';
 
 class App extends GetView<AppController> {
   App({super.key}) {

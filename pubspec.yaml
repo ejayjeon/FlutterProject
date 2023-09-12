@@ -14,14 +14,20 @@ dependencies:
   flutter:
     sdk: flutter
 
-
-
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   intl: ^0.18.1
   shared_preferences: any
   flutter_localizations:
     sdk: flutter
+  change_app_package_name: ^1.1.0
+  firebase_messaging: ^14.6.7
+  firebase_core: ^2.15.1
+  firebase_analytics: ^10.4.5
+
+
+
+
 
 dev_dependencies:
   flutter_test:
@@ -34,12 +40,12 @@ dev_dependencies:
 
 flutter:
 
-
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - assets/config/
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

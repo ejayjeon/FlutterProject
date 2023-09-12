@@ -4,7 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:whoever/app/common/util/i18n.dart';
 import 'package:whoever/app/common/util/theme.dart';
-import 'package:whoever/app/common/controller/app_binding.dart';
+import 'package:whoever/app/controller/app_binding.dart';
 import 'package:whoever/app/common/routes/app_router.dart';
 import 'package:whoever/app/common/util/util.dart';
 

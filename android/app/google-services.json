@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "231092113503",
+    "project_id": "whoever-fcm",
+    "storage_bucket": "whoever-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231092113503:android:30549cad4ab57e0f1e4bea",
+        "android_client_info": {
+          "package_name": "app.ejayjeon.whoever"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyn34FXY0ZU2LE1eAmOIeR1jUsWQlCCfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

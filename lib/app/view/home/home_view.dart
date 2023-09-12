@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/view_model/home/home_controller.dart';
+import 'package:whoever/app/common/util/util.dart';
+import 'package:whoever/app/controller/home_controller.dart';
+import 'package:whoever/app/service/firebase_service.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final token;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -19,8 +22,9 @@ class HomeView extends GetView<HomeController> {
             onLoading: const Center(child: CircularProgressIndicator()),
           ),
           ElevatedButton(
-            onPressed: () {
-              controller.getRdNum();
+            onPressed: () async {
+              // controller.getRdNum();
+              await FirebaseService.getToken().then((value) => Log(value));
             },
             child: Text('Enter'),
           ),

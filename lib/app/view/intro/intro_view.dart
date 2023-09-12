@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/view_model/intro/intro_controller.dart';
+import 'package:whoever/app/controller/intro_controller.dart';
 
 class IntroView extends GetView<IntroController> {
   const IntroView({super.key});

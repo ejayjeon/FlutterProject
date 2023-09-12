@@ -1,8 +1,8 @@
 import 'package:flutter/src/widgets/navigator.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/auth/service/auth_service.dart';
+import 'package:whoever/app/service/auth_service.dart';
 import 'package:whoever/app/common/routes/app_router.dart';
-import 'package:whoever/app/common/service/storage_manager.dart';
+import 'package:whoever/app/service/storage_manager.dart';
 
 /**
  * Setting Router Guards

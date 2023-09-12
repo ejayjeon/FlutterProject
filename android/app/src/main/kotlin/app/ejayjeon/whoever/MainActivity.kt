@@ -1,4 +1,4 @@
-package com.example.whoever
+package app.ejayjeon.whoever
 
 import io.flutter.embedding.android.FlutterActivity
 

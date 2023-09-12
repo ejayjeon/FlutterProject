@@ -1,7 +1,7 @@
 import 'package:get/route_manager.dart';
 import 'package:whoever/app/app.dart';
-import 'package:whoever/app/auth/middleware/auth_guard.dart';
-import 'package:whoever/app/common/controller/app_binding.dart';
+import 'package:whoever/app/common/middleware/auth_guard.dart';
+import 'package:whoever/app/controller/app_binding.dart';
 import 'package:whoever/app/view/home/home_view.dart';
 import 'package:whoever/app/view/intro/intro_view.dart';
 import 'package:whoever/app/view/user/login_view.dart';

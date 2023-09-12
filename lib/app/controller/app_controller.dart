@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:whoever/app/common/service/storage_manager.dart';
+import 'package:whoever/app/service/storage_manager.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/common/util/util.dart';
 import 'package:whoever/app/view/home/home_view.dart';
