@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/common/component/main_button.dart';
 import 'package:whoever/app/common/util/util.dart';
 import 'package:whoever/app/controller/home_controller.dart';
 import 'package:whoever/app/data/model/user/test_user.dart';
@@ -25,6 +26,10 @@ class HomeView extends GetView<HomeController> {
             onError: (error) => _container('Error'),
             onEmpty: _container('Empty'),
             onLoading: const Center(child: CircularProgressIndicator()),
+          ),
+          MainButton.active(
+            '확인',
+            onPressed: () {},
           ),
           ElevatedButton(
             onPressed: () async {
