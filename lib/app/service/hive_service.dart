@@ -15,7 +15,6 @@ class HiveService extends GetxService {
   static Future<Box> openDataBase(value) async {
     Map<String, dynamic> deviceInfo = await getDeviceInfo();
     box = await Hive.openBox('${deviceInfo['identifier']}');
-    Log(box.path);
     return box;
   }
 
