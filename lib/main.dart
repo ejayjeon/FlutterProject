@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive/hive.dart';
 import 'package:whoever/app/common/util/i18n.dart';
 import 'package:whoever/app/common/util/theme.dart';
 import 'package:whoever/app/controller/app_binding.dart';
@@ -11,6 +12,7 @@ import 'package:whoever/app/common/util/util.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppBinding().dependencies();
+
   runApp(const _App());
 }
 
