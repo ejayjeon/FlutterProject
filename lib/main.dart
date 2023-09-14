@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,26 +22,31 @@ class _App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      onInit: () {},
-      locale: Get.deviceLocale,
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      translations: I18N(),
-      fallbackLocale: const Locale('ko', 'KR'),
-      supportedLocales: const [
-        Locale('ko', 'KR'),
-        Locale('en', 'US'),
-      ],
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      // themeMode: ThemeMode.system,
-      initialRoute: AppRouter.initPath,
-      getPages: AppRouter.pages,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, __) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        onInit: () {},
+        locale: Get.deviceLocale,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        translations: I18N(),
+        fallbackLocale: const Locale('ko', 'KR'),
+        supportedLocales: const [
+          Locale('ko', 'KR'),
+          Locale('en', 'US'),
+        ],
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        // themeMode: ThemeMode.system,
+        initialRoute: AppRouter.initPath,
+        getPages: AppRouter.pages,
+      ),
     );
   }
 }

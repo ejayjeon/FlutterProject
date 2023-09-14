@@ -8,9 +8,7 @@ class SplashView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Splash'),
-      ),
+      body: Column(),
     );
   }
 }
