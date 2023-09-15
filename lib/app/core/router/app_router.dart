@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:whoever/app/app.dart';
 import 'package:whoever/app/core/middleware/auth_guard.dart';
 import 'package:whoever/app/view/home_view.dart';
 import 'package:whoever/app/view/intro_view.dart';
@@ -21,6 +22,10 @@ class AppRouter {
       ],
       name: Routes.INTRO,
       page: () => const IntroView(),
+    ),
+    GetPage(
+      name: Routes.APP,
+      page: () => const App(),
     ),
     GetPage(
       name: Routes.HOME,

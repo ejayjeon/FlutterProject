@@ -29,7 +29,7 @@ flutter:
 
 #----------------------------------------------------------------
   assets:
-    - assets/config/
+    # - assets/config/
     - assets/image/
   #   - images/a_dot_ham.jpeg
 

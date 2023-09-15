@@ -16,19 +16,19 @@ class AppController extends GetxController
       length: tabItems.length,
       vsync: this,
     );
-    // tabcontroller.addListener(tabListener);
+    tabcontroller.addListener(tabListener);
   }
 
   @override
   void onClose() {
-    // tabcontroller.removeListener(tabListener);
+    tabcontroller.removeListener(tabListener);
     tabcontroller.dispose();
     super.onClose();
   }
 
-  // void tabListener() {
-  //   currentIndex.value = tabcontroller.index;
-  // }
+  void tabListener() {
+    currentIndex.value = tabcontroller.index;
+  }
 
   final List<Widget> tabViews = <Widget>[
     const IntroView(),

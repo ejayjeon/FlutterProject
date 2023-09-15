@@ -6,7 +6,7 @@ class AuthGuard extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     return const RouteSettings(
-      name: Routes.HOME,
+      name: Routes.APP,
     );
   }
 }
