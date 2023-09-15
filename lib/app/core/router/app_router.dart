@@ -25,7 +25,7 @@ class AppRouter {
     ),
     GetPage(
       name: Routes.APP,
-      page: () => const App(),
+      page: () => App(),
     ),
     GetPage(
       name: Routes.HOME,

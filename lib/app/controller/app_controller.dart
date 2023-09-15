@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/core/ui/theme/custom_theme.dart';
+import 'package:whoever/app/core/util/utils.dart';
+import 'package:whoever/app/service/pref_service.dart';
 import 'package:whoever/app/view/home_view.dart';
 import 'package:whoever/app/view/intro_view.dart';
 import 'package:whoever/app/view/setting_view.dart';
 
 class AppController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  // ------------ Field ------------------------
   late final TabController tabcontroller;
   final RxInt currentIndex = 0.obs;
+  final RxBool isDark = false.obs;
 
+  // -------------- Method -----------------------
   @override
   void onInit() {
     super.onInit();
@@ -46,8 +52,30 @@ class AppController extends GetxController
       'label': 'Home'.tr,
     },
     {
-      'icon': Icons.settings,
+      'icon': Icons.more_horiz,
       'label': 'Setting'.tr,
     },
   ];
+
+  // --------------------------------------------------------------------
+
+  /**
+   * APP THEME
+   */
+  setThemeStatus() async {
+    await PrefManager.setData('isDarkMode', isDark.value);
+  }
+
+  getThemeStatus() async {
+    final _isDark = await PrefManager.getData('isDarkMode') ?? true;
+    isDark.value = _isDark;
+
+    // Get.changeThemeMode(
+    //   isDark.value ? ThemeMode.light : ThemeMode.dark,
+    // );
+
+    // Get.changeTheme(
+    //   isDark.value ? lightTheme : darkTheme,
+    // );
+  }
 }

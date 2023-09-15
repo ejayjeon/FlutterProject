@@ -4,7 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/controller/app_binding.dart';
 import 'package:whoever/app/core/router/app_router.dart';
+import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/translation.dart';
+import 'package:whoever/app/core/util/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +38,8 @@ class _Main extends StatelessWidget {
           Locale('ko', 'KR'),
           Locale('en', 'US'),
         ],
+        theme: lightTheme,
+        darkTheme: darkTheme,
         initialRoute: AppRouter.initPath,
         getPages: AppRouter.pages,
       ),
