@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
 import 'package:whoever/app/service/pref_service.dart';
@@ -37,23 +38,36 @@ class AppController extends GetxController
   }
 
   final List<Widget> tabViews = <Widget>[
-    const IntroView(),
     const HomeView(),
+    const IntroView(),
     const SettingView(),
   ];
 
   final List<Map<String, dynamic>> tabItems = [
     {
-      'icon': Icons.dark_mode_outlined,
-      'label': 'Intro'.tr,
-    },
-    {
-      'icon': Icons.home_outlined,
+      'icon': 'assets/icon/ic_home.png',
       'label': 'Home'.tr,
     },
     {
-      'icon': Icons.more_horiz,
+      'icon': 'assets/icon/ic_note.png',
+      'label': 'Intro'.tr,
+    },
+    {
+      'icon': 'assets/icon/ic_more.png',
       'label': 'Setting'.tr,
+    },
+  ];
+
+  final List<Map<String, dynamic>> drawerItems = [
+    {
+      'icon': 'assets/icon/ic_home.png',
+      'title': 'Home'.tr,
+      'to': Routes.APP,
+    },
+    {
+      'icon': 'assets/icon/ic_note.png',
+      'title': 'Note'.tr,
+      'to': Routes.APP,
     },
   ];
 

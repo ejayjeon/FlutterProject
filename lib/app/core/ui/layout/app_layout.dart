@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:whoever/app/controller/app_controller.dart';
-import 'package:whoever/app/core/util/utils.dart';
-import 'package:whoever/app/view/home_view.dart';
-import 'package:whoever/app/view/intro_view.dart';
-import 'package:whoever/app/view/setting_view.dart';
 
-class AppLayout extends GetView<AppController> {
+class AppLayout extends StatelessWidget {
   final String? title;
   final Widget body;
   final Drawer? drawer;

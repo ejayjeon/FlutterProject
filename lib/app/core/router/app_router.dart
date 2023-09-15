@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:whoever/app/app.dart';
+import 'package:whoever/app/controller/app_binding.dart';
 import 'package:whoever/app/core/middleware/auth_guard.dart';
 import 'package:whoever/app/view/home_view.dart';
 import 'package:whoever/app/view/intro_view.dart';

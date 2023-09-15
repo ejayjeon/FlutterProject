@@ -14,8 +14,9 @@ class PrefService extends GetxService {
 }
 
 class PrefManager {
-  static final pref = PrefService.to.pref;
+  // static final pref = PrefService.to.pref;
   static getData(String key) async {
+    final pref = await SharedPreferences.getInstance();
     dynamic obj;
     if (!pref.isBlank!) {
       obj = pref.get(key);
@@ -25,6 +26,7 @@ class PrefManager {
   }
 
   static setData(String key, dynamic value) async {
+    final pref = await SharedPreferences.getInstance();
     if (value is int) {
       pref.setInt(key, value);
     } else if (value is String) {
