@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
@@ -14,15 +15,13 @@ class HomeView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _header(title: '나의 서재'),
-          _topPart(),
+          _topPart(index: 1),
+          SizedBox(height: 36.h),
           _header(title: '오늘의 책'),
-          ...List.generate(
-            5,
-            (index) => _bottomPart(
-              title: '보보경심',
-              description: '청나라로 타임슬립한 2016년 장샤오의, 마이태 약희 생존기',
-              index: index,
-            ),
+          _bottomPart(
+            title: '보보경심',
+            description: '청나라로 타임슬립한 2016년 장샤오의, 마이태 약희 생존기',
+            index: 5,
           ),
         ],
       ),
@@ -41,11 +40,26 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _topPart() {
+  Widget _topPart({
+    required int index,
+  }) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: List.generate(10, (index) => _renderBox(index)),
+        children: [
+          ...List.generate(
+            index,
+            (index) => _renderBox(index),
+          ),
+          SvgPicture.asset(
+            'assets/icon/ic_add.svg',
+            width: 100,
+            fit: BoxFit.cover,
+            color: Get.isDarkMode
+                ? darkTheme.disabledColor
+                : lightTheme.disabledColor,
+          ),
+        ],
       ),
     );
   }
@@ -55,33 +69,40 @@ class HomeView extends StatelessWidget {
     required String description,
     required int index,
   }) {
-    return IntrinsicHeight(
-      child: Row(
-        children: [
-          _renderBox(index),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(
+          index,
+          (index) => IntrinsicHeight(
+            child: Row(
               children: [
-                Text(
-                  title,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
+                _renderBox(index),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        description,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        maxLines: 5,
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  description,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: false,
-                  maxLines: 5,
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

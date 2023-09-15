@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/controller/app_controller.dart';
 import 'package:whoever/app/core/router/app_router.dart';
@@ -73,7 +74,7 @@ class App extends GetView<AppController> {
           ...List.generate(
             controller.drawerItems.length,
             (index) => ListTile(
-              leading: Image.asset(
+              leading: SvgPicture.asset(
                 controller.drawerItems[index]['icon'],
                 fit: BoxFit.cover,
                 width: 20.w,
@@ -106,7 +107,7 @@ class App extends GetView<AppController> {
       items: List.generate(
         controller.tabViews.length,
         (index) => BottomNavigationBarItem(
-          activeIcon: Image.asset(
+          activeIcon: SvgPicture.asset(
             controller.tabItems[index]['icon'],
             fit: BoxFit.cover,
             width: 23.w,
@@ -114,7 +115,7 @@ class App extends GetView<AppController> {
                 ? lightTheme.primaryColor
                 : darkTheme.primaryColor,
           ),
-          icon: Image.asset(
+          icon: SvgPicture.asset(
             controller.tabItems[index]['icon'],
             fit: BoxFit.cover,
             width: 23.w,

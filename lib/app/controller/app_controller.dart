@@ -41,31 +41,36 @@ class AppController extends GetxController
     const HomeView(),
     const IntroView(),
     const SettingView(),
+    const SettingView(),
   ];
 
   final List<Map<String, dynamic>> tabItems = [
     {
-      'icon': 'assets/icon/ic_home.png',
+      'icon': 'assets/icon/ic_home.svg',
       'label': 'Home'.tr,
     },
     {
-      'icon': 'assets/icon/ic_note.png',
+      'icon': 'assets/icon/ic_note.svg',
       'label': 'Intro'.tr,
     },
     {
-      'icon': 'assets/icon/ic_more.png',
+      'icon': 'assets/icon/ic_chat.svg',
+      'label': 'Chatting'.tr,
+    },
+    {
+      'icon': 'assets/icon/ic_more.svg',
       'label': 'Setting'.tr,
     },
   ];
 
   final List<Map<String, dynamic>> drawerItems = [
     {
-      'icon': 'assets/icon/ic_home.png',
+      'icon': 'assets/icon/ic_home.svg',
       'title': 'Home'.tr,
       'to': Routes.APP,
     },
     {
-      'icon': 'assets/icon/ic_note.png',
+      'icon': 'assets/icon/ic_note.svg',
       'title': 'Note'.tr,
       'to': Routes.APP,
     },
