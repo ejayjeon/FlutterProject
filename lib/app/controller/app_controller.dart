@@ -4,6 +4,7 @@ import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
 import 'package:whoever/app/service/pref_service.dart';
+import 'package:whoever/app/view/book_view.dart';
 import 'package:whoever/app/view/home_view.dart';
 import 'package:whoever/app/view/intro_view.dart';
 import 'package:whoever/app/view/setting_view.dart';
@@ -40,7 +41,7 @@ class AppController extends GetxController
   final List<Widget> tabViews = <Widget>[
     const HomeView(),
     const IntroView(),
-    const SettingView(),
+    const BookView(),
     const SettingView(),
   ];
 

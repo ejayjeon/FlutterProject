@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppLayout extends StatelessWidget {
+class SubLayout extends StatelessWidget {
   final String? title;
   final Widget body;
-  final bool needDrawer;
   final bool needActionButton;
-  final Drawer? drawer;
-  final BottomNavigationBar? bottomNavigationBar;
-  final FloatingActionButton? floatingActionButton;
   final VoidCallback? onSearchPressed;
-  const AppLayout({
+  const SubLayout({
     super.key,
     this.title,
-    this.needDrawer = false,
     this.needActionButton = true,
     required this.body,
-    this.drawer,
-    this.bottomNavigationBar,
-    this.floatingActionButton,
     this.onSearchPressed,
   });
 
@@ -26,11 +18,7 @@ class AppLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      drawer: !needDrawer ? drawer : null,
-      drawerEnableOpenDragGesture: false,
       body: body,
-      bottomNavigationBar: bottomNavigationBar,
-      floatingActionButton: floatingActionButton,
     );
   }
 

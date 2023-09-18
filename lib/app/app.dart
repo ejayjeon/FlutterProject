@@ -36,6 +36,8 @@ class App extends GetView<AppController> {
               controller.isDark.value ? ThemeMode.light : ThemeMode.dark,
             );
           },
+          needDrawer: true,
+          needActionButton: true,
           drawer: _startDrawer(),
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
