@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/util/utils.dart';
 
 class PinController extends GetxController {
@@ -20,5 +21,13 @@ class PinController extends GetxController {
     pinController.dispose();
     focusNode.dispose();
     super.onClose();
+  }
+
+  pinValidator(String value) {
+    if (value.isEmpty || value.length != 4) {
+      return '비밀번호를 확인해 주세요';
+    } else {
+      Get.toNamed(Routes.HOME);
+    }
   }
 }

@@ -10,31 +10,34 @@ class BookView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              customBottomSheet(
-                title: 'dd',
-                content: ListView(
-                  children: [
-                    Image.asset(
-                      'assets/image/illu16.png',
-                      fit: BoxFit.cover,
-                    ),
-                    Text('ddd'),
-                  ],
-                ),
-                height: 300,
-              );
-            },
-            child: Text('CLICK'),
-          )
-        ],
+    return AppLayout(
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                customBottomSheet(
+                  title: 'dd',
+                  content: ListView(
+                    children: [
+                      Image.asset(
+                        'assets/image/illu16.png',
+                        fit: BoxFit.cover,
+                      ),
+                      Text('ddd'),
+                    ],
+                  ),
+                  height: 300,
+                );
+              },
+              child: Text('CLICK'),
+            )
+          ],
+        ),
       ),
+      needBottomNavigationBar: true,
     );
   }
 }

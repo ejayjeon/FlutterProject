@@ -44,15 +44,16 @@ class PinView extends GetView<PinController> {
       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
       obscureText: true,
       focusNode: controller.focusNode,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return '번호를 입력해 주세요';
-        }
-        if (value != '1234') {
-          return '잘못 입력했습니다';
-        }
-        Get.toNamed(Routes.APP);
-      },
+      // validator: (value) {
+      //   if (value!.isEmpty) {
+      //     return '번호를 입력해 주세요';
+      //   }
+      //   // value가 user가 최초로 설정한 번호가 아닐 때, 지금은 임시로
+      //   if (value != '1234') {
+      //     return '잘못 입력했습니다';
+      //   }
+      // },
+      validator: (value) => controller.pinValidator(value!),
       onCompleted: (value) {
         controller.pinCode.value = int.parse(value);
         Log('---------->${controller.pinCode.value}');

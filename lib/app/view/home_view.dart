@@ -10,21 +10,24 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _header(title: '나의 서재'),
-          _topPart(index: 1),
-          SizedBox(height: 36.h),
-          _header(title: '오늘의 책'),
-          _bottomPart(
-            title: '보보경심',
-            description: '청나라로 타임슬립한 2016년 장샤오의, 마이태 약희 생존기',
-            index: 5,
-          ),
-        ],
+    return AppLayout(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _header(title: '나의 서재'),
+            _topPart(index: 1),
+            SizedBox(height: 36.h),
+            _header(title: '오늘의 책'),
+            _bottomPart(
+              title: 'Title',
+              description: 'Contents',
+              index: 5,
+            ),
+          ],
+        ),
       ),
+      needBottomNavigationBar: true,
     );
   }
 

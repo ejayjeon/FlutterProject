@@ -15,17 +15,20 @@ class SettingView extends StatelessWidget {
     //     _bottomList(),
     //   ],
     // );
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _header(title: '프로필'),
-          _topPart(),
-          SizedBox(height: 36.h),
-          _header(title: '설정'),
-          _bottomPart(),
-        ],
+    return AppLayout(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _header(title: '프로필'),
+            _topPart(),
+            SizedBox(height: 36.h),
+            _header(title: '설정'),
+            _bottomPart(),
+          ],
+        ),
       ),
+      needBottomNavigationBar: true,
     );
   }
 
