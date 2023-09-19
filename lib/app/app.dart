@@ -29,7 +29,7 @@ class App extends GetView<AppController> {
           return false;
         },
         child: AppLayout(
-          title: Routes.HOME.replaceAll(RegExp('/'), '').toUpperCase(),
+          // title: Routes.HOME.replaceAll(RegExp('/'), '').toUpperCase(),
           onSearchPressed: () {
             controller.isDark.value = !controller.isDark.value;
             Get.changeThemeMode(

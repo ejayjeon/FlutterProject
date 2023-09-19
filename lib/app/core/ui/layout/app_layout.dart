@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:whoever/app/controller/app_controller.dart';
 
 class AppLayout extends StatelessWidget {
   final String? title;
@@ -24,7 +26,9 @@ class AppLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AppController());
     return Scaffold(
+      key: controller.scaffoldKey,
       appBar: _appBar(),
       drawer: !needDrawer ? drawer : null,
       drawerEnableOpenDragGesture: false,

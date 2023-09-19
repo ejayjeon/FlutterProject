@@ -7,11 +7,13 @@ import 'package:whoever/app/service/pref_service.dart';
 import 'package:whoever/app/view/book_view.dart';
 import 'package:whoever/app/view/home_view.dart';
 import 'package:whoever/app/view/intro_view.dart';
+import 'package:whoever/app/view/pin_view.dart';
 import 'package:whoever/app/view/setting_view.dart';
 
 class AppController extends GetxController
     with GetSingleTickerProviderStateMixin {
   // ------------ Field ------------------------
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late final TabController tabcontroller;
   final RxInt currentIndex = 0.obs;
   final RxBool isDark = false.obs;
@@ -39,7 +41,8 @@ class AppController extends GetxController
   }
 
   final List<Widget> tabViews = <Widget>[
-    const HomeView(),
+    // const HomeView(),
+    const PinView(),
     const IntroView(),
     const BookView(),
     const SettingView(),
