@@ -12,22 +12,23 @@ class PinView extends GetView<PinController> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _pinKey = GlobalKey<FormState>();
-    return Scaffold(
-      body: Form(
-        key: _pinKey,
-        child: Container(
-          width: Get.width,
-          height: Get.height,
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('dd'),
-              Expanded(
-                child: _buildPinPut(),
-              ),
-            ],
+    return SafeArea(
+      top: true,
+      child: Scaffold(
+        body: Form(
+          key: _pinKey,
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Text('dd'),
+                _buildPinPut(),
+              ],
+            ),
           ),
         ),
       ),

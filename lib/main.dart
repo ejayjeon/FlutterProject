@@ -25,6 +25,9 @@ class _Main extends StatelessWidget {
       minTextAdapt: true,
       // splitScreenMode: true,
       builder: (_, __) => GetMaterialApp(
+        enableLog: true,
+        defaultTransition: Transition.fadeIn,
+        navigatorKey: Get.key,
         debugShowCheckedModeBanner: false,
         onInit: () {},
         locale: Get.deviceLocale,

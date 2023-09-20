@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/controller/app_controller.dart';
+import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/widget/custom_bottom_sheet.dart';
 
@@ -11,6 +12,7 @@ class BookView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppLayout(
+      title: Routes.BOOK.replaceAll(RegExp('/'), '').toUpperCase(),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

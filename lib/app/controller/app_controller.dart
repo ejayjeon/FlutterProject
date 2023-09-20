@@ -14,56 +14,43 @@ class AppController extends GetxController
     with GetSingleTickerProviderStateMixin {
   // ------------ Field ------------------------
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late final TabController tabcontroller;
-  final RxInt currentIndex = 0.obs;
   final RxBool isDark = false.obs;
 
   // -------------- Method -----------------------
   @override
   void onInit() {
     super.onInit();
-    tabcontroller = TabController(
-      length: tabItems.length,
-      vsync: this,
-    );
-    tabcontroller.addListener(tabListener);
   }
 
   @override
   void onClose() {
-    tabcontroller.removeListener(tabListener);
-    tabcontroller.dispose();
     super.onClose();
   }
 
-  void tabListener() {
-    currentIndex.value = tabcontroller.index;
-  }
-
-  final List<Widget> tabViews = <Widget>[
-    // const HomeView(),
-    const PinView(),
-    const IntroView(),
-    const BookView(),
-    const SettingView(),
-  ];
-
   final List<Map<String, dynamic>> tabItems = [
     {
+      'index': 0,
       'icon': 'assets/icon/ic_home.svg',
       'label': 'Home'.tr,
+      'routeName': Routes.HOME,
     },
     {
+      'index': 1,
       'icon': 'assets/icon/ic_note.svg',
-      'label': 'Intro'.tr,
+      'label': 'Book'.tr,
+      'routeName': Routes.BOOK,
     },
     {
+      'index': 2,
       'icon': 'assets/icon/ic_chat.svg',
-      'label': 'Chatting'.tr,
+      'label': 'Chat'.tr,
+      'routeName': Routes.CHAT,
     },
     {
+      'index': 3,
       'icon': 'assets/icon/ic_more.svg',
       'label': 'Setting'.tr,
+      'routeName': Routes.SETTING,
     },
   ];
 
@@ -71,12 +58,12 @@ class AppController extends GetxController
     {
       'icon': 'assets/icon/ic_home.svg',
       'title': 'Home'.tr,
-      'to': Routes.APP,
+      'to': Routes.HOME,
     },
     {
       'icon': 'assets/icon/ic_note.svg',
       'title': 'Note'.tr,
-      'to': Routes.APP,
+      'to': Routes.HOME,
     },
   ];
 
@@ -92,13 +79,5 @@ class AppController extends GetxController
   getThemeStatus() async {
     final _isDark = await PrefManager.getData('isDarkMode') ?? true;
     isDark.value = _isDark;
-
-    // Get.changeThemeMode(
-    //   isDark.value ? ThemeMode.light : ThemeMode.dark,
-    // );
-
-    // Get.changeTheme(
-    //   isDark.value ? lightTheme : darkTheme,
-    // );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 
@@ -9,13 +10,8 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return CustomScrollView(
-    //   slivers: [
-    //     _topProfile(),
-    //     _bottomList(),
-    //   ],
-    // );
     return AppLayout(
+      title: Routes.SETTING.replaceAll(RegExp('/'), '').toUpperCase(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
