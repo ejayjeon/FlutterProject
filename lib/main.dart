@@ -29,7 +29,9 @@ class _Main extends StatelessWidget {
         defaultTransition: Transition.fadeIn,
         navigatorKey: Get.key,
         debugShowCheckedModeBanner: false,
-        onInit: () {},
+        onInit: () {
+          Log('Main init...');
+        },
         locale: Get.deviceLocale,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,

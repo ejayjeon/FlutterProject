@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/controller/app_controller.dart';
 import 'package:whoever/app/core/ui/theme/color_schemes.g.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 
@@ -20,6 +21,7 @@ class CustomButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AppController());
     return CupertinoButton(
       onPressed: onPressed,
       child: Container(
@@ -29,8 +31,7 @@ class CustomButtonWidget extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(height),
-          color:
-              Get.isDarkMode ? darkTheme.primaryColor : lightTheme.primaryColor,
+          color: controller.changeColor(),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

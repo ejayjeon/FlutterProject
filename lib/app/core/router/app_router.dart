@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/middleware/auth_guard.dart';
-import 'package:whoever/app/view/book_view.dart';
-import 'package:whoever/app/view/chat_view.dart';
-import 'package:whoever/app/view/home_view.dart';
-import 'package:whoever/app/view/intro_view.dart';
-import 'package:whoever/app/view/pin_view.dart';
-import 'package:whoever/app/view/setting_view.dart';
-import 'package:whoever/app/view/signin_view.dart';
+import 'package:whoever/app/view/main/book_view.dart';
+import 'package:whoever/app/view/main/chat_view.dart';
+import 'package:whoever/app/view/main/home_view.dart';
+import 'package:whoever/app/view/etc/intro_view.dart';
+import 'package:whoever/app/view/etc/pin_view.dart';
+import 'package:whoever/app/view/main/setting_view.dart';
+import 'package:whoever/app/view/etc/signin_view.dart';
 
 abstract class Routes {
   static const HOME = '/home';
@@ -35,7 +35,7 @@ class AppRouter {
     ),
     GetPage(
       name: Routes.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       participatesInRootNavigator: true,
       curve: Curves.easeInOut,
     ),

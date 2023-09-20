@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
-import 'package:whoever/app/core/util/utils.dart';
 import 'package:whoever/app/service/pref_service.dart';
-import 'package:whoever/app/view/book_view.dart';
-import 'package:whoever/app/view/home_view.dart';
-import 'package:whoever/app/view/intro_view.dart';
-import 'package:whoever/app/view/pin_view.dart';
-import 'package:whoever/app/view/setting_view.dart';
 
 class AppController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -68,11 +62,8 @@ class AppController extends GetxController
     },
   ];
 
-  // --------------------------------------------------------------------
+  // ------------------------------ Theme -----------------------------
 
-  /**
-   * APP THEME
-   */
   setThemeStatus() async {
     await PrefManager.setData('isDarkMode', isDark.value);
   }
@@ -81,4 +72,17 @@ class AppController extends GetxController
     final _isDark = await PrefManager.getData('isDarkMode') ?? true;
     isDark.value = _isDark;
   }
+
+  changeTheme() {
+    isDark.value = !isDark.value;
+    Get.changeThemeMode(
+      isDark.value ? ThemeMode.light : ThemeMode.dark,
+    );
+  }
+
+  changeColor() {
+    return Get.isDarkMode ? lightTheme.primaryColor : darkTheme.primaryColor;
+  }
+
+  // ----------------------- App Layout -------------------------------------
 }

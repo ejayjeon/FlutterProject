@@ -11,7 +11,6 @@ class UserController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Log('... user Controller init');
   }
 
   // -------------------- Validator --------------------------------

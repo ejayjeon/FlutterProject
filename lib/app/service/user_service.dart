@@ -22,7 +22,6 @@ class UserService extends GetxService {
   String get userPassword => _userPassword.value;
 
   Future<UserService> init() async {
-    Log('User service init...');
     return this;
   }
 

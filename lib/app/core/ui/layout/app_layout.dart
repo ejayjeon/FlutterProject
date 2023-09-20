@@ -14,8 +14,11 @@ class AppLayout extends StatelessWidget {
   final bool needDrawer;
   final bool needActionButton;
   final bool needBottomNavigationBar;
+  final bool needFloatingActionButton;
   final FloatingActionButton? floatingActionButton;
   final VoidCallback? onSearchPressed;
+  final VoidCallback? onFabPressed;
+  final String? fabToolTib;
 
   const AppLayout({
     super.key,
@@ -23,9 +26,12 @@ class AppLayout extends StatelessWidget {
     this.needDrawer = false,
     this.needBottomNavigationBar = false,
     this.needActionButton = true,
+    this.needFloatingActionButton = false,
     required this.body,
     this.floatingActionButton,
     this.onSearchPressed,
+    this.onFabPressed,
+    this.fabToolTib,
   });
 
   @override
@@ -42,7 +48,11 @@ class AppLayout extends StatelessWidget {
         drawerEnableOpenDragGesture: false,
         body: body,
         bottomNavigationBar: _bottomNavigationBar(controller),
-        floatingActionButton: floatingActionButton,
+        floatingActionButton: _floatingActionButton(
+          controller,
+          onFabPressed,
+          fabToolTib,
+        ),
       ),
     );
   }
@@ -68,7 +78,28 @@ class AppLayout extends StatelessWidget {
                 ),
               ),
             ]
-          : [],
+          : null,
+    );
+  }
+
+  FloatingActionButton? _floatingActionButton(
+    AppController controller,
+    VoidCallback? onPressed,
+    String? toolTip,
+  ) {
+    if (!needFloatingActionButton) return null;
+    return FloatingActionButton(
+      backgroundColor: controller.changeColor(),
+      onPressed: onPressed,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.0),
+      ),
+      tooltip: toolTip,
+      child: FittedBox(
+        child: Icon(
+          Icons.add,
+        ),
+      ),
     );
   }
 
@@ -90,9 +121,7 @@ class AppLayout extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(8.0),
                   bottomRight: Radius.circular(8.0)),
-              color: Get.isDarkMode
-                  ? darkColorScheme.onPrimary
-                  : lightColorScheme.onPrimary,
+              color: controller.changeColor(),
             ),
           ),
           ...List.generate(
@@ -120,10 +149,6 @@ class AppLayout extends StatelessWidget {
     if (!needBottomNavigationBar) return null;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      selectedItemColor:
-          Get.isDarkMode ? lightTheme.primaryColor : darkTheme.primaryColor,
-      unselectedItemColor:
-          Get.isDarkMode ? lightTheme.disabledColor : darkTheme.disabledColor,
       onTap: (int index) {
         if (index == controller.tabItems[index]['index']) {
           Get.offAndToNamed(controller.tabItems[index]['routeName']);
@@ -168,9 +193,6 @@ class AppLayout extends StatelessWidget {
     );
   }
 
-  /**
-   * 바텀 네비게이션 움직일 때마다 인덱스 변동
-   */
   int getIndex() {
     if (Get.currentRoute == Routes.HOME) {
       return 0;
@@ -183,3 +205,29 @@ class AppLayout extends StatelessWidget {
     }
   }
 }
+
+/**
+ * Widget? child,
+  String? tooltip,
+  Color? foregroundColor,
+  Color? backgroundColor,
+  Color? focusColor,
+  Color? hoverColor,
+  Color? splashColor,
+  Object? heroTag = const _DefaultHeroTag(),
+  double? elevation,
+  double? focusElevation,
+  double? hoverElevation,
+  double? highlightElevation,
+  double? disabledElevation,
+  required void Function()? onPressed,
+  MouseCursor? mouseCursor,
+  bool mini = false,
+  ShapeBorder? shape,
+  Clip clipBehavior = Clip.none,
+  FocusNode? focusNode,
+  bool autofocus = false,
+  MaterialTapTargetSize? materialTapTargetSize,
+  bool isExtended = false,
+  bool? enableFeedback,
+ */

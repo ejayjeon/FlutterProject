@@ -6,6 +6,11 @@ import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
 
+/*
+로그인 상태 + 비밀번호를 설정한 상태에서,
+사용자가 앱 재시작시 비밀번호 페이지 오픈을 원했을 때
+ */
+
 class PinView extends GetView<PinController> {
   const PinView({super.key});
 
@@ -24,7 +29,6 @@ class PinView extends GetView<PinController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Text('dd'),
                 _buildPinPut(),
               ],
             ),
@@ -44,15 +48,6 @@ class PinView extends GetView<PinController> {
       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
       obscureText: true,
       focusNode: controller.focusNode,
-      // validator: (value) {
-      //   if (value!.isEmpty) {
-      //     return '번호를 입력해 주세요';
-      //   }
-      //   // value가 user가 최초로 설정한 번호가 아닐 때, 지금은 임시로
-      //   if (value != '1234') {
-      //     return '잘못 입력했습니다';
-      //   }
-      // },
       validator: (value) => controller.pinValidator(value!),
       onCompleted: (value) {
         controller.pinCode.value = int.parse(value);
