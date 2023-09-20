@@ -5,12 +5,11 @@ import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/service/pref_service.dart';
 
 class AppController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+    with GetSingleTickerProviderStateMixin, StateMixin {
   // ------------ Field ------------------------
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final RxBool isDark = false.obs;
 
-  // -------------- Method -----------------------
   @override
   void onInit() {
     super.onInit();
@@ -84,5 +83,9 @@ class AppController extends GetxController
     return Get.isDarkMode ? lightTheme.primaryColor : darkTheme.primaryColor;
   }
 
-  // ----------------------- App Layout -------------------------------------
+  // -------------- Method -----------------------
+  @override
+  void change(newState, {RxStatus? status}) {
+    super.change(newState, status: status);
+  }
 }
