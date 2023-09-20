@@ -89,6 +89,11 @@ final customHeader = TextStyle(
   fontSize: 24.sp,
 );
 
+final customBody = TextStyle(
+  fontWeight: FontWeight.w400,
+  fontSize: 14.sp,
+);
+
 final defaultPinTheme = PinTheme(
   width: 56,
   height: 56,

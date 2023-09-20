@@ -6,6 +6,7 @@ import 'package:whoever/app/controller/app_controller.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/color_schemes.g.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
+import 'package:whoever/app/core/ui/widget/custom_dialog.dart';
 import 'package:whoever/app/core/util/utils.dart';
 
 class AppLayout extends StatelessWidget {
@@ -39,6 +40,11 @@ class AppLayout extends StatelessWidget {
     final controller = Get.put(AppController());
     return WillPopScope(
       onWillPop: () async {
+        FocusManager.instance.primaryFocus?.requestFocus(FocusNode());
+        await showConfirmDialog(
+          title: 'Exit App'.tr,
+          content: 'Exit App'.tr,
+        ).then((result) => result);
         return false;
       },
       child: Scaffold(
