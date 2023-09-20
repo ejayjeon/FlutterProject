@@ -24,6 +24,7 @@ class AppController extends GetxController
 
   @override
   void onClose() {
+    scaffoldKey.currentState!.dispose();
     super.onClose();
   }
 

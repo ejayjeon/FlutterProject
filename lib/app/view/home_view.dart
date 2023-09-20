@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
+import 'package:whoever/app/core/util/utils.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

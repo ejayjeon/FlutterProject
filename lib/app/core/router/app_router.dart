@@ -7,6 +7,7 @@ import 'package:whoever/app/view/home_view.dart';
 import 'package:whoever/app/view/intro_view.dart';
 import 'package:whoever/app/view/pin_view.dart';
 import 'package:whoever/app/view/setting_view.dart';
+import 'package:whoever/app/view/signin_view.dart';
 
 abstract class Routes {
   static const HOME = '/home';
@@ -21,7 +22,7 @@ abstract class Routes {
 
 class AppRouter {
   AppRouter._();
-  static const initPath = Routes.PIN;
+  static const initPath = Routes.INTRO;
   static final pages = <GetPage>[
     GetPage(
       name: Routes.INTRO,
@@ -35,6 +36,12 @@ class AppRouter {
     GetPage(
       name: Routes.HOME,
       page: () => const HomeView(),
+      participatesInRootNavigator: true,
+      curve: Curves.easeInOut,
+    ),
+    GetPage(
+      name: Routes.SIGNIN,
+      page: () => const SignInView(),
       participatesInRootNavigator: true,
       curve: Curves.easeInOut,
     ),
@@ -64,24 +71,3 @@ class AppRouter {
     ),
   ];
 }
-
-/**bool? participatesInRootNavigator,
-  double Function(BuildContext)? gestureWidth,
-  bool maintainState = true,
-  Curve curve = Curves.linear,
-  Alignment? alignment,
-  Map<String, String>? parameters,
-  bool opaque = true,
-  Duration? transitionDuration,
-  bool? popGesture,
-  Bindings? binding,
-  List<Bindings> bindings = const [],
-  Transition? transition,
-  CustomTransition? customTransition,
-  bool fullscreenDialog = false,
-  List<GetPage<dynamic>> children = const <GetPage>[],
-  List<GetMiddleware>? middlewares,
-  GetPage<dynamic>? unknownRoute,
-  Object? arguments,
-  bool showCupertinoParallax = true,
-  bool preventDuplicates = true, */

@@ -58,6 +58,7 @@ ThemeData darkTheme = ThemeData(
     thumbColor: MaterialStateProperty.all(darkColorScheme.primaryContainer),
     trackColor: MaterialStateProperty.all(darkColorScheme.secondaryContainer),
   ),
+
   inputDecorationTheme: InputDecorationTheme(
     focusColor: lightColorScheme.tertiary,
     iconColor: lightColorScheme.primary,

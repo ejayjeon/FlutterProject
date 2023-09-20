@@ -11,12 +11,11 @@ class PinView extends GetView<PinController> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _pinKey = GlobalKey<FormState>();
     return SafeArea(
       top: true,
       child: Scaffold(
         body: Form(
-          key: _pinKey,
+          key: controller.pinFormKey,
           child: Container(
             width: Get.width,
             height: Get.height,

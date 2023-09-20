@@ -7,6 +7,7 @@ import 'package:whoever/app/service/user_service.dart';
 class PinController extends GetxController {
   // ---------------- Field ------------------------
   late final TextEditingController pinController;
+  final pinFormKey = GlobalKey<FormState>();
   final focusNode = FocusNode();
   RxInt pinCode = 0.obs;
 

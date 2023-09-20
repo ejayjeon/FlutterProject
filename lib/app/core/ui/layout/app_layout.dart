@@ -36,6 +36,7 @@ class AppLayout extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        // key: controller.scaffoldKey,
         appBar: _appBar(),
         drawer: _startDrawer(controller),
         drawerEnableOpenDragGesture: false,
@@ -67,7 +68,7 @@ class AppLayout extends StatelessWidget {
                 ),
               ),
             ]
-          : null,
+          : [],
     );
   }
 
@@ -105,7 +106,7 @@ class AppLayout extends StatelessWidget {
               ),
               title: Text(controller.drawerItems[index]['title']),
               onTap: () {
-                Get.toNamed(controller.drawerItems[index]['to']);
+                Get.offAndToNamed(controller.drawerItems[index]['to']);
               },
               trailing: Icon(Icons.navigate_next_outlined),
             ),
