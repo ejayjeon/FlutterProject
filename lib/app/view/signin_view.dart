@@ -15,37 +15,42 @@ class SignInView extends GetView<UserController> {
       body: SingleChildScrollView(
         child: Form(
           key: UserService.to.loginFormKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                validator: (value) => controller.emailValidator(value!),
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'Email...',
+          child: SizedBox(
+            width: Get.width,
+            height: Get.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  validator: (value) => controller.emailValidator(value!),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    hintText: 'Email...',
+                  ),
+                  onSaved: (value) => UserService.to.setUserEmail(value!),
                 ),
-                onSaved: (value) => UserService.to.setUserEmail(value!),
-              ),
-              const SizedBox(height: 24),
-              TextFormField(
-                validator: (value) => controller.passWwordValidator(value!),
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Password...',
+                const SizedBox(height: 24),
+                TextFormField(
+                  validator: (value) => controller.passWwordValidator(value!),
+                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    hintText: 'Password...',
+                  ),
+                  onSaved: (value) => UserService.to.setUserPassWord(value!),
                 ),
-                onSaved: (value) => UserService.to.setUserPassWord(value!),
-              ),
-              const SizedBox(height: 24),
-              CustomButton.active(
-                label: 'SIGNIN',
-                onPressed: () {
-                  controller.formSubmit();
-                },
-              ),
-            ],
+                const SizedBox(height: 24),
+                CustomButton.active(
+                  label: 'SIGNIN',
+                  onPressed: () {
+                    controller.formSubmit();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
