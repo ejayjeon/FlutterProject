@@ -20,19 +20,20 @@ class BookView extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                customBottomSheet(
-                  title: 'dd',
-                  content: ListView(
-                    children: [
-                      Image.asset(
-                        'assets/image/illu16.png',
-                        fit: BoxFit.cover,
-                      ),
-                      Text('ddd'),
-                    ],
-                  ),
-                  height: 300,
-                );
+                Get.toNamed('${Routes.BOOK}${Routes.BOOK_STORY_LIST}');
+                // customBottomSheet(
+                //   title: 'dd',
+                //   content: ListView(
+                //     children: [
+                //       Image.asset(
+                //         'assets/image/illu16.png',
+                //         fit: BoxFit.cover,
+                //       ),
+                //       Text('ddd'),
+                //     ],
+                //   ),
+                //   height: 300,
+                // );
               },
               child: Text('CLICK'),
             )

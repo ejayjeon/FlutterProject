@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,6 +22,7 @@ class AppLayout extends StatelessWidget {
   final VoidCallback? onSearchPressed;
   final VoidCallback? onFabPressed;
   final String? fabToolTib;
+  final Map<String, dynamic>? onWillpopSetting;
 
   const AppLayout({
     super.key,
@@ -33,6 +36,7 @@ class AppLayout extends StatelessWidget {
     this.onSearchPressed,
     this.onFabPressed,
     this.fabToolTib,
+    this.onWillpopSetting,
   });
 
   @override
@@ -42,8 +46,17 @@ class AppLayout extends StatelessWidget {
       onWillPop: () async {
         FocusManager.instance.primaryFocus?.requestFocus(FocusNode());
         await showConfirmDialog(
-          title: 'Exit App'.tr,
-          content: 'Exit App'.tr,
+          title: onWillpopSetting != null
+              ? onWillpopSetting!['title']
+              : 'Exit App'.tr,
+          content: onWillpopSetting != null
+              ? onWillpopSetting!['content']
+              : 'Exit App'.tr,
+          onOkPressed: onWillpopSetting != null
+              ? () => Get.offNamed(
+                    onWillpopSetting!['to'],
+                  )
+              : exit(0),
         ).then((result) => result);
         return false;
       },
