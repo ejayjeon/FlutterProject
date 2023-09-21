@@ -26,6 +26,8 @@ dependencies:
 
   flutter_quill: ^7.4.6
 
+  uuid: ^4.0.0
+
 #----------------------------------------------------------------
 
 dev_dependencies:

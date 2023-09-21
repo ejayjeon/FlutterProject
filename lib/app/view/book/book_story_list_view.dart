@@ -1,61 +1,314 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:whoever/app/controller/asset_controller.dart';
+
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
+import 'package:whoever/app/core/ui/theme/custom_theme.dart';
+import 'package:whoever/app/core/util/utils.dart';
+import 'package:whoever/app/model/book_model.dart';
 
 class BookStoryListView extends StatelessWidget {
   const BookStoryListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final assetController = Get.put(AssetController());
+    Future getJson() async {
+      final file = await rootBundle.loadString('assets/config/mock_book.json');
+      final decode = jsonDecode(file);
+      final book1 = BookModel.fromJson(decode['data']);
+      return book1;
+      // return file;
+    }
+
     return AppLayout(
-      body: Column(
-        children: <Widget>[
-          Flexible(
-            flex: 1,
-            child: CustomScrollView(
-              slivers: [
-                _sliverGrid(),
-              ],
-            ),
-          ),
-          Flexible(
-            flex: 2,
-            child: CustomScrollView(
-              slivers: [
-                _sliverList(),
-              ],
-            ),
-          ),
-        ],
+      body: FutureBuilder(
+        future: getJson(),
+        builder: (_, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return assetController.showLoading(
+              onLoading: !snapshot.hasData,
+            );
+          }
+          return Column(
+            children: <Widget>[
+              Flexible(
+                flex: 1,
+                child: CustomScrollView(
+                  slivers: [
+                    _topPart(
+                      imagePath: snapshot.data.bookImage,
+                      title: snapshot.data.title,
+                      description: snapshot.data.description,
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                flex: 3,
+                child: CustomScrollView(
+                  slivers: [
+                    if (snapshot.data.episodes.length > 1)
+                      ...List.generate(
+                        snapshot.data.episodes.length,
+                        (index) => _bottomStoryList(
+                          title: snapshot
+                              .data.episodes[index].stories[index].title,
+                          index: snapshot
+                              .data.episodes[index].stories[index].index,
+                          count: snapshot.data.episodes[index].stories.length,
+                          isEditing: true,
+                        ),
+                        // Column(
+                        //   children: [
+                        //     _bottomEpisodeHeader(
+                        //       hasEpisode: true,
+                        //       title: snapshot.data.episodes[index].title,
+                        //     )!,
+                        //     _bottomStoryList(
+                        //       title: snapshot
+                        //           .data.episodes[index].stories[index].title,
+                        //       index: snapshot
+                        //           .data.episodes[index].stories[index].index,
+                        //       count:
+                        //           snapshot.data.episodes[index].stories.length,
+                        //       isEditing: true,
+                        //     ),
+                        //   ],
+                        // ),
+                      ),
+                    // _bottomStoryList(
+                    //   title: {
+                    //     'index': 1,
+                    //     'title': '책이름',
+                    //   },
+                    //   isEditing: true,
+                    // ),
+                    // _bottomEpisodeHeader(
+                    //   hasEpisode: true,
+                    //   title: '책 에피소드2',
+                    // )!,
+                    // _bottomStoryList(
+                    //   title: {
+                    //     'index': 2,
+                    //     'title': '책이름2',
+                    //   },
+                    //   isEditing: true,
+                    // ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  SliverList _sliverList() {
+  SliverPadding _topPart({
+    required String imagePath,
+    required String title,
+    String? description,
+  }) {
+    return SliverPadding(
+      padding: const EdgeInsets.all(8.0),
+      sliver: SliverToBoxAdapter(
+        child: SizedBox(
+          child: Row(
+            children: [
+              Flexible(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Image.asset(
+                      imagePath,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              Flexible(
+                flex: 2,
+                child: Container(
+                  child: Column(
+                    children: [
+                      Text(
+                        title,
+                        style: customHeader,
+                      ),
+                      Text(description ?? ''),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SliverList _bottomStoryList({
+    required String title,
+    required int index,
+    required bool isEditing,
+    required int count,
+  }) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        childCount: 30,
-        (context, index) => ListTile(
-          title: Text('Top ${index}'),
-        ),
+        childCount: count,
+        (_, index) {
+          return ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+            minVerticalPadding: 4.0,
+            trailing: isEditing ? Icon(Icons.edit_sharp) : Icon(Icons.check),
+            title: Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Text(
+                    index.toString(),
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                Flexible(
+                  flex: 3,
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            titleTextStyle: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
+            ),
+            onTap: () {
+              Log('message: ${index}');
+            },
+            // 길게 누를 시 정보
+            onLongPress: () {
+              Log('long pressed... ${index}');
+            },
+            dense: true,
+          );
+        },
       ),
     );
   }
 
-  SliverGrid _sliverGrid() {
-    return SliverGrid(
-      delegate: SliverChildBuilderDelegate(
-        childCount: 10,
-        (context, index) => Container(
-          height: 100,
-          color: Colors.green[100 * (index % 9)],
+  // SliverGrid _sliverGrid() {
+  //   return SliverGrid(
+  //     delegate: SliverChildBuilderDelegate(
+  //       childCount: 10,
+  //       (context, index) => Container(
+  //         height: 100,
+  //         color: Colors.green[100 * (index % 9)],
+  //         child: Center(
+  //           child: Text('Bottom ${index}'),
+  //         ),
+  //       ),
+  //     ),
+  //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  //       crossAxisCount: 3,
+  //     ),
+  //   );
+  // }
+
+  // Widget _sliverTest() {
+  //   return SliverList.separated(
+  //     itemCount: 30,
+  //     itemBuilder: (_, index) {
+  //       Log('build ${index}');
+  //       return ListTile(
+  //         title: Text('Test ${index + 1}'),
+  //       );
+  //     },
+  //     separatorBuilder: (_, index) {
+  //       index += 1;
+  //       if (index % 5 == 0) {
+  //         return Container(
+  //           color: Colors.black,
+  //           height: 50,
+  //           child: Text(
+  //             'header',
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //             ),
+  //           ),
+  //         );
+  //       }
+  //       return SizedBox(
+  //         height: 8.0,
+  //       );
+  //     },
+  //   );
+  // }
+
+  // Labeling을 할 수 있는 헤더
+  SliverPersistentHeader? _bottomEpisodeHeader({
+    required bool hasEpisode,
+    String? title,
+  }) {
+    if (!hasEpisode) {
+      return null;
+    }
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: _SliverFixedHeaderDelegate(
+        child: Container(
+          color: Colors.black.withOpacity(0.8),
           child: Center(
-            child: Text('Bottom ${index}'),
+            child: Text(
+              title!,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
-      ),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        minHeight: 30.0,
+        maxHeight: 70.0,
       ),
     );
+  }
+}
+
+class _SliverFixedHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double minHeight;
+  final double maxHeight;
+
+  _SliverFixedHeaderDelegate({
+    required this.child,
+    required this.minHeight,
+    required this.maxHeight,
+  });
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(
+      child: child,
+    );
+  }
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  bool shouldRebuild(_SliverFixedHeaderDelegate oldDelegate) {
+    return oldDelegate.minExtent != minHeight ||
+        oldDelegate.maxHeight != maxHeight ||
+        oldDelegate.child != child;
   }
 }
