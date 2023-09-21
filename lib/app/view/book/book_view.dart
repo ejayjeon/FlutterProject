@@ -13,14 +13,14 @@ class BookView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppLayout(
       title: Routes.BOOK.replaceAll(RegExp('/'), '').toUpperCase(),
-      body: Container(
+      body: SizedBox(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
               onPressed: () {
-                Get.toNamed('${Routes.BOOK}${Routes.BOOK_STORY_LIST}');
+                Get.toNamed('${Routes.BOOK}${Routes.BOOK_STORY_EDIT}');
                 // customBottomSheet(
                 //   title: 'dd',
                 //   content: ListView(
@@ -36,7 +36,13 @@ class BookView extends StatelessWidget {
                 // );
               },
               child: Text('CLICK'),
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('${Routes.BOOK}${Routes.BOOK_STORY_LIST}');
+              },
+              child: Text('리스트뷰'),
+            ),
           ],
         ),
       ),

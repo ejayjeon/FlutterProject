@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/middleware/auth_guard.dart';
+import 'package:whoever/app/view/book/book_story_edit_view.dart';
 import 'package:whoever/app/view/book/book_story_list_view.dart';
 import 'package:whoever/app/view/book/book_view.dart';
 import 'package:whoever/app/view/main/chat_view.dart';
@@ -19,6 +20,7 @@ abstract class Routes {
   static const PIN = '/pin';
   static const SETTING = '/setting';
   static const CHAT = '/chat';
+  static const BOOK_STORY_EDIT = '/book_story_edit';
   static const BOOK_STORY_LIST = '/book_story_list';
 }
 
@@ -56,6 +58,10 @@ class AppRouter {
         GetPage(
           name: Routes.BOOK_STORY_LIST,
           page: () => const BookStoryListView(),
+        ),
+        GetPage(
+          name: Routes.BOOK_STORY_EDIT,
+          page: () => const BookStoryEditView(),
         ),
       ],
     ),
