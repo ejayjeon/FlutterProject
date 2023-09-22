@@ -15,7 +15,6 @@ class ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     final assetController = Get.put(AssetController());
     final data = Future.delayed(Duration(seconds: 5), () {
-      print(Random().nextInt(10));
       return Random().nextInt(10);
     });
     return AppLayout(
@@ -27,7 +26,6 @@ class ChatView extends StatelessWidget {
               onLoading: !snapshot.hasData,
             );
           }
-          Log(snapshot.data);
           return Container(
             child: Center(
               child: Text(

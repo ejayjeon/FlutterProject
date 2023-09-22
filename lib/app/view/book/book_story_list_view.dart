@@ -34,6 +34,23 @@ class BookStoryListView extends StatelessWidget {
               onLoading: !snapshot.hasData,
             );
           }
+          // if (snapshot.data.containsKey('episodes')) {
+          //   final episodes = snapshot.data.episodes;
+
+          //   for (var episode in episodes) {
+          //     if (episode.containsKey('stories')) {
+          //       final stories = episode['stories'];
+
+          //       for (var story in stories) {
+          //         final title = story['title'];
+          //         final content = story['content'];
+
+          //         Log(title);
+          //         Log(content);
+          //       }
+          //     }
+          //   }
+          // }
           return Column(
             children: <Widget>[
               Flexible(
@@ -52,56 +69,162 @@ class BookStoryListView extends StatelessWidget {
                 flex: 3,
                 child: CustomScrollView(
                   slivers: [
-                    if (snapshot.data.episodes.length > 1)
-                      ...List.generate(
-                        snapshot.data.episodes.length,
-                        (index) => _bottomStoryList(
-                          title: snapshot
-                              .data.episodes[index].stories[index].title,
-                          index: snapshot
-                              .data.episodes[index].stories[index].index,
-                          count: snapshot.data.episodes[index].stories.length,
-                          isEditing: true,
-                        ),
-                        // Column(
-                        //   children: [
-                        //     _bottomEpisodeHeader(
-                        //       hasEpisode: true,
-                        //       title: snapshot.data.episodes[index].title,
-                        //     )!,
-                        //     _bottomStoryList(
-                        //       title: snapshot
-                        //           .data.episodes[index].stories[index].title,
-                        //       index: snapshot
-                        //           .data.episodes[index].stories[index].index,
-                        //       count:
-                        //           snapshot.data.episodes[index].stories.length,
-                        //       isEditing: true,
-                        //     ),
-                        //   ],
-                        // ),
-                      ),
-                    // _bottomStoryList(
-                    //   title: {
-                    //     'index': 1,
-                    //     'title': '책이름',
-                    //   },
-                    //   isEditing: true,
-                    // ),
-                    // _bottomEpisodeHeader(
-                    //   hasEpisode: true,
-                    //   title: '책 에피소드2',
-                    // )!,
-                    // _bottomStoryList(
-                    //   title: {
-                    //     'index': 2,
-                    //     'title': '책이름2',
-                    //   },
-                    //   isEditing: true,
-                    // ),
+                    // if (snapshot.data.episodes.length > 1)
+                    //   for (var episode in snapshot.data.episodes) {}
+                    //   ...List.generate(
+                    //     snapshot.data.episodes.length,
+                    //     (index) =>
+                    //         // _bottomStoryList(
+                    //         //   title: snapshot
+                    //         //       .data.episodes[index].stories[index].title,
+                    //         //   index: snapshot
+                    //         //       .data.episodes[index].stories[index].index,
+                    //         //   count: snapshot.data.episodes[index].stories.length,
+                    //         //   isEditing: true,
+                    //         // ),
+                    //         _bottomEpisodeHeader(
+                    //       hasEpisode: true,
+                    //       title: snapshot.data.episodes[index].title,
+                    //     )!,
+                    //   ),
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    /*
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[0].title,
+                      index: snapshot.data.episodes[0].stories[0].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[1].title,
+                      index: snapshot.data.episodes[0].stories[1].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[2].title,
+                      index: snapshot.data.episodes[0].stories[2].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[1].stories[0].title,
+                      index: snapshot.data.episodes[1].stories[0].index,
+                      count: snapshot.data.episodes[1].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[1].stories[1].title,
+                      index: snapshot.data.episodes[1].stories[1].index,
+                      count: snapshot.data.episodes[1].stories.length,
+                      isEditing: true,
+                    ),
+
+                    // ----------------
+
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[0].title,
+                      index: snapshot.data.episodes[0].stories[0].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[1].title,
+                      index: snapshot.data.episodes[0].stories[1].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[2].title,
+                      index: snapshot.data.episodes[0].stories[2].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[1].stories[0].title,
+                      index: snapshot.data.episodes[1].stories[0].index,
+                      count: snapshot.data.episodes[1].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[1].stories[1].title,
+                      index: snapshot.data.episodes[1].stories[1].index,
+                      count: snapshot.data.episodes[1].stories.length,
+                      isEditing: true,
+                    ),
+
+                    // ---------
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[0].title,
+                      index: snapshot.data.episodes[0].stories[0].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[1].title,
+                      index: snapshot.data.episodes[0].stories[1].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[0].stories[2].title,
+                      index: snapshot.data.episodes[0].stories[2].index,
+                      count: snapshot.data.episodes[0].stories.length,
+                      isEditing: true,
+                    ),
+
+                    _bottomEpisodeHeader(hasEpisode: true, title: 'ddd')!,
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[1].stories[0].title,
+                      index: snapshot.data.episodes[1].stories[0].index,
+                      count: snapshot.data.episodes[1].stories.length,
+                      isEditing: true,
+                    ),
+                    _bottomStoryList(
+                      title: snapshot.data.episodes[1].stories[1].title,
+                      index: snapshot.data.episodes[1].stories[1].index,
+                      count: snapshot.data.episodes[1].stories.length,
+                      isEditing: true,
+                    ), */
                   ],
                 ),
               ),
+              // Flexible(
+              //   flex: 3,
+              //   child: CustomScrollView(
+              //     slivers: List.generate(
+              //       snapshot.data.episodes.length,
+              //       (index) => _bottomPart(
+              //         count: snapshot.data.episodes[index].stories.length,
+              //         hasEpisode: snapshot.data.episodes.length > 1,
+              //         isEditing: true,
+              //         title: snapshot.data.episodes[index].stories[index].title,
+              //         episodeTitle: snapshot.data.episodes[index].title,
+              //       ),
+              //     ),
+              //     // slivers: [
+              //     //   if (snapshot.data.episodes.length > 1)
+              //     //     ...List.generate(
+              //     //       snapshot.data.episodes.length,
+              //     //       (index) => _bottomStoryList(
+              //     //         title: snapshot
+              //     //             .data.episodes[index].stories[index].title,
+              //     //         index: snapshot
+              //     //             .data.episodes[index].stories[index].index,
+              //     //         count: snapshot.data.episodes[index].stories.length,
+              //     //         isEditing: true,
+              //     //       ),
+              //     //     ),
+              //     // ],
+              //   ),
+              // ),
             ],
           );
         },
@@ -134,7 +257,7 @@ class BookStoryListView extends StatelessWidget {
               ),
               Flexible(
                 flex: 2,
-                child: Container(
+                child: SizedBox(
                   child: Column(
                     children: [
                       Text(
@@ -153,6 +276,100 @@ class BookStoryListView extends StatelessWidget {
     );
   }
 
+  SliverToBoxAdapter _bottomPart({
+    required int count,
+    required bool hasEpisode,
+    required bool isEditing,
+    required String title,
+    String? episodeTitle,
+  }) {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          hasEpisode
+              ? SliverPersistentHeader(
+                  pinned: true,
+                  delegate: _SliverFixedHeaderDelegate(
+                    child: Container(
+                      color: Colors.black.withOpacity(0.8),
+                      child: Center(
+                        child: Text(
+                          episodeTitle!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    minHeight: 30.0,
+                    maxHeight: 70.0,
+                  ),
+                )
+              : SliverPersistentHeader(
+                  delegate: _SliverFixedHeaderDelegate(
+                    child: Container(
+                      color: Colors.black.withOpacity(0.8),
+                      child: const Text(
+                        'Default',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    minHeight: 30.0,
+                    maxHeight: 70.0,
+                  ),
+                ),
+          // 스토리 리스트
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     childCount: count,
+          //     (_, index) {
+          //       return ListTile(
+          //         contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+          //         minVerticalPadding: 4.0,
+          //         trailing:
+          //             isEditing ? Icon(Icons.edit_sharp) : Icon(Icons.check),
+          //         title: Row(
+          //           children: [
+          //             Flexible(
+          //               flex: 1,
+          //               child: Text(
+          //                 index.toString(),
+          //               ),
+          //             ),
+          //             SizedBox(width: 8.w),
+          //             Flexible(
+          //               flex: 3,
+          //               child: Text(
+          //                 title,
+          //                 maxLines: 1,
+          //                 overflow: TextOverflow.ellipsis,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //         titleTextStyle: TextStyle(
+          //           fontWeight: FontWeight.w600,
+          //           fontSize: 14.sp,
+          //         ),
+          //         onTap: () {
+          //           Log('message: ${index}');
+          //         },
+          //         // 길게 누를 시 정보
+          //         onLongPress: () {
+          //           Log('long pressed... ${index}');
+          //         },
+          //         dense: true,
+          //       );
+          //     },
+          //   ),
+          // ),
+        ],
+      ),
+    );
+  }
+
   SliverList _bottomStoryList({
     required String title,
     required int index,
@@ -161,7 +378,7 @@ class BookStoryListView extends StatelessWidget {
   }) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        childCount: count,
+        childCount: 1,
         (_, index) {
           return ListTile(
             contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -203,54 +420,6 @@ class BookStoryListView extends StatelessWidget {
       ),
     );
   }
-
-  // SliverGrid _sliverGrid() {
-  //   return SliverGrid(
-  //     delegate: SliverChildBuilderDelegate(
-  //       childCount: 10,
-  //       (context, index) => Container(
-  //         height: 100,
-  //         color: Colors.green[100 * (index % 9)],
-  //         child: Center(
-  //           child: Text('Bottom ${index}'),
-  //         ),
-  //       ),
-  //     ),
-  //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //       crossAxisCount: 3,
-  //     ),
-  //   );
-  // }
-
-  // Widget _sliverTest() {
-  //   return SliverList.separated(
-  //     itemCount: 30,
-  //     itemBuilder: (_, index) {
-  //       Log('build ${index}');
-  //       return ListTile(
-  //         title: Text('Test ${index + 1}'),
-  //       );
-  //     },
-  //     separatorBuilder: (_, index) {
-  //       index += 1;
-  //       if (index % 5 == 0) {
-  //         return Container(
-  //           color: Colors.black,
-  //           height: 50,
-  //           child: Text(
-  //             'header',
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //             ),
-  //           ),
-  //         );
-  //       }
-  //       return SizedBox(
-  //         height: 8.0,
-  //       );
-  //     },
-  //   );
-  // }
 
   // Labeling을 할 수 있는 헤더
   SliverPersistentHeader? _bottomEpisodeHeader({

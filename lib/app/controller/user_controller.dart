@@ -34,7 +34,6 @@ class UserController extends GetxController {
   void formSubmit() {
     final isValid = service.loginFormKey.currentState!.validate();
     Get.focusScope!.unfocus();
-    Log(isValid);
 
     if (isValid) {
       PrefManager.setData('loginValid', isValid);

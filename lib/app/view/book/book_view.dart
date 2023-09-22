@@ -12,7 +12,6 @@ class BookView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Log(DateTime.now());
     return AppLayout(
       title: Routes.BOOK.replaceAll(RegExp('/'), '').toUpperCase(),
       body: SizedBox(

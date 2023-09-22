@@ -51,7 +51,6 @@ class PinView extends GetView<PinController> {
       validator: (value) => controller.pinValidator(value!),
       onCompleted: (value) {
         controller.pinCode.value = int.parse(value);
-        Log('---------->${controller.pinCode.value}');
       },
     );
   }
