@@ -22,7 +22,6 @@ class BookStoryListView extends StatelessWidget {
       final decode = jsonDecode(file);
       final book1 = BookModel.fromJson(decode['data']);
       return book1;
-      // return file;
     }
 
     return AppLayout(
@@ -34,23 +33,6 @@ class BookStoryListView extends StatelessWidget {
               onLoading: !snapshot.hasData,
             );
           }
-          // if (snapshot.data.containsKey('episodes')) {
-          //   final episodes = snapshot.data.episodes;
-
-          //   for (var episode in episodes) {
-          //     if (episode.containsKey('stories')) {
-          //       final stories = episode['stories'];
-
-          //       for (var story in stories) {
-          //         final title = story['title'];
-          //         final content = story['content'];
-
-          //         Log(title);
-          //         Log(content);
-          //       }
-          //     }
-          //   }
-          // }
           return Column(
             children: <Widget>[
               Flexible(
