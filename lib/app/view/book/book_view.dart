@@ -44,6 +44,18 @@ class BookView extends StatelessWidget {
               },
               child: Text('리스트뷰'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('${Routes.BOOK}/12');
+              },
+              child: Text('12'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed('${Routes.BOOK}/34');
+              },
+              child: Text('34'),
+            ),
           ],
         ),
       ),

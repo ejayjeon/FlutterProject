@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:whoever/app/core/middleware/auth_guard.dart';
 import 'package:whoever/app/view/book/book_story_edit_view.dart';
 import 'package:whoever/app/view/book/book_story_list_view.dart';
+import 'package:whoever/app/view/book/book_test.dart';
 import 'package:whoever/app/view/book/book_view.dart';
 import 'package:whoever/app/view/main/chat_view.dart';
 import 'package:whoever/app/view/main/home_view.dart';
@@ -62,6 +63,10 @@ class AppRouter {
         GetPage(
           name: Routes.BOOK_STORY_EDIT,
           page: () => const BookStoryEditView(),
+        ),
+        GetPage(
+          name: '/:id',
+          page: () => const BookTest(),
         ),
       ],
     ),
