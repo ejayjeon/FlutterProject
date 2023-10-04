@@ -4,12 +4,17 @@ import 'package:get/get.dart';
 import 'package:whoever/app/controller/edit_controller.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
+import 'package:whoever/app/core/util/typedef.dart';
+import 'package:whoever/app/core/util/utils.dart';
 
 class BookStoryEditView extends GetView<EditController> {
   const BookStoryEditView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final fontValue = ['8', '9', '10', '11', '12', '13', '14']
+        .map((e) => {e: e}) as Map<String, String>;
+    Log(fontValue);
     return AppLayout(
       onWillpopSetting: const {
         'title': '취소',
@@ -22,26 +27,27 @@ class BookStoryEditView extends GetView<EditController> {
           children: [
             QuillToolbar.basic(
               controller: controller.editController,
-              fontSizeValues: const {
-                '8': '8',
-                '9': '9',
-                '10': '10',
-                '11': '11',
-                '12': '12',
-                '13': '13',
-                '14': '14',
-                '15': '15',
-                '16': '16',
-                '17': '17',
-                '18': '18',
-                '19': '19',
-                '20': '20',
-                '24': '24',
-                '32': '32',
-                '36': '36',
-                '48': '48',
-                '62': '62',
-              },
+              // fontSizeValues: const {
+              //   '8': '8',
+              //   '9': '9',
+              //   '10': '10',
+              //   '11': '11',
+              //   '12': '12',
+              //   '13': '13',
+              //   '14': '14',
+              //   '15': '15',
+              //   '16': '16',
+              //   '17': '17',
+              //   '18': '18',
+              //   '19': '19',
+              //   '20': '20',
+              //   '24': '24',
+              //   '32': '32',
+              //   '36': '36',
+              //   '48': '48',
+              //   '62': '62',
+              // },
+              fontSizeValues: fontValue,
               showAlignmentButtons: true,
               showBackgroundColorButton: false,
               showClearFormat: false,
