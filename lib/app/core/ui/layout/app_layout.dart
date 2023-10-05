@@ -53,7 +53,7 @@ class AppLayout extends StatelessWidget {
               ? onWillpopSetting!['content']
               : 'Exit App'.tr,
           onOkPressed: onWillpopSetting != null
-              ? () => Get.offNamed(
+              ? () => Get.offAllNamed(
                     onWillpopSetting!['to'],
                   )
               : exit(0),

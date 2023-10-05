@@ -12,9 +12,29 @@ class BookStoryEditView extends GetView<EditController> {
 
   @override
   Widget build(BuildContext context) {
-    final fontValue = ['8', '9', '10', '11', '12', '13', '14']
-        .map((e) => {e: e}) as Map<String, String>;
-    Log(fontValue);
+    final fontSize = [
+      '8',
+      '9',
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15',
+      '16',
+      '17',
+      '18',
+      '19',
+      '20',
+      '24',
+      '32',
+      '36',
+      '48',
+      '62'
+    ];
+    Map<String, String> fontValue = {for (var e in fontSize) e: e};
+    // Map<String, String> fontValue = Map.fromIterable(fontSize, key: (e) => e, value: (e) => e,);
+
     return AppLayout(
       onWillpopSetting: const {
         'title': '취소',
@@ -27,26 +47,6 @@ class BookStoryEditView extends GetView<EditController> {
           children: [
             QuillToolbar.basic(
               controller: controller.editController,
-              // fontSizeValues: const {
-              //   '8': '8',
-              //   '9': '9',
-              //   '10': '10',
-              //   '11': '11',
-              //   '12': '12',
-              //   '13': '13',
-              //   '14': '14',
-              //   '15': '15',
-              //   '16': '16',
-              //   '17': '17',
-              //   '18': '18',
-              //   '19': '19',
-              //   '20': '20',
-              //   '24': '24',
-              //   '32': '32',
-              //   '36': '36',
-              //   '48': '48',
-              //   '62': '62',
-              // },
               fontSizeValues: fontValue,
               showAlignmentButtons: true,
               showBackgroundColorButton: false,
@@ -71,8 +71,7 @@ class BookStoryEditView extends GetView<EditController> {
               showSuperscript: false,
               showUnderLineButton: false,
               multiRowsDisplay: false,
-
-              // locale: Get.locale,
+              locale: Get.locale,
             ),
             Container(
               height: Get.width,

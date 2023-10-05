@@ -9,7 +9,8 @@ import 'package:whoever/app/view/main/chat_view.dart';
 import 'package:whoever/app/view/main/home_view.dart';
 import 'package:whoever/app/view/etc/intro_view.dart';
 import 'package:whoever/app/view/etc/pin_view.dart';
-import 'package:whoever/app/view/main/setting_view.dart';
+import 'package:whoever/app/view/setting/setting_detail_view.dart';
+import 'package:whoever/app/view/setting/setting_view.dart';
 import 'package:whoever/app/view/etc/signin_view.dart';
 
 abstract class Routes {
@@ -83,10 +84,15 @@ class AppRouter {
       curve: Curves.easeInOut,
     ),
     GetPage(
-      name: Routes.SETTING,
-      page: () => const SettingView(),
-      participatesInRootNavigator: true,
-      curve: Curves.easeInOut,
-    ),
+        name: Routes.SETTING,
+        page: () => const SettingView(),
+        participatesInRootNavigator: true,
+        curve: Curves.easeInOut,
+        children: <GetPage>[
+          GetPage(
+            name: '/:index',
+            page: () => const SettingDetailView(),
+          ),
+        ]),
   ];
 }

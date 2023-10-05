@@ -59,10 +59,15 @@ class SettingView extends StatelessWidget {
       child: Column(
         children: List.generate(
           5,
-          (index) => ListTile(
-            title: Text('11'),
-            subtitle: Text('22'),
-            trailing: Icon(Icons.arrow_forward_ios_rounded),
+          (index) => GestureDetector(
+            onTap: () {
+              Get.toNamed('${Routes.SETTING}/$index');
+            },
+            child: ListTile(
+              title: Text(index.toString()),
+              subtitle: Text(index.toString()),
+              trailing: Icon(Icons.arrow_forward_ios_rounded),
+            ),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/controller/app_controller.dart';
@@ -52,7 +53,8 @@ class BookView extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.toNamed('${Routes.BOOK}/34');
+                // Get.toNamed('${Routes.BOOK}/34');
+                _openReceiveApp();
               },
               child: Text('34'),
             ),
@@ -61,5 +63,16 @@ class BookView extends StatelessWidget {
       ),
       needBottomNavigationBar: true,
     );
+  }
+
+  Future<void> _openReceiveApp() async {
+    const platform = MethodChannel('com.sketch.wallet.android');
+    try {
+      await platform.invokeMethod(
+          'openReceiverApp', {'message': 'Hello from Sender App!'});
+      print('success');
+    } on PlatformException catch (e) {
+      print("Error: ${e.message}");
+    }
   }
 }

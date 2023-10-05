@@ -46,6 +46,7 @@ Future<void> showConfirmDialog({
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextButton(
                 onPressed: () {

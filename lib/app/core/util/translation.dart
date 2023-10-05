@@ -5,12 +5,20 @@ class Translation extends Translations {
   Map<String, Map<String, String>> get keys => {
         'en_US': {
           'home': 'HOME',
+          'ok': 'OK',
+          'cancle': 'Cancle',
+          'page-back': 'Back to previous page?',
         },
         'ko_KR': {
           'home': '홈',
+          'ok': '확인',
+          'cancel': '취소',
+          'page-back': '이전 페이지로 돌아가시겠습니까?',
           'Clear': '삭제',
           'Undo': '뒤로',
           'Redo': '되돌리기',
+          'Font': '글꼴',
+          'Size': '크기',
           'Font family': '글꼴',
           'Font size': '글씨크기',
           'Bold': '굵게',
