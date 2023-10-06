@@ -19,7 +19,7 @@ class BookView extends StatelessWidget {
       body: SizedBox(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
               onPressed: () {
@@ -55,14 +55,19 @@ class BookView extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Get.toNamed('${Routes.BOOK}/34');
-                Navigator.of(Get.context!).push(MaterialPageRoute(
-                  builder: (context) {
-                    return BookCard();
-                  },
-                ));
+                // Navigator.of(Get.context!).push(MaterialPageRoute(
+                //   builder: (context) {
+                //     return BookCard();
+                //   },
+                // ));
+
                 // _openReceiveApp();
               },
               child: Text('34'),
+            ),
+            BookCard(
+              imagePath: 'assets/image/book_1.jpeg',
+              width: 200,
             ),
           ],
         ),
