@@ -7,6 +7,7 @@ import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/widget/custom_bottom_sheet.dart';
 import 'package:whoever/app/core/util/utils.dart';
+import 'package:whoever/app/view/book/book_card.dart';
 
 class BookView extends StatelessWidget {
   const BookView({super.key});
@@ -54,7 +55,12 @@ class BookView extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Get.toNamed('${Routes.BOOK}/34');
-                _openReceiveApp();
+                Navigator.of(Get.context!).push(MaterialPageRoute(
+                  builder: (context) {
+                    return BookCard();
+                  },
+                ));
+                // _openReceiveApp();
               },
               child: Text('34'),
             ),
@@ -65,14 +71,14 @@ class BookView extends StatelessWidget {
     );
   }
 
-  Future<void> _openReceiveApp() async {
-    const platform = MethodChannel('com.sketch.wallet.android');
-    try {
-      await platform.invokeMethod(
-          'openReceiverApp', {'message': 'Hello from Sender App!'});
-      print('success');
-    } on PlatformException catch (e) {
-      print("Error: ${e.message}");
-    }
-  }
+  // Future<void> _openReceiveApp() async {
+  //   const platform = MethodChannel('com.sketch.wallet.android');
+  //   try {
+  //     await platform.invokeMethod(
+  //         'openReceiverApp', {'message': 'Hello from Sender App!'});
+  //     print('success');
+  //   } on PlatformException catch (e) {
+  //     print("Error: ${e.message}");
+  //   }
+  // }
 }
