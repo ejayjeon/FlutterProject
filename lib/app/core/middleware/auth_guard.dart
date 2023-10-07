@@ -11,7 +11,7 @@ class AuthGuard extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     if (PrefManager.getData('loginValid') != null) {
       return const RouteSettings(
-        name: Routes.HOME,
+        name: Routes.PIN,
       );
     }
 

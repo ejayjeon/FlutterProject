@@ -7,9 +7,13 @@ import 'package:whoever/app/controller/app_binding.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/translation.dart';
+import 'package:whoever/app/service/pref_service.dart';
+import 'package:whoever/app/service/user_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Get.putAsync(() => PrefService().init());
+  await Get.putAsync(() => UserService().init());
   AppBinding().dependencies();
   runApp(const _Main());
 }

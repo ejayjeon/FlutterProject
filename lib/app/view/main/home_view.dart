@@ -7,11 +7,19 @@ import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
+import 'package:whoever/app/view/book/book_card.dart';
 
 class HomeView extends GetView<AppController> {
   HomeView({super.key}) {
     controller.getThemeStatus();
   }
+  final bookTitle = [
+    '도시와 그 불확실한 벽',
+    '비가 오면 열리는 상점',
+    '메리골드 마음 세탁소',
+    '어리석은 장미',
+    '달의 아이',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +33,10 @@ class HomeView extends GetView<AppController> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _header(title: '나의 서재'),
-            _topPart(index: 1),
+            _topPart(index: 5),
             SizedBox(height: 36.h),
             _header(title: '오늘의 책'),
             _bottomPart(
-              title: 'Title',
               description: 'Contents',
               index: 5,
             ),
@@ -63,15 +70,27 @@ class HomeView extends GetView<AppController> {
         children: [
           ...List.generate(
             index,
-            (index) => _renderBox(index),
+            (index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BookCard(
+                imagePath: 'assets/image/book_${index + 1}.jpeg',
+                width: 200,
+                title: bookTitle[index],
+              ),
+            ),
           ),
-          SvgPicture.asset(
-            'assets/icon/ic_add.svg',
-            width: 100,
-            fit: BoxFit.cover,
-            color: Get.isDarkMode
-                ? darkTheme.disabledColor
-                : lightTheme.disabledColor,
+          GestureDetector(
+            onTap: () {
+              Log('click');
+            },
+            child: SvgPicture.asset(
+              'assets/icon/ic_add.svg',
+              width: 100,
+              fit: BoxFit.cover,
+              color: Get.isDarkMode
+                  ? darkTheme.disabledColor
+                  : lightTheme.disabledColor,
+            ),
           ),
         ],
       ),
@@ -79,7 +98,6 @@ class HomeView extends GetView<AppController> {
   }
 
   Widget _bottomPart({
-    required String title,
     required String description,
     required int index,
   }) {
@@ -90,13 +108,20 @@ class HomeView extends GetView<AppController> {
           (index) => IntrinsicHeight(
             child: Row(
               children: [
-                _renderBox(index),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BookCard(
+                    imagePath: 'assets/image/book_${index + 1}.jpeg',
+                    width: 150,
+                    title: bookTitle[index],
+                  ),
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        title,
+                        bookTitle[index],
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -116,23 +141,6 @@ class HomeView extends GetView<AppController> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _renderBox(int index) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 150.w,
-        height: 200.w,
-        decoration: BoxDecoration(
-          color: Colors.green[100 * (index % 9)],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-        child: Center(
-          child: Text(index.toString()),
         ),
       ),
     );

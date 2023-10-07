@@ -3,16 +3,19 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
 
 class BookCard extends StatelessWidget {
   final String? imagePath;
   final double width;
+  final String title;
 
   const BookCard({
     super.key,
     this.imagePath,
     this.width = 50.0,
+    this.title = 'Title',
   });
 
   @override
@@ -25,10 +28,21 @@ class BookCard extends StatelessWidget {
       fill: Fill.fillBack,
       direction: FlipDirection.HORIZONTAL, // default
       side: CardSide.FRONT,
-      autoFlipDuration: const Duration(seconds: 2),
+      // autoFlipDuration: const Duration(seconds: 2),
       speed: 1000,
       front: GestureDetector(
-        onTap: () => _cardKey.currentState!.toggleCard(),
+        onTap: () {
+          _cardKey.currentState!.toggleCard();
+          // 먼저 카드를 플립한 다음에 페이지 이동
+          Future.delayed(
+            const Duration(
+              milliseconds: 1500,
+            ),
+            () {
+              Log(title);
+            },
+          );
+        },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(
@@ -41,14 +55,17 @@ class BookCard extends StatelessWidget {
       ),
       back: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 64, 255, 220),
+          color: Color.fromARGB(255, 93, 116, 111),
           borderRadius: BorderRadius.circular(10),
         ),
         height: 300,
         width: 200,
         child: TextButton(
           onPressed: () => _cardKey.currentState!.toggleCard(),
-          child: Text('Toggle'),
+          child: Text(
+            title,
+            style: customBody,
+          ),
         ),
       ),
     );

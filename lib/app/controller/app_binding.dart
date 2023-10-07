@@ -11,8 +11,8 @@ import 'package:whoever/app/service/user_service.dart';
 class AppBinding implements Bindings {
   @override
   void dependencies() async {
-    await Get.putAsync(() => PrefService().init());
-    await Get.putAsync(() => UserService().init());
+    // await Get.putAsync(() => PrefService().init());
+    // await Get.putAsync(() => UserService().init());
     Get.put(AppController());
     Get.put(PinController());
     Get.put(UserController());

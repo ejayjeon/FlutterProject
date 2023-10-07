@@ -44,12 +44,38 @@ class SettingView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 100.h,
+        height: Get.height / 3.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
-          color: lightTheme.primaryColor,
+          color: Colors.transparent,
         ),
-        child: Text('....'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/image/avatar_5.png'),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              radius: 80,
+            ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'JEMMA JEON',
+                      style: customHeader,
+                    ),
+                    Text(
+                      'Hello world, My name is Jeon Jemma! \n Nice to meet you!',
+                      style: customBody,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,7 +90,10 @@ class SettingView extends StatelessWidget {
               Get.toNamed('${Routes.SETTING}/$index');
             },
             child: ListTile(
-              title: Text(index.toString()),
+              title: Text(
+                '메뉴 타이틀 $index',
+                style: customHeader.copyWith(fontSize: 18.sp),
+              ),
               subtitle: Text(index.toString()),
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
