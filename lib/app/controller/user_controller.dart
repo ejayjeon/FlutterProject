@@ -1,16 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/router/app_router.dart';
-import 'package:whoever/app/core/util/utils.dart';
+import 'package:whoever/app/model/user_model.dart';
+import 'package:whoever/app/provider/users_provider.dart';
 import 'package:whoever/app/service/pref_service.dart';
 import 'package:whoever/app/service/user_service.dart';
 
-class UserController extends GetxController {
+class UserController extends GetxController with StateMixin<List<UserModel>> {
   final service = Get.find<UserService>();
 
   @override
   void onInit() {
     super.onInit();
+    fetchUsers();
+  }
+
+  fetchUsers() async {
+    // [기본 상태]
+    change([], status: RxStatus.loading());
+    try {
+      var res = await UsersProvider().getUserList();
+      if (res.d != null) {
+        change(res.d, status: RxStatus.success());
+      } else {
+        change([], status: RxStatus.empty());
+      }
+    } on Exception catch (err) {
+      change([], status: RxStatus.error(err.toString()));
+    }
   }
 
   // -------------------- Validator --------------------------------
