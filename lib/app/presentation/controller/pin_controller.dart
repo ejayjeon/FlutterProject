@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/util/utils.dart';
-import 'package:whoever/app/service/user_service.dart';
+import 'package:whoever/app/data/service/user_service.dart';
 
 class PinController extends GetxController {
   // ---------------- Field ------------------------

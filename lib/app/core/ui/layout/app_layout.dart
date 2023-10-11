@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/controller/app_controller.dart';
+import 'package:whoever/app/presentation/controller/app_controller.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/color_schemes.g.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';

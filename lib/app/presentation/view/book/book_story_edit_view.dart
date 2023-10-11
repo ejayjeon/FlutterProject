@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/controller/edit_controller.dart';
+import 'package:whoever/app/presentation/controller/edit_controller.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/util/typedef.dart';

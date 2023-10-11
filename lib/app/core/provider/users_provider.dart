@@ -1,6 +1,6 @@
 import 'package:whoever/app/core/util/api.dart';
-import 'package:whoever/app/model/api_response_model.dart';
-import 'package:whoever/app/model/user_model.dart';
+import 'package:whoever/app/data/model/api_response_model.dart';
+import 'package:whoever/app/data/model/user_model.dart';
 
 class UsersProvider {
   Future<ApiResponse<List<UserModel>>> getUserList() async {

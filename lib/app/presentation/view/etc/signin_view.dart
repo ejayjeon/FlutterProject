@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/controller/user_controller.dart';
+import 'package:whoever/app/presentation/controller/user_controller.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/ui/widget/custom_button.dart';
-import 'package:whoever/app/service/user_service.dart';
+import 'package:whoever/app/data/service/user_service.dart';
 
 class SignInView extends GetView<UserController> {
   const SignInView({super.key});

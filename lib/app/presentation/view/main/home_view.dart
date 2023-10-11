@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/controller/app_controller.dart';
+import 'package:whoever/app/presentation/controller/app_controller.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
-import 'package:whoever/app/view/book/book_card.dart';
+import 'package:whoever/app/presentation/view/book/book_card.dart';
 
 class HomeView extends GetView<AppController> {
   HomeView({super.key}) {

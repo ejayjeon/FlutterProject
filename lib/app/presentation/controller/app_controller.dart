@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/router/app_router.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
-import 'package:whoever/app/service/pref_service.dart';
+import 'package:whoever/app/data/service/pref_service.dart';
 
 class AppController extends GetxController
     with GetSingleTickerProviderStateMixin, StateMixin {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whoever/app/core/util/utils.dart';
-import 'package:whoever/app/service/pref_service.dart';
+import 'package:whoever/app/data/service/pref_service.dart';
 
 class UserService extends GetxService {
   static UserService get to => Get.find();

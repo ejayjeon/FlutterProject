@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whoever/app/presentation/binding/pin_binding.dart';
 import 'package:whoever/app/core/middleware/auth_guard.dart';
-import 'package:whoever/app/view/book/book_story_edit_view.dart';
-import 'package:whoever/app/view/book/book_story_list_view.dart';
-import 'package:whoever/app/view/book/book_test.dart';
-import 'package:whoever/app/view/book/book_view.dart';
-import 'package:whoever/app/view/main/chat_view.dart';
-import 'package:whoever/app/view/main/home_view.dart';
-import 'package:whoever/app/view/etc/intro_view.dart';
-import 'package:whoever/app/view/etc/pin_view.dart';
-import 'package:whoever/app/view/main/main_view.dart';
-import 'package:whoever/app/view/setting/setting_detail_view.dart';
-import 'package:whoever/app/view/setting/setting_view.dart';
-import 'package:whoever/app/view/etc/signin_view.dart';
+import 'package:whoever/app/presentation/view/book/book_story_edit_view.dart';
+import 'package:whoever/app/presentation/view/book/book_story_list_view.dart';
+import 'package:whoever/app/presentation/view/book/book_test.dart';
+import 'package:whoever/app/presentation/view/book/book_view.dart';
+import 'package:whoever/app/presentation/view/main/chat_view.dart';
+import 'package:whoever/app/presentation/view/main/home_view.dart';
+import 'package:whoever/app/presentation/view/etc/intro_view.dart';
+import 'package:whoever/app/presentation/view/etc/pin_view.dart';
+import 'package:whoever/app/presentation/view/main/main_view.dart';
+import 'package:whoever/app/presentation/view/setting/setting_detail_view.dart';
+import 'package:whoever/app/presentation/view/setting/setting_view.dart';
+import 'package:whoever/app/presentation/view/etc/signin_view.dart';
 
 abstract class Routes {
   static const HOME = '/home';
@@ -81,6 +82,7 @@ class AppRouter {
     GetPage(
       name: Routes.PIN,
       page: () => const PinView(),
+      binding: PinBinding(),
       participatesInRootNavigator: true,
       curve: Curves.easeInOut,
     ),

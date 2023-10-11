@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:whoever/app/core/router/app_router.dart';
-import 'package:whoever/app/model/user_model.dart';
-import 'package:whoever/app/provider/users_provider.dart';
-import 'package:whoever/app/service/pref_service.dart';
-import 'package:whoever/app/service/user_service.dart';
+import 'package:whoever/app/data/model/user_model.dart';
+import 'package:whoever/app/core/provider/users_provider.dart';
+import 'package:whoever/app/data/service/pref_service.dart';
+import 'package:whoever/app/data/service/user_service.dart';
 
 class UserController extends GetxController with StateMixin<List<UserModel>> {
   final service = Get.find<UserService>();

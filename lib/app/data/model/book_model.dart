@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:whoever/app/model/user_model.dart';
+import 'package:whoever/app/data/model/user_model.dart';
 
 part 'book_model.freezed.dart';
 part 'book_model.g.dart';

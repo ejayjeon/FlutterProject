@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/controller/theme_controller.dart';
+import 'package:whoever/app/presentation/controller/theme_controller.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});

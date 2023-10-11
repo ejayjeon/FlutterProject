@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:whoever/app/controller/asset_controller.dart';
+import 'package:whoever/app/presentation/controller/asset_controller.dart';
 
 import 'package:whoever/app/core/ui/layout/app_layout.dart';
 import 'package:whoever/app/core/ui/theme/custom_theme.dart';
 import 'package:whoever/app/core/util/utils.dart';
-import 'package:whoever/app/model/book_model.dart';
+import 'package:whoever/app/data/model/book_model.dart';
 
 class BookStoryListView extends StatelessWidget {
   const BookStoryListView({super.key});
