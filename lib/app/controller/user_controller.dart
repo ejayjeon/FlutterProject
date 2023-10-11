@@ -11,7 +11,7 @@ class UserController extends GetxController with StateMixin<List<UserModel>> {
   @override
   void onInit() {
     super.onInit();
-    fetchUsers();
+    // fetchUsers();
   }
 
   fetchUsers() async {

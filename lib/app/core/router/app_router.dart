@@ -9,6 +9,7 @@ import 'package:whoever/app/view/main/chat_view.dart';
 import 'package:whoever/app/view/main/home_view.dart';
 import 'package:whoever/app/view/etc/intro_view.dart';
 import 'package:whoever/app/view/etc/pin_view.dart';
+import 'package:whoever/app/view/main/main_view.dart';
 import 'package:whoever/app/view/setting/setting_detail_view.dart';
 import 'package:whoever/app/view/setting/setting_view.dart';
 import 'package:whoever/app/view/etc/signin_view.dart';
@@ -41,7 +42,7 @@ class AppRouter {
     ),
     GetPage(
       name: Routes.HOME,
-      page: () => HomeView(),
+      page: () => MainView(),
       participatesInRootNavigator: true,
       curve: Curves.easeInOut,
     ),
