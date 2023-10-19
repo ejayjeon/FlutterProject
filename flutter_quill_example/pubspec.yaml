@@ -1,0 +1,87 @@
+name: whoever
+description: A new Flutter project.
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  get: ^4.6.6
+  flutter_screenutil: ^5.9.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+  shared_preferences: ^2.2.1
+  flutter_svg: ^2.0.7
+  pinput: ^3.0.1
+
+  json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
+  
+  lottie: ^2.6.0
+  dio: ^5.3.3
+
+  flutter_quill: ^7.4.6
+
+  uuid: ^4.0.0
+
+  flip_card: ^0.7.0
+
+#----------------------------------------------------------------
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
+  freezed: ^2.4.2
+
+#----------------------------------------------------------------
+flutter:
+  uses-material-design: true
+
+#----------------------------------------------------------------
+  assets:
+    - assets/config/
+    - assets/image/
+    - assets/icon/
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/font/Pretendard-ExtraBold.otf
+          weight: 900
+        - asset: assets/font/Pretendard-Bold.otf
+          weight: 800
+        - asset: assets/font/Pretendard-Black.otf
+          weight: 700
+        - asset: assets/font/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/font/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/font/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/font/Pretendard-Light.otf
+          weight: 300
+        - asset: assets/font/Pretendard-Thin.otf
+          weight: 200
+        - asset: assets/font/Pretendard-ExtraLight.otf
+          weight: 100
